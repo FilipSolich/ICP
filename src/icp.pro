@@ -9,11 +9,17 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    diagramtabwidget.cc \
+    fileprocessor.cc \
     main.cc \
-    mainwindow.cc
+    mainwindow.cc \
+    sequencediagram.cc
 
 HEADERS += \
-    mainwindow.hh
+    diagramtabwidget.hh \
+    fileprocessor.hh \
+    mainwindow.hh \
+    sequencediagram.hh
 
 FORMS += \
     mainwindow.ui

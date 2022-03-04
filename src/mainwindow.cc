@@ -16,6 +16,7 @@
 #include <QLabel>
 #include <QTextStream>
 
+#include "diagramtabwidget.hh"
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
@@ -25,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    DiagramTabWidget *tabs = new DiagramTabWidget(this);
+    ui->centralwidget->layout()->addWidget(tabs);
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
