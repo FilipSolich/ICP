@@ -11,12 +11,12 @@
 
 FileProcessor::FileProcessor(){}
 
-static QString generateFile(void)
+QString FileProcessor::generateFile(void)
 {
     return "str";
 }
 
-static void parseFile(QString &text)
+void FileProcessor::parseFile(QString &text)
 {
 
 }
