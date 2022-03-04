@@ -1,3 +1,12 @@
+/**
+ * \file mainwindow.hh
+ *
+ * \brief Header file for class MainWindow.
+ *
+ * \date 4. 3. 2022
+ * \author Filip Solich
+ */
+
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
