@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
+    connect(ui->actionSave_as, &QAction::triggered, this, &MainWindow::saveAs);
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
 }
 
@@ -58,6 +61,8 @@ void MainWindow::open()
         return;
     }
 
+    setWindowTitle("UML Editor - " + fileName);
+
     QTextStream in{&file};
     QString text = in.readAll();
 
@@ -66,8 +71,67 @@ void MainWindow::open()
     file.close();
 }
 
-void MainWindow::save(){}
-void MainWindow::saveAs(){}
+void MainWindow::save()
+{
+    QString fileName;
+    if (currentFile.isEmpty()) {
+        fileName = QFileDialog::getSaveFileName(this, "Save");
+        if (fileName.isEmpty()) {
+            return;
+        }
+        currentFile = fileName;
+    } else {
+        fileName = currentFile;
+    }
+
+    QFile file{fileName};
+    if (!file.open(QIODevice::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+        return;
+    }
+
+    setWindowTitle("UML Editor - " + fileName);
+
+    QString text;
+    // TODO: generate file text.
+
+    QTextStream out{&file};
+    out << text;
+
+    file.close();
+}
+
+void MainWindow::saveAs()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, "Save as");
+    if (fileName.isEmpty()) {
+        return;
+    }
+
+    QFile file{fileName};
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+        return;
+    }
+
+    currentFile = fileName;
+    setWindowTitle("UML Editor - " + fileName);
+
+    QString text;
+    // TODO: generate file text.
+
+    QTextStream out{&file};
+    out << text;
+
+    file.close();
+}
+
+void MainWindow::exit()
+{
+    // TODO: offer save file if changes were done
+    close();
+}
+
 void MainWindow::cut(){}
 void MainWindow::copy(){}
 void MainWindow::paste(){}
