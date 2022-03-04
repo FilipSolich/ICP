@@ -15,7 +15,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void newDocument();
+    void open();
+    void save();
+    void saveAs();
+    void cut();
+    void copy();
+    void paste();
+    void undo();
+    void about();
+
 private:
     Ui::MainWindow *ui;
+    QString currentFile;
 };
 #endif // MAINWINDOW_HH

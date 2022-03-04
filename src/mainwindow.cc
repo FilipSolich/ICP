@@ -14,3 +14,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::newDocument(){}
+
+void MainWindow::open(){}
+void MainWindow::save(){}
+void MainWindow::saveAs(){}
+void MainWindow::cut(){}
+void MainWindow::copy(){}
+void MainWindow::paste(){}
+void MainWindow::undo(){}
+void MainWindow::about(){}
