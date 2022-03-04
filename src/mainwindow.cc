@@ -17,6 +17,7 @@
 #include <QTextStream>
 
 #include "diagramtabwidget.hh"
+#include "fileprocessor.hh"
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
@@ -47,6 +48,7 @@ void MainWindow::newDocument()
 {
     currentFile.clear();
 
+    // TODO: clear diagram models
     // TODO: clear screen and delete existing diagram. Offer save if changes were done.
 }
 
@@ -70,7 +72,7 @@ void MainWindow::open()
     QTextStream in{&file};
     QString text = in.readAll();
 
-    // TODO: Process all data from file in variable text
+    FileProcessor::parseFile(text); // TODO: What shoud be as return value. Some model.
 
     file.close();
 }
@@ -96,8 +98,7 @@ void MainWindow::save()
 
     setWindowTitle("UML Editor - " + fileName);
 
-    QString text;
-    // TODO: generate file text.
+    QString text = FileProcessor::generateFile(); // TODO: Add necessary params
 
     QTextStream out{&file};
     out << text;
@@ -121,8 +122,7 @@ void MainWindow::saveAs()
     currentFile = fileName;
     setWindowTitle("UML Editor - " + fileName);
 
-    QString text;
-    // TODO: generate file text.
+    QString text = FileProcessor::generateFile(); // TODO: Add necessary params
 
     QTextStream out{&file};
     out << text;

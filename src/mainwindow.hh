@@ -20,6 +20,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    bool unsavedChanges = false;
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
