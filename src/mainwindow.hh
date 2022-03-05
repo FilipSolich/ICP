@@ -12,6 +12,8 @@
 
 #include <QMainWindow>
 
+#include "diagram.hh"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -20,7 +22,11 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-    bool unsavedChanges = false;
+    Ui::MainWindow *ui;
+    QString currentFile;
+    Diagram *diagram = nullptr;
+
+    void closeCurrentDiagram(void);
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -37,9 +43,5 @@ private slots:
     void paste();
     void undo();
     void about();
-
-private:
-    Ui::MainWindow *ui;
-    QString currentFile;
 };
 #endif // MAINWINDOW_HH

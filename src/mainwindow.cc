@@ -3,7 +3,7 @@
  *
  * \brief Source code for MainWindow class.
  *
- * \date 4. 3. 2022
+ * \date 5. 3. 2022
  * \author Filip Solich
  */
 
@@ -21,7 +21,6 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
-// TODO: add about link to https://icons8.com
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -48,12 +47,14 @@ void MainWindow::newDocument()
 {
     currentFile.clear();
 
-    // TODO: clear diagram models
-    // TODO: clear screen and delete existing diagram. Offer save if changes were done.
+    closeCurrentDiagram();
+    // TODO: clear screen.
 }
 
 void MainWindow::open()
 {
+    closeCurrentDiagram();
+
     QString fileName = QFileDialog::getOpenFileName(this, "Open the file");
     if (fileName.isEmpty()) {
         return;
@@ -72,7 +73,7 @@ void MainWindow::open()
     QTextStream in{&file};
     QString text = in.readAll();
 
-    FileProcessor::parseFile(text); // TODO: What shoud be as return value. Some model.
+    diagram = FileProcessor::parseFile(text);
 
     file.close();
 }
@@ -98,7 +99,7 @@ void MainWindow::save()
 
     setWindowTitle("UML Editor - " + fileName);
 
-    QString text = FileProcessor::generateFile(); // TODO: Add necessary params
+    QString *text = FileProcessor::generateFile(*diagram);
 
     QTextStream out{&file};
     out << text;
@@ -122,7 +123,7 @@ void MainWindow::saveAs()
     currentFile = fileName;
     setWindowTitle("UML Editor - " + fileName);
 
-    QString text = FileProcessor::generateFile(); // TODO: Add necessary params
+    QString *text = FileProcessor::generateFile(*diagram);
 
     QTextStream out{&file};
     out << text;
@@ -132,14 +133,14 @@ void MainWindow::saveAs()
 
 void MainWindow::exit()
 {
-    // TODO: offer save file if changes were done
+    closeCurrentDiagram();
     close();
 }
 
-void MainWindow::cut(){}
-void MainWindow::copy(){}
-void MainWindow::paste(){}
-void MainWindow::undo(){}
+void MainWindow::cut(){} // TODO
+void MainWindow::copy(){} // TODO
+void MainWindow::paste(){} // TODO
+void MainWindow::undo(){} // TODO
 
 void MainWindow::about()
 {
@@ -156,4 +157,13 @@ void MainWindow::about()
 
     about->setLayout(layout);
     about->show();
+}
+
+void MainWindow::closeCurrentDiagram(void)
+{
+    if (diagram != nullptr) {
+        // offer save if changes were done
+        delete diagram;
+        diagram = nullptr;
+    }
 }

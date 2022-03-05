@@ -1,0 +1,21 @@
+# Pripona souboru ".uml"
+# Komentar. Nebude obsahem konecne specifikace syntaxe.
+start class
+
+
+end class
+
+start sequnce
+participant Orchestra
+participant Storage
+
+activate Orchestra
+Orchestra -> Storage # SYN
+Orchestra => Storage # ASYN
+Orchestra <- Storage # RES
+Orchestra -x Storage # Destroy
+Orchestra -+ Storage # Create
+deactivate Orchestra
+end sequence
+
+# Mohou nasledovat dalsi sequence

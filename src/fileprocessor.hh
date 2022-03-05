@@ -12,13 +12,15 @@
 
 #include <QString>
 
+#include "diagram.hh"
+
 class FileProcessor
 {
 public:
     FileProcessor();
 
-    static QString generateFile(void);
-    static void parseFile(QString &text);
+    static QString *generateFile(Diagram &diagram);
+    static Diagram *parseFile(QString &text);
 };
 
 #endif // FILEPROCESSOR_HH

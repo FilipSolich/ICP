@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    diagram.cc \
     diagramtabwidget.cc \
     fileprocessor.cc \
     main.cc \
@@ -16,6 +17,7 @@ SOURCES += \
     sequencediagram.cc
 
 HEADERS += \
+    diagram.hh \
     diagramtabwidget.hh \
     fileprocessor.hh \
     mainwindow.hh \
@@ -31,3 +33,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    ../save_file_syntax.txt

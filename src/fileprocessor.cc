@@ -7,16 +7,17 @@
  * \author Filip Solich
  */
 
+#include "diagram.hh"
 #include "fileprocessor.hh"
 
 FileProcessor::FileProcessor(){}
 
-QString FileProcessor::generateFile(void)
+QString *FileProcessor::generateFile(Diagram &diagram)
 {
-    return "str";
+    return new QString("str");
 }
 
-void FileProcessor::parseFile(QString &text)
+Diagram *FileProcessor::parseFile(QString &text)
 {
-
+    return new Diagram();
 }

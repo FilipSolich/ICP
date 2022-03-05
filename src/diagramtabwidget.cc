@@ -3,7 +3,7 @@
  *
  * \brief Source code for DiagramTabWidget class.
  *
- * \date 4. 3. 2022
+ * \date 4. 4. 2022
  * \author Filip Solich
  */
 
@@ -17,7 +17,7 @@ DiagramTabWidget::DiagramTabWidget(QWidget *parent)
 {
     setTabPosition(QTabWidget::South);
 
-    QWidget *dummy1 = new QWidget;
+    QWidget *dummy1 = new QWidget; // TODO: Create real widget for this page
     SequenceDiagram *sequence = new SequenceDiagram(this);
 
     addTab(dummy1, "Class diagram");
