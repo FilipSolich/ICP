@@ -13,9 +13,10 @@
 
 class Diagram
 {
-    bool unsavedChanges = false;
 
 public:
+    bool unsavedChanges = false;
+
     Diagram();
 };
 

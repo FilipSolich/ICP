@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
     DiagramTabWidget *tabs = new DiagramTabWidget(this);
     ui->centralwidget->layout()->addWidget(tabs);
 
+    diagram = new Diagram();
+
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
@@ -45,9 +47,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::newDocument()
 {
-    currentFile.clear();
-
     closeCurrentDiagram();
+    currentFile.clear();
+    diagram = new Diagram();
+
     // TODO: clear screen.
 }
 
@@ -105,6 +108,10 @@ void MainWindow::save()
     out << text;
 
     file.close();
+
+    if (diagram != nullptr) {
+        diagram->unsavedChanges = false;
+    }
 }
 
 void MainWindow::saveAs()
@@ -129,6 +136,10 @@ void MainWindow::saveAs()
     out << text;
 
     file.close();
+
+    if (diagram != nullptr) {
+        diagram->unsavedChanges = false;
+    }
 }
 
 void MainWindow::exit()
@@ -148,6 +159,7 @@ void MainWindow::about()
     about->resize(400, 200);
     about->setWindowTitle("About");
 
+
     QLabel *label = new QLabel(about);
     label->setAlignment(Qt::AlignCenter);
     label->setText("Version: v1.0.0\nIcons are provided by Icons8\nhttps://icons8.com");
@@ -162,7 +174,19 @@ void MainWindow::about()
 void MainWindow::closeCurrentDiagram(void)
 {
     if (diagram != nullptr) {
-        // offer save if changes were done
+        if (diagram->unsavedChanges) {
+            QMessageBox *mg = new QMessageBox;
+            mg->setWindowTitle("Save changes");
+            mg->setText("Diagram have unsaved changes");
+            mg->addButton(QMessageBox::Discard);
+            mg->addButton(QMessageBox::Save);
+            int code = mg->exec();
+
+            if (code == QMessageBox::Save) {
+                save();
+            }
+        }
+
         delete diagram;
         diagram = nullptr;
     }
