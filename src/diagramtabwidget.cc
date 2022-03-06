@@ -7,8 +7,7 @@
  * \author Filip Solich
  */
 
-#include <QDebug> // TODO: remove
-
+#include "classdiagram.hh"
 #include "diagramtabwidget.hh"
 #include "sequencediagram.hh"
 
@@ -17,10 +16,10 @@ DiagramTabWidget::DiagramTabWidget(QWidget *parent)
 {
     setTabPosition(QTabWidget::South);
 
-    QWidget *dummy1 = new QWidget; // TODO: Create real widget for this page
+    QWidget *_class = new ClassDiagram(this);
     SequenceDiagram *sequence = new SequenceDiagram(this);
 
-    addTab(dummy1, "Class diagram");
+    addTab(_class, "Class diagram");
     addTab(sequence, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
     addDummyTab();
 
