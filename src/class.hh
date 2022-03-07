@@ -20,16 +20,14 @@ class Class : public QWidget
 
     QVBoxLayout *layout = nullptr;
 
-    int attributes_count = 0;
-    int methods_count = 0;
-
 public:
     QGraphicsProxyWidget *proxy = nullptr;
     QLineEdit *name = nullptr;
+    QVector<QWidget *> attributes;
+    QVector<QWidget *> methods;
 
     explicit Class(QWidget *parent = nullptr);
 
-    QStringList dataTypes{"int", "float", "string"};
     QStringList visibility{"+", "-", "#", "~"};
 
     void addAttribute(void);

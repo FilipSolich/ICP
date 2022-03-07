@@ -17,6 +17,7 @@
 #include "class.hh"
 
 #include <QDebug>
+#include <QGraphicsRectItem>
 
 Class::Class(QWidget *parent)
     : QWidget{parent}
@@ -67,12 +68,13 @@ void Class::addAttribute(void)
     QComboBox *visibilityBox = new QComboBox(attr);
     visibilityBox ->addItems(visibility);
 
-    QComboBox *dt = new QComboBox(attr);
-    dt->addItems(dataTypes);
+    QLineEdit *dt = new QLineEdit(attr);
+    dt->setObjectName("dt");
 
     QLabel *divider = new QLabel(":", attr);
 
     QLineEdit *name = new QLineEdit(attr);
+    name->setObjectName("name");
 
     layout->addWidget(visibilityBox);
     layout->addWidget(dt);
@@ -81,32 +83,79 @@ void Class::addAttribute(void)
 
     attr->setLayout(layout);
 
-    this->layout->insertWidget(1 + attributes_count, attr);
-    attributes_count += 1;
+    this->layout->insertWidget(1 + attributes.size(), attr);
+    attributes.push_back(attr);
 }
 
 void Class::delAttribute(void)
 {
-    if (attributes_count > 0) {
-        QList<QLabel *> labels = this->findChildren<QLabel *>();
-        QWidget *w = labels[0]->parentWidget();
+    if (attributes.size() > 0) {
+        QWidget *w = attributes.last();
+
+        QGraphicsRectItem *rect = static_cast<QGraphicsRectItem *>(this->proxy->parentItem());
+        QRectF rectf;
+        rectf = rect->rect();
+        qDebug() << "widget (" << this->width() << "," << this->height() << ") rect (" << rectf.width() << "," << rectf.height() << ")";
+
         this->layout->removeWidget(w);
         delete w;
-        resize(minimumSizeHint());
-        attributes_count -= 1;
+        attributes.pop_back();
 
+        rectf = rect->rect();
+        qDebug() << "widget (" << this->width() << "," << this->height() << ") rect (" << rectf.width() << "," << rectf.height() << ")";
+
+        resize(minimumSizeHint());
+
+        rectf = rect->rect();
+        qDebug() << "widget (" << this->width() << "," << this->height() << ") rect (" << rectf.width() << "," << rectf.height() << ")";
         //resize(this->layout->minimumSizeHint());
-        setLayout(this->layout);
-        //static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
+        //setLayout(this->layout);
+        static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
+
+        rectf = rect->rect();
+        qDebug() << "widget (" << this->width() << "," << this->height() << ") rect (" << rectf.width() << "," << rectf.height() << ")";
     }
 }
 
 void Class::addMethod(void)
 {
+    QWidget *meth = new QWidget(this);
+
+    QHBoxLayout *layout = new QHBoxLayout(meth);
+
+    QComboBox *visibilityBox = new QComboBox(meth);
+    visibilityBox ->addItems(visibility);
+
+    QLineEdit *returnDt = new QLineEdit(meth);
+    returnDt->setObjectName("dt");
+
+    QLabel *divider = new QLabel(":", meth);
+
+    QLineEdit *name = new QLineEdit(meth);
+    name->setObjectName("name");
+
+    layout->addWidget(visibilityBox);
+    layout->addWidget(returnDt);
+    layout->addWidget(divider);
+    layout->addWidget(name);
+
+    meth->setLayout(layout);
+
+    this->layout->insertWidget(this->layout->count() - 1, meth);
+    methods.push_back(meth);
 }
 
 void Class::delMethod(void)
 {
-    this->layout->removeItem(this->layout->itemAt(3 + methods_count)); // TODO probably change 3
-    methods_count -= 1;
+    if (methods.size() > 0) {
+        QWidget *w = methods.last();
+        this->layout->removeWidget(w);
+        delete w;
+        methods.pop_back();
+
+        resize(minimumSizeHint());
+        //resize(this->layout->minimumSizeHint());
+        setLayout(this->layout);
+        //static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
+    }
 }

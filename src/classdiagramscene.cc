@@ -57,8 +57,8 @@ void ClassDiagramScene::addClass()
     QGraphicsRectItem *rect = scene->addRect(x, y, new_class->width(), new_class->height());
     rect->setFlag(QGraphicsItem::ItemIsMovable);
     rect->setFlag(QGraphicsItem::ItemIsSelectable);
-    rect->setFlag(QGraphicsItem::ItemIsFocusable);
-    rect->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
+    //rect->setFlag(QGraphicsItem::ItemIsFocusable);
+    //rect->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
 
     QGraphicsProxyWidget *proxy = scene->addWidget(new_class);
     new_class->proxy = proxy;

@@ -19,7 +19,9 @@ class FileProcessor
     Diagram *diagram = nullptr;
 
     QString genSequences();
-    QString genClass();
+    QString genClasses();
+    void addLine(QString &text, QString const &increment);
+    void addElement(QString &text, QString const &increment);
 
 public:
     FileProcessor();
