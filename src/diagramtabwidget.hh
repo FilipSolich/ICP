@@ -13,6 +13,8 @@
 #include <QTabWidget>
 #include <QWidget>
 
+#include "diagram.hh"
+
 class DiagramTabWidget : public QTabWidget
 {
     Q_OBJECT
@@ -22,7 +24,7 @@ class DiagramTabWidget : public QTabWidget
     void addDummyTab(void);
 
 public:
-    explicit DiagramTabWidget(QWidget *parent = nullptr);
+    explicit DiagramTabWidget(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
 private slots:
     void addSequenceTab(int index);

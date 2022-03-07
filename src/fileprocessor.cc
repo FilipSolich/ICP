@@ -7,17 +7,37 @@
  * \author Filip Solich
  */
 
+#include "class.hh"
 #include "diagram.hh"
 #include "fileprocessor.hh"
 
 FileProcessor::FileProcessor(){}
 
-QString *FileProcessor::generateFile(Diagram &diagram)
+QString FileProcessor::generateFile(Diagram *diagram)
 {
-    return new QString("str");
+    this->diagram = diagram;
+
+    QString text;
+    text += genClass();
+    text += genSequences();
+    return text;
 }
 
-Diagram *FileProcessor::parseFile(QString &text)
+QString FileProcessor::genSequences()
+{
+    QString text;
+    text += "start sequence";
+
+    for (Class *w: diagram->classes) {
+        text += "participant " + w->name->text();
+    }
+
+    text += "end sequence";
+}
+
+QString FileProcessor::genClass() {}
+
+Diagram *FileProcessor::parseFile(QString *text)
 {
     return new Diagram();
 }

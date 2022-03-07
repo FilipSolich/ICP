@@ -27,10 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    DiagramTabWidget *tabs = new DiagramTabWidget(this);
+    diagram = new Diagram();
+
+    DiagramTabWidget *tabs = new DiagramTabWidget(this, diagram);
     ui->centralwidget->layout()->addWidget(tabs);
 
-    diagram = new Diagram();
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
@@ -76,7 +77,8 @@ void MainWindow::open()
     QTextStream in{&file};
     QString text = in.readAll();
 
-    diagram = FileProcessor::parseFile(text);
+    FileProcessor parser;
+    diagram = parser.parseFile(&text);
 
     file.close();
 }
@@ -102,7 +104,8 @@ void MainWindow::save()
 
     setWindowTitle("UML Editor - " + fileName);
 
-    QString *text = FileProcessor::generateFile(*diagram);
+    FileProcessor generator;
+    QString text = generator.generateFile(diagram);
 
     QTextStream out{&file};
     out << text;
@@ -130,7 +133,8 @@ void MainWindow::saveAs()
     currentFile = fileName;
     setWindowTitle("UML Editor - " + fileName);
 
-    QString *text = FileProcessor::generateFile(*diagram);
+    FileProcessor generator;
+    QString text = generator.generateFile(diagram);
 
     QTextStream out{&file};
     out << text;

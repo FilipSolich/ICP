@@ -10,12 +10,16 @@
 #ifndef DIAGRAM_HH
 #define DIAGRAM_HH
 
+#include <QVector>
+
+#include "class.hh"
 
 class Diagram
 {
 
 public:
     bool unsavedChanges = false;
+    QVector<Class *> classes;
 
     Diagram();
 };

@@ -16,11 +16,17 @@
 
 class FileProcessor
 {
+    Diagram *diagram = nullptr;
+
+    QString genSequences();
+    QString genClass();
+
 public:
     FileProcessor();
 
-    static QString *generateFile(Diagram &diagram);
-    static Diagram *parseFile(QString &text);
+    QString generateFile(Diagram *diagram);
+    Diagram *parseFile(QString *text);
+
 };
 
 #endif // FILEPROCESSOR_HH

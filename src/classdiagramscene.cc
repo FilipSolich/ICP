@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 
+#include "diagram.hh"
 #include "class.hh"
 #include "classdiagramscene.hh"
 
@@ -12,9 +13,11 @@
 #include <QGraphicsWidget>
 #include <QGraphicsProxyWidget>
 
-ClassDiagramScene::ClassDiagramScene(QWidget *parent)
+ClassDiagramScene::ClassDiagramScene(QWidget *parent, Diagram *diagram)
     : QWidget(parent)
 {
+    this->diagram = diagram;
+
     QVBoxLayout *layout = new QVBoxLayout;
     this->setLayout(layout);
 
@@ -49,6 +52,7 @@ void ClassDiagramScene::addClass()
 {
     int x = 0, y = 0;
     Class *new_class = new Class();
+    this->diagram->classes.push_back(new_class);
 
     QGraphicsRectItem *rect = scene->addRect(x, y, new_class->width(), new_class->height());
     rect->setFlag(QGraphicsItem::ItemIsMovable);

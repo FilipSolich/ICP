@@ -8,15 +8,16 @@
  */
 
 #include "classdiagramscene.hh"
+#include "diagram.hh"
 #include "diagramtabwidget.hh"
 #include "sequencediagram.hh"
 
-DiagramTabWidget::DiagramTabWidget(QWidget *parent)
+DiagramTabWidget::DiagramTabWidget(QWidget *parent, Diagram *diagram)
     : QTabWidget{parent}
 {
     setTabPosition(QTabWidget::South);
 
-    QWidget *_class = new ClassDiagramScene(this);
+    ClassDiagramScene *_class = new ClassDiagramScene(this, diagram);
     SequenceDiagram *sequence = new SequenceDiagram(this);
 
     addTab(_class, "Class diagram");

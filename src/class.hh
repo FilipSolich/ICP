@@ -19,13 +19,13 @@ class Class : public QWidget
     Q_OBJECT
 
     QVBoxLayout *layout = nullptr;
-    QLineEdit *name = nullptr;
 
     int attributes_count = 0;
     int methods_count = 0;
 
 public:
     QGraphicsProxyWidget *proxy = nullptr;
+    QLineEdit *name = nullptr;
 
     explicit Class(QWidget *parent = nullptr);
 
