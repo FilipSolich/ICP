@@ -92,12 +92,12 @@ void Class::delAttribute(void)
         QWidget *w = labels[0]->parentWidget();
         this->layout->removeWidget(w);
         delete w;
-        resize(sizeHint());
+        resize(minimumSizeHint());
         attributes_count -= 1;
 
-        resize(this->layout->sizeHint());
+        //resize(this->layout->minimumSizeHint());
         setLayout(this->layout);
-        static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
+        //static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
     }
 }
 
