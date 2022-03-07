@@ -72,7 +72,7 @@ QString FileProcessor::genClasses()
             addElement(line, attr->findChild<QLineEdit *>("name")->text());
         }
 
-        addElement(text, ":");
+        addElement(line, ":");
 
         // Add methods
         for (QWidget *meth : cls->methods) {
