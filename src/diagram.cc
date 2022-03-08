@@ -9,7 +9,4 @@
 
 #include "diagram.hh"
 
-Diagram::Diagram()
-{
-
-}
+Diagram::Diagram() {}

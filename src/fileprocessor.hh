@@ -1,9 +1,10 @@
 /**
  * \file fileprocessor.hh
  *
- * \brief Header file for FileProcessor class.
+ * \brief Class for reading diagram content from file or
+ *        writing diagram content into file.
  *
- * \date 4. 3. 2022
+ * \date 8. 3. 2022
  * \author Filip Solich
  */
 
@@ -28,7 +29,6 @@ public:
 
     QString generateFile(Diagram *diagram);
     Diagram *parseFile(QString *text);
-
 };
 
 #endif // FILEPROCESSOR_HH

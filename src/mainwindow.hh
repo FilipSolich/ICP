@@ -1,7 +1,7 @@
 /**
  * \file mainwindow.hh
  *
- * \brief Header file for class MainWindow.
+ * \brief Main window class.
  *
  * \date 4. 3. 2022
  * \author Filip Solich

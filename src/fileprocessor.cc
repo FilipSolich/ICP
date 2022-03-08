@@ -3,11 +3,12 @@
  *
  * \brief Source code for FileProcessor class.
  *
- * \date 4. 3. 2022
+ * \date 8. 3. 2022
  * \author Filip Solich
  */
 
 #include <QComboBox>
+#include <QTextStream>
 
 #include "class.hh"
 #include "diagram.hh"
@@ -43,9 +44,12 @@ QString FileProcessor::genSequences()
 
     addLine(text, "start sequence");
 
-    for (Class *cls : diagram->classes) {
+    for (Class *cls : qAsConst(diagram->classes)) {
         addLine(text, "participant " + cls->name->text());
     }
+
+    // TODO
+    // Add connections
 
     addLine(text, "end sequence");
 
@@ -59,14 +63,14 @@ QString FileProcessor::genClasses()
     addLine(text, "start class");
 
     // Add class
-    for (Class *cls : diagram->classes) {
+    for (Class *cls : qAsConst(diagram->classes)) {
         QString line;
 
         addElement(line, "class");
         addElement(line, cls->name->text());
 
         // Add attributes
-        for (QWidget *attr : cls->attributes) {
+        for (QWidget *attr : qAsConst(cls->attributes)) {
             addElement(line, attr->findChild<QComboBox *>()->currentText());
             addElement(line, attr->findChild<QLineEdit *>("dt")->text());
             addElement(line, attr->findChild<QLineEdit *>("name")->text());
@@ -75,7 +79,7 @@ QString FileProcessor::genClasses()
         addElement(line, ":");
 
         // Add methods
-        for (QWidget *meth : cls->methods) {
+        for (QWidget *meth : qAsConst(cls->methods)) {
             addElement(line, meth->findChild<QComboBox *>()->currentText());
             addElement(line, meth->findChild<QLineEdit *>("dt")->text());
             addElement(line, meth->findChild<QLineEdit *>("name")->text());
@@ -94,5 +98,12 @@ QString FileProcessor::genClasses()
 
 Diagram *FileProcessor::parseFile(QString *text)
 {
+    QString line;
+    QTextStream stream{text};
+
+    while (stream.readLineInto(&line)) {
+        // TODO
+    }
+
     return new Diagram();
 }

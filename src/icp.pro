@@ -10,7 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     class.cc \
-    classdiagramscene.cc \
+    classdiagrameditor.cc \
     diagram.cc \
     diagramtabwidget.cc \
     fileprocessor.cc \
@@ -20,7 +20,7 @@ SOURCES += \
 
 HEADERS += \
     class.hh \
-    classdiagramscene.hh \
+    classdiagrameditor.hh \
     diagram.hh \
     diagramtabwidget.hh \
     fileprocessor.hh \

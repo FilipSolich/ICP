@@ -9,7 +9,6 @@
 
 // Some code was taken from https://doc.qt.io/qt-6/qtwidgets-tutorials-notepad-example.html
 
-#include <QDebug> // TODO: remove
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QMessageBox>
@@ -31,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     DiagramTabWidget *tabs = new DiagramTabWidget(this, diagram);
     ui->centralwidget->layout()->addWidget(tabs);
-
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);

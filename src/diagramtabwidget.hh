@@ -1,7 +1,7 @@
 /**
  * \file diagramtabwidget.hh
  *
- * \brief Header file for DiagramTabWidget class.
+ * \brief DiagramTabWidget class representing tab bar for users diagram.
  *
  * \date 4. 3. 2022
  * \author Filip Solich
