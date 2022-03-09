@@ -10,7 +10,7 @@
 #include <QComboBox>
 #include <QTextStream>
 
-#include "class.hh"
+#include "classwidget.hh"
 #include "diagram.hh"
 #include "fileprocessor.hh"
 
@@ -45,7 +45,7 @@ QString FileProcessor::genSequences()
     addLine(text, "start sequence");
 
     for (Class *cls : qAsConst(diagram->classes)) {
-        addLine(text, "participant " + cls->name->text());
+        addLine(text, "participant " + cls->widget->name->text());
     }
 
     // TODO
@@ -67,10 +67,10 @@ QString FileProcessor::genClasses()
         QString line;
 
         addElement(line, "class");
-        addElement(line, cls->name->text());
+        addElement(line, cls->widget->name->text());
 
         // Add attributes
-        for (QWidget *attr : qAsConst(cls->attributes)) {
+        for (QWidget *attr : qAsConst(cls->widget->attributes)) {
             addElement(line, attr->findChild<QComboBox *>()->currentText());
             addElement(line, attr->findChild<QLineEdit *>("dt")->text());
             addElement(line, attr->findChild<QLineEdit *>("name")->text());
@@ -79,7 +79,7 @@ QString FileProcessor::genClasses()
         addElement(line, ":");
 
         // Add methods
-        for (QWidget *meth : qAsConst(cls->methods)) {
+        for (QWidget *meth : qAsConst(cls->widget->methods)) {
             addElement(line, meth->findChild<QComboBox *>()->currentText());
             addElement(line, meth->findChild<QLineEdit *>("dt")->text());
             addElement(line, meth->findChild<QLineEdit *>("name")->text());

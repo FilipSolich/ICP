@@ -11,6 +11,8 @@ CONFIG += c++17
 SOURCES += \
     class.cc \
     classdiagrameditor.cc \
+    classitem.cc \
+    classwidget.cc \
     diagram.cc \
     diagramtabwidget.cc \
     fileprocessor.cc \
@@ -21,6 +23,8 @@ SOURCES += \
 HEADERS += \
     class.hh \
     classdiagrameditor.hh \
+    classitem.hh \
+    classwidget.hh \
     diagram.hh \
     diagramtabwidget.hh \
     fileprocessor.hh \

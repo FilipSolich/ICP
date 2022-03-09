@@ -19,13 +19,13 @@ class ClassDiagramEditor : public QWidget
 {
     Q_OBJECT
 
-    QGraphicsView *view = nullptr;
-    QGraphicsScene *scene = nullptr;
-
     Diagram *diagram = nullptr;
 
 public:
     ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+
+    QGraphicsView *view = nullptr;
+    QGraphicsScene *scene = nullptr;
 
     void addClass();
 };

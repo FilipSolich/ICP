@@ -52,12 +52,41 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cc \
-		mainwindow.cc moc_mainwindow.cpp
-OBJECTS       = main.o \
+SOURCES       = class.cc \
+		classdiagrameditor.cc \
+		classitem.cc \
+		classwidget.cc \
+		diagram.cc \
+		diagramtabwidget.cc \
+		fileprocessor.cc \
+		main.cc \
+		mainwindow.cc \
+		sequencediagram.cc qrc_resources.cpp \
+		moc_classdiagrameditor.cpp \
+		moc_classitem.cpp \
+		moc_classwidget.cpp \
+		moc_diagramtabwidget.cpp \
+		moc_mainwindow.cpp \
+		moc_sequencediagram.cpp
+OBJECTS       = class.o \
+		classdiagrameditor.o \
+		classitem.o \
+		classwidget.o \
+		diagram.o \
+		diagramtabwidget.o \
+		fileprocessor.o \
+		main.o \
 		mainwindow.o \
-		moc_mainwindow.o
-DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
+		sequencediagram.o \
+		qrc_resources.o \
+		moc_classdiagrameditor.o \
+		moc_classitem.o \
+		moc_classwidget.o \
+		moc_diagramtabwidget.o \
+		moc_mainwindow.o \
+		moc_sequencediagram.o
+DIST          = ../save_file_syntax.txt \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/sanitize.conf \
@@ -114,6 +143,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -133,8 +163,24 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		icp.pro mainwindow.hh main.cc \
-		mainwindow.cc
+		icp.pro class.hh \
+		classdiagrameditor.hh \
+		classitem.hh \
+		classwidget.hh \
+		diagram.hh \
+		diagramtabwidget.hh \
+		fileprocessor.hh \
+		mainwindow.hh \
+		sequencediagram.hh class.cc \
+		classdiagrameditor.cc \
+		classitem.cc \
+		classwidget.cc \
+		diagram.cc \
+		diagramtabwidget.cc \
+		fileprocessor.cc \
+		main.cc \
+		mainwindow.cc \
+		sequencediagram.cc
 QMAKE_TARGET  = icp
 DESTDIR       = 
 TARGET        = icp
@@ -203,6 +249,7 @@ Makefile: icp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /us
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -222,7 +269,8 @@ Makefile: icp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /us
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		icp.pro
+		icp.pro \
+		resources.qrc
 	$(QMAKE) -o Makefile icp.pro
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf:
@@ -281,6 +329,7 @@ Makefile: icp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /us
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -301,6 +350,7 @@ Makefile: icp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /us
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 icp.pro:
+resources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile icp.pro
 
@@ -315,9 +365,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.hh $(DISTDIR)/
-	$(COPY_FILE) --parents main.cc mainwindow.cc $(DISTDIR)/
+	$(COPY_FILE) --parents class.hh classdiagrameditor.hh classitem.hh classwidget.hh diagram.hh diagramtabwidget.hh fileprocessor.hh mainwindow.hh sequencediagram.hh $(DISTDIR)/
+	$(COPY_FILE) --parents class.cc classdiagrameditor.cc classitem.cc classwidget.cc diagram.cc diagramtabwidget.cc fileprocessor.cc main.cc mainwindow.cc sequencediagram.cc $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -342,21 +393,74 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resources.cpp
+qrc_resources.cpp: resources.qrc \
+		/usr/lib/qt5/bin/rcc \
+		icons/icons8-about-24.png \
+		icons/icons8-rollback-24.png \
+		icons/icons8-undo-24.png \
+		icons/icons8-exit-sign-24.png \
+		icons/icons8-paste-24.png \
+		icons/icons8-import-file-24.png \
+		icons/icons8-save-24.png \
+		icons/icons8-new-file-24.png \
+		icons/icons8-copy-24.png \
+		icons/icons8-cut-24.png \
+		icons/icons8-save-as-24.png
+	/usr/lib/qt5/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_classdiagrameditor.cpp moc_classitem.cpp moc_classwidget.cpp moc_diagramtabwidget.cpp moc_mainwindow.cpp moc_sequencediagram.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_classdiagrameditor.cpp moc_classitem.cpp moc_classwidget.cpp moc_diagramtabwidget.cpp moc_mainwindow.cpp moc_sequencediagram.cpp
+moc_classdiagrameditor.cpp: classdiagrameditor.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include classdiagrameditor.hh -o moc_classdiagrameditor.cpp
+
+moc_classitem.cpp: classitem.hh \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include classitem.hh -o moc_classitem.cpp
+
+moc_classwidget.cpp: classwidget.hh \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include classwidget.hh -o moc_classwidget.cpp
+
+moc_diagramtabwidget.cpp: diagramtabwidget.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include diagramtabwidget.hh -o moc_diagramtabwidget.cpp
+
 moc_mainwindow.cpp: mainwindow.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.hh -o moc_mainwindow.cpp
+
+moc_sequencediagram.cpp: sequencediagram.hh \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include sequencediagram.hh -o moc_sequencediagram.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -375,19 +479,94 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
-main.o: main.cc mainwindow.hh
+class.o: class.cc class.hh \
+		classitem.hh \
+		classwidget.hh \
+		classdiagrameditor.hh \
+		diagram.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o class.o class.cc
+
+classdiagrameditor.o: classdiagrameditor.cc class.hh \
+		classitem.hh \
+		classwidget.hh \
+		classdiagrameditor.hh \
+		diagram.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o classdiagrameditor.o classdiagrameditor.cc
+
+classitem.o: classitem.cc classitem.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o classitem.o classitem.cc
+
+classwidget.o: classwidget.cc classwidget.hh \
+		class.hh \
+		classitem.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o classwidget.o classwidget.cc
+
+diagram.o: diagram.cc diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o diagram.o diagram.cc
+
+diagramtabwidget.o: diagramtabwidget.cc classdiagrameditor.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh \
+		diagramtabwidget.hh \
+		sequencediagram.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o diagramtabwidget.o diagramtabwidget.cc
+
+fileprocessor.o: fileprocessor.cc classwidget.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		fileprocessor.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileprocessor.o fileprocessor.cc
+
+main.o: main.cc mainwindow.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cc
 
-mainwindow.o: mainwindow.cc mainwindow.hh \
+mainwindow.o: mainwindow.cc diagramtabwidget.hh \
+		diagram.hh \
+		class.hh \
+		classitem.hh \
+		classwidget.hh \
+		fileprocessor.hh \
+		mainwindow.hh \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cc
 
+sequencediagram.o: sequencediagram.cc sequencediagram.hh
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sequencediagram.o sequencediagram.cc
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
+moc_classdiagrameditor.o: moc_classdiagrameditor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_classdiagrameditor.o moc_classdiagrameditor.cpp
+
+moc_classitem.o: moc_classitem.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_classitem.o moc_classitem.cpp
+
+moc_classwidget.o: moc_classwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_classwidget.o moc_classwidget.cpp
+
+moc_diagramtabwidget.o: moc_diagramtabwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_diagramtabwidget.o moc_diagramtabwidget.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_sequencediagram.o: moc_sequencediagram.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sequencediagram.o moc_sequencediagram.cpp
 
 ####### Install
 

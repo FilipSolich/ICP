@@ -1,42 +1,23 @@
-/**
- * \file class.hh
- *
- * \brief Header file for Class class.
- *
- * \date 6. 4. 2022
- * \author Filip Solich
- */
-
 #ifndef CLASS_HH
 #define CLASS_HH
 
-#include <QLineEdit>
-#include <QWidget>
-#include <QVBoxLayout>
+#include "classitem.hh"
+#include "classwidget.hh"
 
-class Class : public QWidget
+class Diagram;
+class ClassDiagramEditor;
+
+class Class
 {
-    Q_OBJECT
-
-    QVBoxLayout *layout = nullptr;
-
 public:
+    Class(ClassDiagramEditor *editor, Diagram *diagram);
+
+    ClassDiagramEditor *editor = nullptr;
+    ClassItem *item = nullptr;
+    ClassWidget *widget = nullptr;
     QGraphicsProxyWidget *proxy = nullptr;
-    QLineEdit *name = nullptr;
-    QVector<QWidget *> attributes;
-    QVector<QWidget *> methods;
 
-    explicit Class(QWidget *parent = nullptr);
-
-    QStringList visibility{"+", "-", "#", "~"};
-
-    void addAttribute(void);
-    void delAttribute(void);
-    void addMethod(void);
-    void delMethod(void);
-
-signals:
-
+    Diagram *diagram;
 };
 
 #endif // CLASS_HH
