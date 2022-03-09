@@ -11,6 +11,8 @@ public:
     ClassItem(Class *parentClass);
 
     Class *parentClass = nullptr;
+
+    void setWidgetSize(QRectF rect);
 };
 
 #endif // CLASSITEM_HH

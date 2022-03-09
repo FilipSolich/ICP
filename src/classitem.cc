@@ -13,3 +13,8 @@ ClassItem::ClassItem(Class *parentClass)
 
     this->parentClass->editor->scene->addItem(this);
 }
+
+void ClassItem::setWidgetSize(QRectF rect)
+{
+    setRect(rect);
+}

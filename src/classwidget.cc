@@ -16,6 +16,7 @@
 
 #include "classwidget.hh"
 #include "class.hh"
+#include <QDebug>
 
 ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     : QWidget{parent}
@@ -53,13 +54,14 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     layout->addWidget(divider);
     layout->addWidget(methBtns);
 
-    resize(layout->sizeHint());
     setLayout(layout);
+    resize(layout->sizeHint());
 
     connect(addAttrBtn, &QPushButton::clicked, this, &ClassWidget::addAttribute);
     connect(delAttrBtn, &QPushButton::clicked, this, &ClassWidget::delAttribute);
     connect(addMethBtn, &QPushButton::clicked, this, &ClassWidget::addMethod);
     connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethod);
+    qDebug() << this->width() << this->height();
 }
 
 void ClassWidget::addAttribute(void)
@@ -88,8 +90,10 @@ void ClassWidget::addAttribute(void)
 
     this->layout->insertWidget(1 + attributes.size(), attr);
     attributes.push_back(attr);
+
+    this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
 }
-#include <QDebug>
+
 void ClassWidget::delAttribute(void)
 {
     if (attributes.size() > 0) {
@@ -99,6 +103,8 @@ void ClassWidget::delAttribute(void)
         delete w;
 
         adjustSize();
+
+        this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
 }
 
@@ -128,6 +134,8 @@ void ClassWidget::addMethod(void)
 
     this->layout->insertWidget(this->layout->count() - 1, meth);
     methods.push_back(meth);
+
+    this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
 }
 
 void ClassWidget::delMethod(void)
@@ -139,5 +147,7 @@ void ClassWidget::delMethod(void)
         delete w;
 
         adjustSize();
+
+        this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
 }
