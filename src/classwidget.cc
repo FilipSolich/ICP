@@ -22,6 +22,9 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
 {
     this->parentClass = parentClass;
 
+    setMinimumWidth(250);
+    setMaximumWidth(250);
+
     layout = new QVBoxLayout(this);
 
     name = new QLineEdit(this);
@@ -86,19 +89,16 @@ void ClassWidget::addAttribute(void)
     this->layout->insertWidget(1 + attributes.size(), attr);
     attributes.push_back(attr);
 }
-
+#include <QDebug>
 void ClassWidget::delAttribute(void)
 {
     if (attributes.size() > 0) {
         QWidget *w = attributes.last();
+        attributes.pop_back();
         this->layout->removeWidget(w);
         delete w;
-        attributes.pop_back();
 
-        resize(minimumSizeHint());
-        //resize(this->layout->minimumSizeHint());
-        //setLayout(this->layout);
-        //static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
+        adjustSize();
     }
 }
 
@@ -134,13 +134,10 @@ void ClassWidget::delMethod(void)
 {
     if (methods.size() > 0) {
         QWidget *w = methods.last();
+        methods.pop_back();
         this->layout->removeWidget(w);
         delete w;
-        methods.pop_back();
 
-        resize(minimumSizeHint());
-        //resize(this->layout->minimumSizeHint());
-        setLayout(this->layout);
-        //static_cast<QGraphicsRectItem *>(this->proxy->parentItem())->setRect(0, 0, this->width(), this->height());
+        adjustSize();
     }
 }

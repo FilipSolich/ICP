@@ -63,7 +63,6 @@ SOURCES       = class.cc \
 		mainwindow.cc \
 		sequencediagram.cc qrc_resources.cpp \
 		moc_classdiagrameditor.cpp \
-		moc_classitem.cpp \
 		moc_classwidget.cpp \
 		moc_diagramtabwidget.cpp \
 		moc_mainwindow.cpp \
@@ -80,7 +79,6 @@ OBJECTS       = class.o \
 		sequencediagram.o \
 		qrc_resources.o \
 		moc_classdiagrameditor.o \
-		moc_classitem.o \
 		moc_classwidget.o \
 		moc_diagramtabwidget.o \
 		moc_mainwindow.o \
@@ -143,7 +141,6 @@ DIST          = ../save_file_syntax.txt \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -249,7 +246,6 @@ Makefile: icp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /us
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -329,7 +325,6 @@ Makefile: icp.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /us
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -417,9 +412,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_classdiagrameditor.cpp moc_classitem.cpp moc_classwidget.cpp moc_diagramtabwidget.cpp moc_mainwindow.cpp moc_sequencediagram.cpp
+compiler_moc_header_make_all: moc_classdiagrameditor.cpp moc_classwidget.cpp moc_diagramtabwidget.cpp moc_mainwindow.cpp moc_sequencediagram.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_classdiagrameditor.cpp moc_classitem.cpp moc_classwidget.cpp moc_diagramtabwidget.cpp moc_mainwindow.cpp moc_sequencediagram.cpp
+	-$(DEL_FILE) moc_classdiagrameditor.cpp moc_classwidget.cpp moc_diagramtabwidget.cpp moc_mainwindow.cpp moc_sequencediagram.cpp
 moc_classdiagrameditor.cpp: classdiagrameditor.hh \
 		diagram.hh \
 		class.hh \
@@ -428,11 +423,6 @@ moc_classdiagrameditor.cpp: classdiagrameditor.hh \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include classdiagrameditor.hh -o moc_classdiagrameditor.cpp
-
-moc_classitem.cpp: classitem.hh \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/filip/code/ICP/src/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/filip/code/ICP/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include classitem.hh -o moc_classitem.cpp
 
 moc_classwidget.cpp: classwidget.hh \
 		moc_predefs.h \
@@ -497,7 +487,11 @@ classdiagrameditor.o: classdiagrameditor.cc class.hh \
 		diagram.hh
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o classdiagrameditor.o classdiagrameditor.cc
 
-classitem.o: classitem.cc classitem.hh
+classitem.o: classitem.cc class.hh \
+		classitem.hh \
+		classwidget.hh \
+		classdiagrameditor.hh \
+		diagram.hh
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o classitem.o classitem.cc
 
 classwidget.o: classwidget.cc classwidget.hh \
@@ -552,9 +546,6 @@ qrc_resources.o: qrc_resources.cpp
 
 moc_classdiagrameditor.o: moc_classdiagrameditor.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_classdiagrameditor.o moc_classdiagrameditor.cpp
-
-moc_classitem.o: moc_classitem.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_classitem.o moc_classitem.cpp
 
 moc_classwidget.o: moc_classwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_classwidget.o moc_classwidget.cpp

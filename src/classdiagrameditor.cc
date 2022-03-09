@@ -40,15 +40,4 @@ ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
 void ClassDiagramEditor::addClass()
 {
     new Class(this, diagram);
-    //int x = 0, y = 0;
-    //ClassWidget *new_class = new ClassWidget(this->diagram);
-    //Class *new_class = new Class(this, diagram);
-    //QGraphicsRectItem *rect = scene->addRect(x, y, new_class->width(), new_class->height());
-    //rect->setFlag(QGraphicsItem::ItemIsMovable);
-    //rect->setFlag(QGraphicsItem::ItemIsSelectable);
-
-    //QGraphicsProxyWidget *proxy = scene->addWidget(new_class);
-    //new_class->proxy = proxy;
-    //proxy->setPos(x, y);
-    //proxy->setParentItem(rect);
 }
