@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     diagram = new Diagram();
 
-    DiagramTabWidget *tabs = new DiagramTabWidget(this, diagram);
+    tabs = new DiagramTabWidget(this, diagram);
     ui->centralwidget->layout()->addWidget(tabs);
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
@@ -76,7 +76,7 @@ void MainWindow::open()
     QString text = in.readAll();
 
     FileProcessor parser;
-    diagram = parser.parseFile(&text);
+    diagram = parser.parseFile(tabs, &text);
 
     file.close();
 }
@@ -160,7 +160,6 @@ void MainWindow::about()
     QWidget *about = new QWidget();
     about->resize(400, 200);
     about->setWindowTitle("About");
-
 
     QLabel *label = new QLabel(about);
     label->setAlignment(Qt::AlignCenter);

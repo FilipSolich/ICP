@@ -27,7 +27,7 @@ public:
     QGraphicsView *view = nullptr;
     QGraphicsScene *scene = nullptr;
 
-    void addClass();
+    Class *addClass(int x = 0, int y = 0);
 };
 
 #endif // CLASSDIAGRAMEDITOR_H

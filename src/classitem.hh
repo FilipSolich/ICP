@@ -8,7 +8,7 @@ class Class;
 class ClassItem : public QGraphicsRectItem
 {
 public:
-    ClassItem(Class *parentClass);
+    ClassItem(Class *parentClass, int x = 0, int y = 0);
 
     Class *parentClass = nullptr;
 

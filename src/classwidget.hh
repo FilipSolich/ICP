@@ -33,12 +33,16 @@ public:
 
     Class *parentClass = nullptr;
 
-    void addAttribute(void);
+    void addAttribute(QString visibility = "+", QString dt = "", QString name = "");
     void delAttribute(void);
-    void addMethod(void);
+    void addMethod(QString visibility = "+", QString dt = "", QString name = "");
     void delMethod(void);
 
-signals:
+public slots:
+    void addAttributeSlot(void);
+    void delAttributeSlot(void);
+    void addMethodSlot(void);
+    void delMethodSlot(void);
 
 };
 

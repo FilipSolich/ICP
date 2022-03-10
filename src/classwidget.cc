@@ -58,33 +58,35 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     setLayout(layout);
     resize(layout->sizeHint());
 
-    connect(addAttrBtn, &QPushButton::clicked, this, &ClassWidget::addAttribute);
-    connect(delAttrBtn, &QPushButton::clicked, this, &ClassWidget::delAttribute);
-    connect(addMethBtn, &QPushButton::clicked, this, &ClassWidget::addMethod);
-    connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethod);
+    connect(addAttrBtn, &QPushButton::clicked, this, &ClassWidget::addAttributeSlot);
+    connect(delAttrBtn, &QPushButton::clicked, this, &ClassWidget::delAttributeSlot);
+    connect(addMethBtn, &QPushButton::clicked, this, &ClassWidget::addMethodSlot);
+    connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethodSlot);
 }
 
-void ClassWidget::addAttribute(void)
+void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
 {
+    // TODO check arguments
     QWidget *attr = new QWidget(this);
 
     QHBoxLayout *layout= new QHBoxLayout(attr);
 
     QComboBox *visibilityBox = new QComboBox(attr);
-    visibilityBox ->addItems(visibility);
+    visibilityBox ->addItems(this->visibility);
+    visibilityBox->setCurrentText(visibility);
 
-    QLineEdit *dt = new QLineEdit(attr);
-    dt->setObjectName("dt");
+    QLineEdit *dtLine = new QLineEdit(dt, attr);
+    dtLine->setObjectName("dt");
 
     QLabel *divider = new QLabel(":", attr);
 
-    QLineEdit *name = new QLineEdit(attr);
-    name->setObjectName("name");
+    QLineEdit *nameLine = new QLineEdit(name, attr);
+    nameLine->setObjectName("name");
 
     layout->addWidget(visibilityBox);
-    layout->addWidget(dt);
+    layout->addWidget(dtLine);
     layout->addWidget(divider);
-    layout->addWidget(name);
+    layout->addWidget(nameLine);
 
     attr->setLayout(layout);
 
@@ -110,27 +112,29 @@ void ClassWidget::delAttribute(void)
     }
 }
 
-void ClassWidget::addMethod(void)
+void ClassWidget::addMethod(QString visibility, QString dt, QString name)
 {
+    // TODO check arguments
     QWidget *meth = new QWidget(this);
 
     QHBoxLayout *layout = new QHBoxLayout(meth);
 
     QComboBox *visibilityBox = new QComboBox(meth);
-    visibilityBox ->addItems(visibility);
+    visibilityBox ->addItems(this->visibility);
+    visibilityBox->setCurrentText(visibility);
 
-    QLineEdit *returnDt = new QLineEdit(meth);
+    QLineEdit *returnDt = new QLineEdit(dt, meth);
     returnDt->setObjectName("dt");
 
     QLabel *divider = new QLabel(":", meth);
 
-    QLineEdit *name = new QLineEdit(meth);
-    name->setObjectName("name");
+    QLineEdit *nameLine = new QLineEdit(name, meth);
+    nameLine->setObjectName("name");
 
     layout->addWidget(visibilityBox);
     layout->addWidget(returnDt);
     layout->addWidget(divider);
-    layout->addWidget(name);
+    layout->addWidget(nameLine);
 
     meth->setLayout(layout);
 
@@ -154,4 +158,24 @@ void ClassWidget::delMethod(void)
         QCoreApplication::processEvents(QEventLoop::AllEvents);
         this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
+}
+
+void ClassWidget::addAttributeSlot(void)
+{
+    addAttribute();
+}
+
+void ClassWidget::delAttributeSlot(void)
+{
+    delAttribute();
+}
+
+void ClassWidget::addMethodSlot(void)
+{
+    addMethod();
+}
+
+void ClassWidget::delMethodSlot(void)
+{
+    delMethod();
 }

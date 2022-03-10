@@ -14,6 +14,7 @@
 #include <QString>
 
 #include "diagram.hh"
+#include "diagramtabwidget.hh"
 
 class FileProcessor
 {
@@ -22,13 +23,20 @@ class FileProcessor
     QString genSequences();
     QString genClasses();
     void addLine(QString &text, QString const &increment);
-    void addElement(QString &text, QString const &increment);
+    void addElement(QString &text, QString const &increment, bool leadingSpace = true);
+    int createClass(ClassDiagramEditor *classEditor, QString &line);
 
 public:
-    FileProcessor();
+    FileProcessor() {};
+
+    enum class ParseState {
+        NoState,
+        Classes,
+        Sequences,
+    };
 
     QString generateFile(Diagram *diagram);
-    Diagram *parseFile(QString *text);
+    Diagram *parseFile(DiagramTabWidget *tabs, QString *text);
 };
 
 #endif // FILEPROCESSOR_HH

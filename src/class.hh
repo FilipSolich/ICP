@@ -10,7 +10,7 @@ class ClassDiagramEditor;
 class Class
 {
 public:
-    Class(ClassDiagramEditor *editor, Diagram *diagram);
+    Class(ClassDiagramEditor *editor, Diagram *diagram, int x = 0, int y = 0);
 
     ClassDiagramEditor *editor = nullptr;
     ClassItem *item = nullptr;
@@ -18,6 +18,10 @@ public:
     QGraphicsProxyWidget *proxy = nullptr;
 
     Diagram *diagram;
+
+    void setName(QString name);
+    bool addAttribute(QString visibility, QString dt, QString name);
+    bool addMethod(QString visibility, QString dt, QString name);
 };
 
 #endif // CLASS_HH

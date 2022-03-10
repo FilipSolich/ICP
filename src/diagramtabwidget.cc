@@ -17,8 +17,9 @@ DiagramTabWidget::DiagramTabWidget(QWidget *parent, Diagram *diagram)
 {
     setTabPosition(QTabWidget::South);
 
-    ClassDiagramEditor *classTab = new ClassDiagramEditor(this, diagram);
+    classTab = new ClassDiagramEditor(this, diagram);
     SequenceDiagram *sequenceTab = new SequenceDiagram(this);
+    sequnceTabs.push_back(sequenceTab);
 
     addTab(classTab, "Class diagram");
     addTab(sequenceTab, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
@@ -35,6 +36,8 @@ void DiagramTabWidget::addSequenceTab(int index)
         sequenceDiagramCounter += 1;
 
         SequenceDiagram *sequence = new SequenceDiagram(this);
+        sequnceTabs.push_back(sequence);
+
         addTab(sequence, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
 
         addDummyTab();

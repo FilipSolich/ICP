@@ -1,11 +1,11 @@
 # Pripona souboru ".uml"
 # Komentar. Nebude obsahem konecne specifikace syntaxe.
 start class
-class Name ~ int a # int b : int a(int b)
+class "Name" ~ int a # int b : int a(int b)
 
 end class
 
-start sequnce
+start sequence
 participant Orchestra
 participant Storage
 

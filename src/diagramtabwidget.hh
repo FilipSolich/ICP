@@ -14,6 +14,7 @@
 #include <QWidget>
 
 #include "diagram.hh"
+#include "sequencediagram.hh"
 
 class DiagramTabWidget : public QTabWidget
 {
@@ -25,6 +26,9 @@ class DiagramTabWidget : public QTabWidget
 
 public:
     explicit DiagramTabWidget(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+
+    ClassDiagramEditor *classTab;
+    QVector<SequenceDiagram *> sequnceTabs;
 
 private slots:
     void addSequenceTab(int index);
