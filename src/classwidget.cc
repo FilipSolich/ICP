@@ -7,6 +7,7 @@
  * \author Filip Solich
  */
 
+#include <QCoreApplication>
 #include <QComboBox>
 #include <QGraphicsProxyWidget>
 #include <QLabel>
@@ -61,7 +62,6 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     connect(delAttrBtn, &QPushButton::clicked, this, &ClassWidget::delAttribute);
     connect(addMethBtn, &QPushButton::clicked, this, &ClassWidget::addMethod);
     connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethod);
-    qDebug() << this->width() << this->height();
 }
 
 void ClassWidget::addAttribute(void)
@@ -91,6 +91,7 @@ void ClassWidget::addAttribute(void)
     this->layout->insertWidget(1 + attributes.size(), attr);
     attributes.push_back(attr);
 
+    QCoreApplication::processEvents(QEventLoop::AllEvents);
     this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
 }
 
@@ -104,6 +105,7 @@ void ClassWidget::delAttribute(void)
 
         adjustSize();
 
+        QCoreApplication::processEvents(QEventLoop::AllEvents);
         this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
 }
@@ -135,6 +137,7 @@ void ClassWidget::addMethod(void)
     this->layout->insertWidget(this->layout->count() - 1, meth);
     methods.push_back(meth);
 
+    QCoreApplication::processEvents(QEventLoop::AllEvents);
     this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
 }
 
@@ -148,6 +151,7 @@ void ClassWidget::delMethod(void)
 
         adjustSize();
 
+        QCoreApplication::processEvents(QEventLoop::AllEvents);
         this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
 }
