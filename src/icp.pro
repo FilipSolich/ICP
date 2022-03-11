@@ -18,7 +18,8 @@ SOURCES += \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
-    sequencediagram.cc
+    sequencediagram.cc \
+    sequence.cpp
 
 HEADERS += \
     class.hh \
@@ -29,7 +30,8 @@ HEADERS += \
     diagramtabwidget.hh \
     fileprocessor.hh \
     mainwindow.hh \
-    sequencediagram.hh
+    sequencediagram.hh \
+    sequence.h
 
 FORMS += \
     mainwindow.ui
