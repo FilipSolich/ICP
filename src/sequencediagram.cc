@@ -58,7 +58,7 @@ void SequenceDiagram::makeSequence(QVector<QString> names)
         for(int i=0; i<names.size();i++){
             Sequence *new_seq = new Sequence();
 
-            QGraphicsRectItem *seq_rect = sequence_scene->addRect(0,0,200,50);
+            QGraphicsRectItem *seq_rect = sequence_scene->addRect(0,0,200,300);
             seq_rect->setFlag(QGraphicsItem::ItemIsMovable);
             seq_rect->setFlag(QGraphicsItem::ItemIsSelectable);
 

@@ -3,16 +3,16 @@
 
 #include <QWidget>
 #include <QBoxLayout>
+#include <QFrame>
 #include <QLabel>
-#include <QLineEdit>
 
 class Sequence : public QWidget
 {
     Q_OBJECT
     QGridLayout *seq_layout = nullptr;
     QLabel *seq_name = nullptr;
-    //QLabel *seq_body = nullptr;
-    //QLineEdit *seq_name_edit = nullptr;
+    QLabel *seq_line = nullptr;
+
 
 public:
     QGraphicsProxyWidget *seq_proxy = nullptr;
