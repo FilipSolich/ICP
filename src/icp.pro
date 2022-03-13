@@ -19,7 +19,9 @@ SOURCES += \
     main.cc \
     mainwindow.cc \
     sequencediagram.cc \
-    sequence.cpp
+    sequence.cpp \
+    socket.cc \
+    socketitem.cc
 
 HEADERS += \
     class.hh \
@@ -31,7 +33,9 @@ HEADERS += \
     fileprocessor.hh \
     mainwindow.hh \
     sequencediagram.hh \
-    sequence.h
+    sequence.h \
+    socket.hh \
+    socketitem.hh
 
 FORMS += \
     mainwindow.ui
