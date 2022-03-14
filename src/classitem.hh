@@ -13,6 +13,7 @@ public:
     Class *parentClass = nullptr;
 
     void setWidgetSize(QRectF rect);
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 };
 
 #endif // CLASSITEM_HH

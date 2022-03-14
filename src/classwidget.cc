@@ -95,6 +95,8 @@ void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
 
     QCoreApplication::processEvents(QEventLoop::AllEvents);
     this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+
+    parentClass->moved(parentClass->item->pos());
 }
 
 void ClassWidget::delAttribute(void)

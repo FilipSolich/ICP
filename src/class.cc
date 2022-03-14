@@ -5,8 +5,10 @@
 #include "classwidget.hh"
 #include "classdiagrameditor.hh"
 #include "diagram.hh"
-
 #include "socket.hh"
+#include "socketitem.hh"
+
+#include <QDebug>
 
 Class::Class(ClassDiagramEditor *editor, Diagram *diagram, int x, int y)
     : editor{editor},
@@ -32,6 +34,11 @@ void Class::setName(QString name)
     widget->name->setText(name);
 }
 
+QString Class::getName(void)
+{
+    return widget->name->text();
+}
+
 bool Class::addAttribute(QString visibility, QString dt, QString name)
 {
     if (!widget->visibility.contains(visibility)) {
@@ -52,27 +59,37 @@ bool Class::addMethod(QString visibility, QString dt, QString name)
     return true;
 }
 
-QPoint Class::getSocketPos(Socket::Position pos)
+QPointF Class::getSocketPos(Socket::Position pos)
 {
     int x, y;
+    int itemX = item->pos().x();
+    int itemY = item->pos().y();
+
     switch (pos) {
         case Socket::Position::Top:
-            x = item->rect().width() / 2;
-            y = 0;
+            x = itemX + item->rect().width() / 2;
+            y = itemY - (SocketItem::_heigth / 2);
             break;
         case Socket::Position::Right:
-            x = item->rect().width();
-            y = item->rect().height() / 2;
+            x = itemX + item->rect().width() - (SocketItem::_width / 2);
+            y = itemY + item->rect().height() / 2;
             break;
         case Socket::Position::Bottom:
-            x = item->rect().width() / 2;
-            y = item->rect().height();
+            x = itemX + item->rect().width() / 2;
+            y = itemY + item->rect().height() - (SocketItem::_heigth / 2);
             break;
         case Socket::Position::Left:
-            x = 0;
-            y = item->rect().height() / 2;
+            x = itemX - (SocketItem::_width / 2);
+            y = itemY + item->rect().height() / 2;
             break;
     }
 
-    return QPoint(x, y);
+    return QPointF(x, y);
+}
+
+void Class::moved(QPointF point)
+{
+    for (Socket *s : sockets) {
+        s->moveTo(getSocketPos(s->position));
+    }
 }

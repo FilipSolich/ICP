@@ -2,6 +2,7 @@
 #include "classdiagrameditor.hh"
 #include "classitem.hh"
 
+#include <QDebug>
 
 ClassItem::ClassItem(Class *parentClass, int x, int y)
 {
@@ -17,4 +18,12 @@ ClassItem::ClassItem(Class *parentClass, int x, int y)
 void ClassItem::setWidgetSize(QRectF rect)
 {
     setRect(rect);
+}
+
+QVariant ClassItem::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    if (change == ItemPositionChange && scene()) {
+        parentClass->moved(pos());
+    }
+    return QGraphicsItem::itemChange(change, value);
 }

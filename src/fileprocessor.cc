@@ -56,7 +56,7 @@ QString FileProcessor::genClasses()
         addElement(line, "class", false);
 
         // Add class name
-        addElement(line, "\"" + cls->widget->name->text() + "\"");
+        addElement(line, "\"" + cls->getName() + "\"");
 
         // Add class position
         addElement(line, QString::number(cls->item->pos().x()));

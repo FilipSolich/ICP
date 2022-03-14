@@ -4,7 +4,7 @@
 SocketItem::SocketItem(Socket *socket)
 {
     this->socket = socket;
-    QPoint point = socket->cls->getSocketPos(socket->position);
+    QPointF point = socket->cls->getSocketPos(socket->position);
 
     setRect(point.x(), point.y(), _width, _heigth);
 
