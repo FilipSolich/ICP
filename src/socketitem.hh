@@ -9,11 +9,12 @@ class SocketItem : public QGraphicsEllipseItem
 {
     // Q_OBJECT // TODO: Remove if SocketItem doesnt use signal or slots
 
-    int _width = 10;
-    int _heigth = 10;
 
 public:
     SocketItem(Socket *socket);
+
+    static const int _width = 10;
+    static const int _heigth = 10;
 
     Socket *socket = nullptr;
 };

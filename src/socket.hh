@@ -20,6 +20,8 @@ public:
     Class *cls = nullptr;
     SocketItem *item = nullptr;
     Position position;
+
+    void moveTo(QPointF point);
 };
 
 #endif // SOCKET_HH

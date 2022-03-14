@@ -23,10 +23,14 @@ public:
     Diagram *diagram;
 
     void setName(QString name);
+    QString getName(void);
+
     bool addAttribute(QString visibility, QString dt, QString name);
     bool addMethod(QString visibility, QString dt, QString name);
 
-    QPoint getSocketPos(Socket::Position pos);
+    QPointF getSocketPos(Socket::Position pos);
+
+    void moved(QPointF point);
 };
 
 #endif // CLASS_HH
