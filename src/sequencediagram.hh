@@ -13,6 +13,7 @@ class SequenceDiagram : public QWidget
     QGraphicsScene *sequence_scene = nullptr;
     Diagram *diagram = nullptr;
     QVector<Sequence *> v_diagrams;
+    QVector<QGraphicsRectItem *> v_rect_diagrams;
 
 public:
     explicit SequenceDiagram(QWidget *parent = nullptr, Diagram *diagram = nullptr);

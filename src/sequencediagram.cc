@@ -15,6 +15,7 @@
 #include <QGraphicsProxyWidget>
 #include <QPushButton>
 #include <QGraphicsLayout>
+#include <QGraphicsSceneMouseEvent>
 
 SequenceDiagram::SequenceDiagram(QWidget *parent, Diagram *diagram)
     : QWidget{parent}
@@ -64,20 +65,21 @@ void SequenceDiagram::makeSequence(QVector<QString> names)
         for(int i=0; i<names.size();i++){
             Sequence *new_seq = new Sequence();
 
-            v_diagrams.push_back(new_seq);
-
-            QGraphicsRectItem *seq_rect = sequence_scene->addRect(0,0,300,300);
+            QGraphicsRectItem *seq_rect = sequence_scene->addRect(0,0,200,300);
             seq_rect->setFlag(QGraphicsItem::ItemIsMovable);
-            seq_rect->setFlag(QGraphicsItem::ItemIsSelectable);
+            seq_rect->setFlag(QGraphicsItem::ItemIsSelectable,true);
             seq_rect->setFlag(QGraphicsItem::ItemIsFocusable);
 
             QGraphicsProxyWidget *seq_proxy = sequence_scene->addWidget(new_seq);
+
             new_seq->seq_proxy = seq_proxy;
             seq_proxy->setPos(0, 0);
             seq_proxy->setParentItem(seq_rect);
+
+            v_diagrams.push_back(new_seq);
+            v_rect_diagrams.push_back(seq_rect);
         }
     }
-
 }
 
 void SequenceDiagram::add()
@@ -87,8 +89,21 @@ void SequenceDiagram::add()
 }
 void SequenceDiagram::remove()
 {
-   //iter over vector v_diagrams and find selected shit (::IsSelected())
-   // deleted founded Item you fool.
+    for(int i = 0; i<v_rect_diagrams.size();++i)
+    {
+        if(v_rect_diagrams[i]->isSelected())
+        {
+           delete v_diagrams[i]->seq_proxy;
+           delete v_rect_diagrams[i];
+           v_rect_diagrams[i] = nullptr;
+           v_diagrams[i] = nullptr;
+           break;
+        }
+
+    }
+    v_diagrams.erase(std::remove(v_diagrams.begin(), v_diagrams.end(), nullptr), v_diagrams.end());
+    v_rect_diagrams.erase(std::remove(v_rect_diagrams.begin(), v_rect_diagrams.end(), nullptr), v_rect_diagrams.end());
+
 }
 
 void SequenceDiagram::addConnection()
