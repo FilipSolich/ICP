@@ -15,6 +15,8 @@
 DiagramTabWidget::DiagramTabWidget(QWidget *parent, Diagram *diagram)
     : QTabWidget{parent}
 {
+    this->parent = static_cast<MainWindow *>(parent);
+
     setTabPosition(QTabWidget::South);
 
     classTab = new ClassDiagramEditor(this, diagram);
@@ -25,10 +27,10 @@ DiagramTabWidget::DiagramTabWidget(QWidget *parent, Diagram *diagram)
     addTab(sequenceTab, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
     addDummyTab();
 
-    connect(this, &DiagramTabWidget::tabBarClicked, this, &DiagramTabWidget::addSequenceTab);
+    connect(this, &DiagramTabWidget::tabBarClicked, this, &DiagramTabWidget::selectTab);
 }
 
-void DiagramTabWidget::addSequenceTab(int index)
+void DiagramTabWidget::selectTab(int index)
 {
     if (index == this->count() - 1) {
         removeTab(index);
@@ -41,6 +43,11 @@ void DiagramTabWidget::addSequenceTab(int index)
         addTab(sequence, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
 
         addDummyTab();
+    }
+    if (index == 0) {
+        parent->edgeComboBox->setClassEditorEdges();
+    } else {
+        parent->edgeComboBox->setSequenceEditorEdges();
     }
 }
 

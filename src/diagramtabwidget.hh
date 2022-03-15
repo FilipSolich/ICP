@@ -15,12 +15,14 @@
 
 #include "diagram.hh"
 #include "classdiagrameditor.hh"
+#include "mainwindow.hh"
 #include "sequencediagram.hh"
 
 class DiagramTabWidget : public QTabWidget
 {
     Q_OBJECT
 
+    MainWindow *parent;
     int sequenceDiagramCounter = 1;
 
     void addDummyTab(void);
@@ -32,7 +34,7 @@ public:
     QVector<SequenceDiagram *> sequnceTabs;
 
 private slots:
-    void addSequenceTab(int index);
+    void selectTab(int index);
 
 };
 

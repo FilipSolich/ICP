@@ -15,6 +15,7 @@ SOURCES += \
     classwidget.cc \
     diagram.cc \
     diagramtabwidget.cc \
+    edgecombobox.cc \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
@@ -30,6 +31,7 @@ HEADERS += \
     classwidget.hh \
     diagram.hh \
     diagramtabwidget.hh \
+    edgecombobox.hh \
     fileprocessor.hh \
     mainwindow.hh \
     sequencediagram.hh \

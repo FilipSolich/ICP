@@ -12,12 +12,14 @@
 
 #include <QMainWindow>
 
+#include "edgecombobox.hh"
 #include "diagram.hh"
-#include "diagramtabwidget.hh"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+class DiagramTabWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -34,6 +36,9 @@ public:
     ~MainWindow();
 
     DiagramTabWidget *tabs = nullptr;
+    EdgeComboBox *edgeComboBox = nullptr;
+
+    static MainWindow *getMainWindow(void);
 
 private slots:
     void newDocument();

@@ -9,16 +9,19 @@
 
 // Some code was taken from https://doc.qt.io/qt-6/qtwidgets-tutorials-notepad-example.html
 
+#include <QComboBox>
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QLabel>
 #include <QTextStream>
 
-#include "diagramtabwidget.hh"
+#include "edgecombobox.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
+
+class DiagramTabWidget;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -30,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     tabs = new DiagramTabWidget(this, diagram);
     ui->centralwidget->layout()->addWidget(tabs);
+
+    edgeComboBox = new EdgeComboBox(this);
+    ui->toolBar->addWidget(edgeComboBox);
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);

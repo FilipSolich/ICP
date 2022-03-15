@@ -58,13 +58,13 @@
      <string>Tools</string>
     </property>
     <addaction name="actionAdd_class"/>
+    <addaction name="actionRemove_class"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
