@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSave_as, &QAction::triggered, this, &MainWindow::saveAs);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
+    connect(ui->actionAdd_class, &QAction::triggered, this, &MainWindow::addClass);
+    connect(ui->actionRemove_class, &QAction::triggered, this, &MainWindow::removeClass);
 }
 
 MainWindow::~MainWindow()
@@ -190,5 +192,25 @@ void MainWindow::closeCurrentDiagram(void)
 
         delete diagram;
         diagram = nullptr;
+    }
+}
+
+void MainWindow::addClass()
+{
+    QWidget *w = tabs->currentWidget();
+    if (tabs->currentIndex() == 0) {
+        static_cast<ClassDiagramEditor *>(w)->addClass();
+    } else {
+        //static_cast<SequenceDiagramEditor *>(w)->addClass(); // TODO Add addClass to sequence diagram editor
+    }
+}
+
+void MainWindow::removeClass()
+{
+    QWidget *w = tabs->currentWidget();
+    if (tabs->currentIndex() == 0) {
+        static_cast<ClassDiagramEditor *>(w)->removeClass();
+    } else {
+        //static_cast<SequenceDiagramEditor *>(w)->removeClass(); // TODO Add addClass to sequence diagram editor
     }
 }

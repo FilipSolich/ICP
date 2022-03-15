@@ -33,8 +33,6 @@ ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
     this->setLayout(layout);
 
     this->diagram = diagram;
-
-    addClass(); // TODO Remove after testing
 }
 
 Class *ClassDiagramEditor::addClass(int x, int y)
@@ -43,4 +41,15 @@ Class *ClassDiagramEditor::addClass(int x, int y)
     diagram->classes.push_back(new_class);
 
     return new_class;
+}
+
+void ClassDiagramEditor::removeClass(void)
+{
+    QList<QGraphicsItem *> items = scene->selectedItems();
+    if (items.size() > 0) {
+        ClassItem *item = static_cast<ClassItem *>(items[0]);
+        QVector<Class *> *classes = &diagram->classes;
+        classes->erase(std::remove(classes->begin(), classes->end(), item->parentCls), classes->end());
+        delete item->parentCls;
+    }
 }

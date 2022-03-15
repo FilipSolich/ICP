@@ -20,6 +20,7 @@ public:
     Diagram *diagram;
 
     Class(ClassDiagramEditor *editor, Diagram *diagram, int x = 0, int y = 0);
+    ~Class();
 
     void setName(QString name);
     QString getName(void);

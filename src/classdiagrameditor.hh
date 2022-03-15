@@ -28,6 +28,7 @@ public:
     ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
     Class *addClass(int x = 0, int y = 0);
+    void removeClass(void);
 };
 
 #endif // CLASSDIAGRAMEDITOR_H

@@ -27,6 +27,13 @@ Class::Class(ClassDiagramEditor *editor, Diagram *diagram, int x, int y)
     sockets[3] = new Socket(Socket::Position::Left, this, item);
 }
 
+Class::~Class()
+{
+    editor->scene->removeItem(item);
+    delete proxy;
+    delete item;
+}
+
 void Class::setName(QString name)
 {
     widget->name->setText(name);
