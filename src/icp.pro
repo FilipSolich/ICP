@@ -20,6 +20,7 @@ SOURCES += \
     mainwindow.cc \
     sequencediagram.cc \
     sequence.cpp \
+    sequencemsg.cpp \
     socket.cc \
     socketitem.cc
 
@@ -34,6 +35,7 @@ HEADERS += \
     mainwindow.hh \
     sequencediagram.hh \
     sequence.h \
+    sequencemsg.h \
     socket.hh \
     socketitem.hh
 
