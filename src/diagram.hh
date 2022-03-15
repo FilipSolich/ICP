@@ -18,7 +18,7 @@ class Diagram
 {
 
 public:
-    bool unsavedChanges = false;
+    bool unsavedChanges = false; // TODO deal with unsaved changes
     QVector<Class *> classes;
 
     Diagram();

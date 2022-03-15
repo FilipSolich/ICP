@@ -3,7 +3,7 @@
  *
  * \brief Source code for Class class.
  *
- * \date 6. 4. 2022
+ * \date 15. 4. 2022
  * \author Filip Solich
  */
 
@@ -15,14 +15,13 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-#include "classwidget.hh"
 #include "class.hh"
-#include <QDebug>
+#include "classwidget.hh"
 
 ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     : QWidget{parent}
 {
-    this->parentClass = parentClass;
+    this->parentCls = parentClass;
 
     setMinimumWidth(250);
     setMaximumWidth(250);
@@ -31,6 +30,7 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
 
     name = new QLineEdit(this);
 
+    // Add and remove attribute buttons
     QWidget *attrBtns = new QWidget(this);
     QHBoxLayout *attrBtnsLayout = new QHBoxLayout(attrBtns);
     QPushButton *addAttrBtn = new QPushButton("+", attrBtns);
@@ -39,9 +39,11 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     attrBtnsLayout->addWidget(delAttrBtn);
     attrBtns->setLayout(attrBtnsLayout);
 
+    // Attribute and methods divider
     QFrame *divider = new QFrame();
     divider->setFrameShape(QFrame::HLine);
 
+    // Add and remove method buttons
     QWidget *methBtns = new QWidget(this);
     QHBoxLayout *methBtnsLayout = new QHBoxLayout(methBtns);
     QPushButton *addMethBtn = new QPushButton("+", methBtns);
@@ -66,7 +68,6 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
 
 void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
 {
-    // TODO check arguments
     QWidget *attr = new QWidget(this);
 
     QHBoxLayout *layout= new QHBoxLayout(attr);
@@ -94,9 +95,10 @@ void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
     attributes.push_back(attr);
 
     QCoreApplication::processEvents(QEventLoop::AllEvents);
-    this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+    this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
 
-    parentClass->moved(parentClass->item->pos());
+    // parentCls->moved(parentCls->item->pos()); // TODO: remove
+    parentCls->redrawSockets();
 }
 
 void ClassWidget::delAttribute(void)
@@ -110,13 +112,13 @@ void ClassWidget::delAttribute(void)
         adjustSize();
 
         QCoreApplication::processEvents(QEventLoop::AllEvents);
-        this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+        this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
+    parentCls->redrawSockets();
 }
 
 void ClassWidget::addMethod(QString visibility, QString dt, QString name)
 {
-    // TODO check arguments
     QWidget *meth = new QWidget(this);
 
     QHBoxLayout *layout = new QHBoxLayout(meth);
@@ -144,7 +146,9 @@ void ClassWidget::addMethod(QString visibility, QString dt, QString name)
     methods.push_back(meth);
 
     QCoreApplication::processEvents(QEventLoop::AllEvents);
-    this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+    this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+
+    parentCls->redrawSockets();
 }
 
 void ClassWidget::delMethod(void)
@@ -158,8 +162,9 @@ void ClassWidget::delMethod(void)
         adjustSize();
 
         QCoreApplication::processEvents(QEventLoop::AllEvents);
-        this->parentClass->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+        this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
     }
+    parentCls->redrawSockets();
 }
 
 void ClassWidget::addAttributeSlot(void)

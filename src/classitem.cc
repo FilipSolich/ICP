@@ -2,17 +2,15 @@
 #include "classdiagrameditor.hh"
 #include "classitem.hh"
 
-#include <QDebug>
-
-ClassItem::ClassItem(Class *parentClass, int x, int y)
+ClassItem::ClassItem(Class *parentCls, int x, int y)
 {
-    this->parentClass = parentClass;
+    this->parentCls = parentCls;
 
-    setRect(x, y, this->parentClass->widget->width(), this->parentClass->widget->height());
+    setRect(x, y, this->parentCls->widget->width(), this->parentCls->widget->height());
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable);
 
-    this->parentClass->editor->scene->addItem(this);
+    this->parentCls->editor->scene->addItem(this);
 }
 
 void ClassItem::setWidgetSize(QRectF rect)
@@ -20,10 +18,11 @@ void ClassItem::setWidgetSize(QRectF rect)
     setRect(rect);
 }
 
-QVariant ClassItem::itemChange(GraphicsItemChange change, const QVariant &value)
-{
-    if (change == ItemPositionChange && scene()) {
-        parentClass->moved(pos());
-    }
-    return QGraphicsItem::itemChange(change, value);
-}
+// TODO: remove
+// QVariant ClassItem::itemChange(GraphicsItemChange change, const QVariant &value)
+// {
+//     if (change == ItemPositionChange || change == ItemPositionHasChanged) {
+//         parentCls->moved(pos());
+//     }
+//     return QGraphicsItem::itemChange(change, value);
+// }

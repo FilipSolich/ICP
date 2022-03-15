@@ -15,13 +15,14 @@ public:
         Left,
     };
 
-    Socket(Class *cls, Position position);
+    Socket(Position position, Class *parentCls, QGraphicsItem *parentItem);
 
-    Class *cls = nullptr;
+    Class *parentCls = nullptr;
     SocketItem *item = nullptr;
     Position position;
 
-    void moveTo(QPointF point);
+    QPointF getSocketPos();
+    void redraw(void);
 };
 
 #endif // SOCKET_HH

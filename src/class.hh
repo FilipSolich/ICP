@@ -11,16 +11,15 @@ class ClassDiagramEditor;
 class Class
 {
 public:
-    Class(ClassDiagramEditor *editor, Diagram *diagram, int x = 0, int y = 0);
-
     ClassDiagramEditor *editor = nullptr;
     ClassItem *item = nullptr;
     ClassWidget *widget = nullptr;
     QGraphicsProxyWidget *proxy = nullptr;
 
     Socket *sockets[4];
-
     Diagram *diagram;
+
+    Class(ClassDiagramEditor *editor, Diagram *diagram, int x = 0, int y = 0);
 
     void setName(QString name);
     QString getName(void);
@@ -28,9 +27,10 @@ public:
     bool addAttribute(QString visibility, QString dt, QString name);
     bool addMethod(QString visibility, QString dt, QString name);
 
-    QPointF getSocketPos(Socket::Position pos);
+    void redrawSockets(void);
 
-    void moved(QPointF point);
+    // QPointF getSocketPos(Socket::Position pos); // TODO: remove
+    // void moved(QPointF point); // TODO: remove
 };
 
 #endif // CLASS_HH

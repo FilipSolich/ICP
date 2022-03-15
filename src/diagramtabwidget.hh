@@ -3,7 +3,7 @@
  *
  * \brief DiagramTabWidget class representing tab bar for users diagram.
  *
- * \date 4. 3. 2022
+ * \date 15. 3. 2022
  * \author Filip Solich
  */
 
@@ -14,6 +14,7 @@
 #include <QWidget>
 
 #include "diagram.hh"
+#include "classdiagrameditor.hh"
 #include "sequencediagram.hh"
 
 class DiagramTabWidget : public QTabWidget

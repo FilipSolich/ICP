@@ -21,12 +21,10 @@ Class::Class(ClassDiagramEditor *editor, Diagram *diagram, int x, int y)
     proxy->setPos(x, y);
     proxy->setParentItem(item);
 
-    diagram->classes.push_back(this);
-
-    sockets[0] = new Socket(this, Socket::Position::Top);
-    sockets[1] = new Socket(this, Socket::Position::Right);
-    sockets[2] = new Socket(this, Socket::Position::Bottom);
-    sockets[3] = new Socket(this, Socket::Position::Left);
+    sockets[0] = new Socket(Socket::Position::Top, this, item);
+    sockets[1] = new Socket(Socket::Position::Right, this, item);
+    sockets[2] = new Socket(Socket::Position::Bottom, this, item);
+    sockets[3] = new Socket(Socket::Position::Left, this, item);
 }
 
 void Class::setName(QString name)
@@ -59,37 +57,17 @@ bool Class::addMethod(QString visibility, QString dt, QString name)
     return true;
 }
 
-QPointF Class::getSocketPos(Socket::Position pos)
-{
-    int x, y;
-    int itemX = item->pos().x();
-    int itemY = item->pos().y();
-
-    switch (pos) {
-        case Socket::Position::Top:
-            x = itemX + item->rect().width() / 2;
-            y = itemY - (SocketItem::_heigth / 2);
-            break;
-        case Socket::Position::Right:
-            x = itemX + item->rect().width() - (SocketItem::_width / 2);
-            y = itemY + item->rect().height() / 2;
-            break;
-        case Socket::Position::Bottom:
-            x = itemX + item->rect().width() / 2;
-            y = itemY + item->rect().height() - (SocketItem::_heigth / 2);
-            break;
-        case Socket::Position::Left:
-            x = itemX - (SocketItem::_width / 2);
-            y = itemY + item->rect().height() / 2;
-            break;
-    }
-
-    return QPointF(x, y);
-}
-
-void Class::moved(QPointF point)
+void Class::redrawSockets(void)
 {
     for (Socket *s : sockets) {
-        s->moveTo(getSocketPos(s->position));
+        s->redraw();
     }
 }
+
+// TODO: remove
+// void Class::moved(QPointF point)
+// {
+//     //for (Socket *s : sockets) {
+//     //    s->moveTo(getSocketPos(s->position));
+//     //}
+// }

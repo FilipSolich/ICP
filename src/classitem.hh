@@ -8,12 +8,12 @@ class Class;
 class ClassItem : public QGraphicsRectItem
 {
 public:
-    ClassItem(Class *parentClass, int x = 0, int y = 0);
+    Class *parentCls = nullptr;
 
-    Class *parentClass = nullptr;
+    ClassItem(Class *parentCls, int x = 0, int y = 0);
 
     void setWidgetSize(QRectF rect);
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+    // QVariant itemChange(GraphicsItemChange change, const QVariant &value); // TODO: remove
 };
 
 #endif // CLASSITEM_HH
