@@ -23,15 +23,14 @@ class ClassWidget : public QWidget
     QVBoxLayout *layout = nullptr;
 
 public:
-    ClassWidget(Class *parentClass, QWidget *parent = nullptr);
-
     QStringList visibility{"+", "-", "#", "~"};
 
+    Class *parentCls = nullptr;
     QLineEdit *name = nullptr;
     QVector<QWidget *> attributes;
     QVector<QWidget *> methods;
 
-    Class *parentClass = nullptr;
+    ClassWidget(Class *parentClass, QWidget *parent = nullptr);
 
     void addAttribute(QString visibility = "+", QString dt = "", QString name = "");
     void delAttribute(void);

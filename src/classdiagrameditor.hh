@@ -22,10 +22,10 @@ class ClassDiagramEditor : public QWidget
     Diagram *diagram = nullptr;
 
 public:
-    ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
-
     QGraphicsView *view = nullptr;
     QGraphicsScene *scene = nullptr;
+
+    ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
     Class *addClass(int x = 0, int y = 0);
 };

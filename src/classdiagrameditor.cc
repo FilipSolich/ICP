@@ -39,5 +39,8 @@ ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
 
 Class *ClassDiagramEditor::addClass(int x, int y)
 {
-    return new Class(this, diagram, x, y);
+    Class *new_class = new Class(this, diagram, x, y);
+    diagram->classes.push_back(new_class);
+
+    return new_class;
 }

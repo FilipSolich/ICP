@@ -1,14 +1,43 @@
+#include "class.hh"
 #include "socket.hh"
 #include "socketitem.hh"
 
-Socket::Socket(Class *cls, Position position)
+Socket::Socket(Position position, Class *parentCls, QGraphicsItem *parentItem)
 {
-    this->cls = cls;
     this->position = position;
-    this->item = new SocketItem(this);
+    this->parentCls = parentCls;
+    this->item = new SocketItem(this, parentItem);
+}
+#include <QDebug>
+QPointF Socket::getSocketPos()
+{
+    int x, y;
+
+    switch (position) {
+        case Socket::Position::Top:
+            x = parentCls->item->rect().width() / 2;
+            y = 0 - (SocketItem::_heigth / 2);
+            break;
+        case Socket::Position::Right:
+            x = parentCls->item->rect().width() - (SocketItem::_width / 2);
+            y = parentCls->item->rect().height() / 2;
+            break;
+        case Socket::Position::Bottom:
+            x = parentCls->item->rect().width() / 2;
+            y = parentCls->item->rect().height() - (SocketItem::_heigth / 2);
+            break;
+        case Socket::Position::Left:
+            x = 0 - (SocketItem::_width / 2);
+            y = parentCls->item->rect().height() / 2;
+            break;
+    }
+
+    return QPointF(x, y);
 }
 
-void Socket::moveTo(QPointF point)
+
+void Socket::redraw(void)
 {
+    QPointF point = getSocketPos();
     item->setRect(point.x(), point.y(), SocketItem::_width, SocketItem::_heigth);
 }
