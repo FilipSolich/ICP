@@ -8,7 +8,7 @@ Socket::Socket(Position position, Class *parentCls, QGraphicsItem *parentItem)
     this->parentCls = parentCls;
     this->item = new SocketItem(this, parentItem);
 }
-#include <QDebug>
+
 QPointF Socket::getSocketPos()
 {
     int x, y;

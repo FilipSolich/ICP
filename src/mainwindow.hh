@@ -46,5 +46,7 @@ private slots:
     void paste();
     void undo();
     void about();
+    void addClass();
+    void removeClass();
 };
 #endif // MAINWINDOW_HH
