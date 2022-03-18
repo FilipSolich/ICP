@@ -4,6 +4,7 @@
 #include "socketitem.hh"
 
 class Class;
+class Edge;
 
 class Socket
 {
@@ -20,8 +21,10 @@ public:
     Class *parentCls = nullptr;
     SocketItem *item = nullptr;
     Position position;
+    Edge *edge = nullptr;
 
     QPointF getSocketPos();
+    void createEdge();
     void redraw(void);
 };
 

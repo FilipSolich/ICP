@@ -13,12 +13,14 @@
 #include <QVector>
 
 #include "class.hh"
+#include "edge.hh"
 
 class Diagram
 {
 
 public:
     bool unsavedChanges = false; // TODO deal with unsaved changes
+    Edge *currentEdge = nullptr;
     QVector<Class *> classes;
 
     Diagram();

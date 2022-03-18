@@ -16,6 +16,7 @@
 
 #include "class.hh"
 #include "classdiagrameditor.hh"
+#include "classdiagrameditorview.hh"
 #include "diagram.hh"
 
 
@@ -24,7 +25,7 @@ ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
 {
     scene = new QGraphicsScene;
 
-    view = new QGraphicsView(this);
+    view = new ClassDiagramEditorView(diagram, this);
     view->setScene(scene);
 
     QVBoxLayout *layout = new QVBoxLayout;
@@ -33,6 +34,13 @@ ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
     this->setLayout(layout);
 
     this->diagram = diagram;
+
+    QPainterPath path = QPainterPath({0, 0});
+    //path.cubicTo({10, 0}, {40, 50}, {50, 50});
+    //QPainter painter = QPainter();
+    //painter.setRenderHint(QPainter::Antialiasing);
+    //painter.drawPath(path);
+    scene->addPath(path);
 }
 
 Class *ClassDiagramEditor::addClass(int x, int y)

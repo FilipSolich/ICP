@@ -17,6 +17,8 @@ public:
     SocketItem(Socket *socket, QGraphicsItem *parentItem = nullptr);
 
     Socket *socket = nullptr;
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *ev);
 };
 
 #endif // SOCKETITEM_HH

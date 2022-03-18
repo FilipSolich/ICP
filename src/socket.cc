@@ -1,4 +1,5 @@
 #include "class.hh"
+#include "classdiagrameditor.hh"
 #include "socket.hh"
 #include "socketitem.hh"
 
@@ -35,6 +36,13 @@ QPointF Socket::getSocketPos()
     return QPointF(x, y);
 }
 
+// TODO delete old Edge
+void Socket::createEdge()
+{
+    QGraphicsPathItem *item = parentCls->editor->scene->addPath(QPainterPath());
+    item->setParentItem(this->item);
+    edge = new Edge(parentCls->diagram, item, this);
+}
 
 void Socket::redraw(void)
 {

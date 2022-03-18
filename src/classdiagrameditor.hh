@@ -13,6 +13,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 
+#include "classdiagrameditorview.hh"
 #include "diagram.hh"
 
 class ClassDiagramEditor : public QWidget
@@ -22,7 +23,7 @@ class ClassDiagramEditor : public QWidget
     Diagram *diagram = nullptr;
 
 public:
-    QGraphicsView *view = nullptr;
+    ClassDiagramEditorView *view = nullptr;
     QGraphicsScene *scene = nullptr;
 
     ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);

@@ -1,3 +1,5 @@
+#include <QGraphicsSceneMouseEvent>
+
 #include "socketitem.hh"
 #include "classdiagrameditor.hh"
 
@@ -5,9 +7,16 @@ SocketItem::SocketItem(Socket *socket, QGraphicsItem *parentItem)
     : QGraphicsEllipseItem(parentItem)
 {
     this->socket = socket;
+
+    setFlag(QGraphicsItem::ItemIsSelectable);
+
     QPointF point = socket->getSocketPos();
-
     setRect(point.x(), point.y(), _width, _heigth);
+}
 
-    //this->socket->parentCls->editor->scene->addItem(this); // TODO: remove
+void SocketItem::mousePressEvent(QGraphicsSceneMouseEvent *ev)
+{
+    if (ev->button() == Qt::LeftButton) {
+        socket->createEdge();
+    }
 }

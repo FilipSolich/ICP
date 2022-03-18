@@ -11,10 +11,12 @@ CONFIG += c++17
 SOURCES += \
     class.cc \
     classdiagrameditor.cc \
+    classdiagrameditorview.cc \
     classitem.cc \
     classwidget.cc \
     diagram.cc \
     diagramtabwidget.cc \
+    edge.cc \
     edgecombobox.cc \
     fileprocessor.cc \
     main.cc \
@@ -28,10 +30,12 @@ SOURCES += \
 HEADERS += \
     class.hh \
     classdiagrameditor.hh \
+    classdiagrameditorview.hh \
     classitem.hh \
     classwidget.hh \
     diagram.hh \
     diagramtabwidget.hh \
+    edge.hh \
     edgecombobox.hh \
     fileprocessor.hh \
     mainwindow.hh \
