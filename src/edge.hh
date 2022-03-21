@@ -15,8 +15,10 @@ public:
 
     static const int MAX_SOCKETS = 2;
     static const int C_DISTANCE = 30;
+
     Diagram *diagram = nullptr;
-    Socket *sockets[2] = {nullptr, nullptr};
+    Socket *startSocket = nullptr;
+    Socket *endSocket = nullptr;
     QGraphicsPathItem *item = nullptr;
 
     QPointF startPoint;
@@ -26,11 +28,12 @@ public:
 
     Edge(Diagram *diagram, QGraphicsPathItem *item, Socket *s1 = nullptr, Socket *s2 = nullptr);
 
-    bool setSocket(int idx, Socket *socket);
+    bool setSocket(Socket *socket, Type type);
     QPointF calculateC(QPointF point, Socket::Position socPos);
     void setPoint(Type type, QPointF point, Socket::Position socPos = Socket::Position::Right);
     void setPath();
-    void setMousePos(QPoint pos);
+    void setMousePos(QPointF pos);
+    void socketMoved(Socket *s);
 };
 
 #endif // EDGE_HH

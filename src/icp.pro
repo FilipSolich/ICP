@@ -11,7 +11,7 @@ CONFIG += c++17
 SOURCES += \
     class.cc \
     classdiagrameditor.cc \
-    classdiagrameditorview.cc \
+    classdiagrameditorscene.cc \
     classitem.cc \
     classwidget.cc \
     diagram.cc \
@@ -30,7 +30,7 @@ SOURCES += \
 HEADERS += \
     class.hh \
     classdiagrameditor.hh \
-    classdiagrameditorview.hh \
+    classdiagrameditorscene.hh \
     classitem.hh \
     classwidget.hh \
     diagram.hh \

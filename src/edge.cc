@@ -9,31 +9,27 @@ Edge::Edge(Diagram *diagram, QGraphicsPathItem *item, Socket *s1, Socket *s2)
     this->diagram->currentEdge = this;
 
     this->item = item;
+    //this->item->setFlag(QGraphicsItem::ItemIsSelectable);
 
-    setSocket(0, s1);
-    setSocket(1, s2);
+    setSocket(s1, Type::START);
+    setSocket(s2, Type::END);
 }
 
-bool Edge::setSocket(int idx, Socket *socket)
+bool Edge::setSocket(Socket *socket, Type type)
 {
-    if (idx < 0 || idx > MAX_SOCKETS - 1) {
-        return false;
+    if (type == Type::START) {
+        startSocket = socket;
+    } else {
+        endSocket = socket;
     }
-
-    sockets[idx] = socket;
 
     if (socket) {
-        qDebug() << socket->item->pos();
-        qDebug() << socket->item->scenePos();
-        qDebug() << socket->item->parentItem()->pos();
-        qDebug() << socket->item->parentItem()->scenePos();
-        Type type = idx == 0 ? Type::START : Type::END;
-        //setPoint(type, socket->item->scenePos(), socket->position);
-        setPoint(type, socket->getSocketPos(), socket->position);
+        setPoint(type, socket->getSocketCenter(), socket->position);
     }
 
-    if (idx == MAX_SOCKETS - 1 && socket != nullptr) {
+    if (type == Type::END && socket != nullptr) {
         diagram->currentEdge = nullptr;
+        this->item->setFlag(QGraphicsItem::ItemIsSelectable);
     }
 
     return true;
@@ -44,13 +40,13 @@ QPointF Edge::calculateC(QPointF point, Socket::Position socPos)
     QPointF c{point};
     switch (socPos) {
         case Socket::Position::Top:
-            c.setY(c.y() + C_DISTANCE);
+            c.setY(c.y() - C_DISTANCE);
             break;
         case Socket::Position::Right:
             c.setX(c.x() + C_DISTANCE);
             break;
         case Socket::Position::Bottom:
-            c.setY(c.y() - C_DISTANCE);
+            c.setY(c.y() + C_DISTANCE);
             break;
         case Socket::Position::Left:
             c.setX(c.x() - C_DISTANCE);
@@ -80,7 +76,16 @@ void Edge::setPath()
     item->setPath(path);
 }
 
-void Edge::setMousePos(QPoint pos)
+void Edge::setMousePos(QPointF pos)
 {
     setPoint(Type::END, pos);
+}
+
+void Edge::socketMoved(Socket *s)
+{
+    if (s == startSocket) {
+        setPoint(Type::START, s->getSocketCenter(), s->position);
+    } else {
+        setPoint(Type::END, s->getSocketCenter(), s->position);
+    }
 }

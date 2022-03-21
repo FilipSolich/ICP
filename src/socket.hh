@@ -23,7 +23,8 @@ public:
     Position position;
     Edge *edge = nullptr;
 
-    QPointF getSocketPos();
+    QPointF calculateSocketPos();
+    QPointF getSocketCenter();
     void createEdge();
     void redraw(void);
 };

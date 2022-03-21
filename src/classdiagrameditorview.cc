@@ -8,15 +8,16 @@ ClassDiagramEditorView::ClassDiagramEditorView(Diagram *diagram, QWidget *parent
 {
     this->diagram = diagram;
 
-    setMouseTracking(true);
+    //setMouseTracking(true);
     setRenderHint(QPainter::Antialiasing);
 }
 
 void ClassDiagramEditorView::mouseMoveEvent(QMouseEvent *ev)
 {
-    if (diagram->currentEdge) {
-        diagram->currentEdge->setMousePos(ev->pos());
-    }
+    //if (diagram->currentEdge) {
+    //    diagram->currentEdge->setMousePos(ev->pos());
+    //    qDebug() << ev->pos();
+    //}
 
     QGraphicsView::mouseMoveEvent(ev);
 }

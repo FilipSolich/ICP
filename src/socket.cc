@@ -10,7 +10,7 @@ Socket::Socket(Position position, Class *parentCls, QGraphicsItem *parentItem)
     this->item = new SocketItem(this, parentItem);
 }
 
-QPointF Socket::getSocketPos()
+QPointF Socket::calculateSocketPos()
 {
     int x, y;
 
@@ -36,16 +36,22 @@ QPointF Socket::getSocketPos()
     return QPointF(x, y);
 }
 
-// TODO delete old Edge
+QPointF Socket::getSocketCenter()
+{
+    QPointF point = item->scenePos();
+    point.setX(point.x() + SocketItem::_width / 2);
+    point.setY(point.y() + SocketItem::_heigth/ 2);
+    return point;
+}
+
 void Socket::createEdge()
 {
     QGraphicsPathItem *item = parentCls->editor->scene->addPath(QPainterPath());
-    item->setParentItem(this->item);
     edge = new Edge(parentCls->diagram, item, this);
 }
 
 void Socket::redraw(void)
 {
-    QPointF point = getSocketPos();
-    item->setRect(point.x(), point.y(), SocketItem::_width, SocketItem::_heigth);
+    QPointF point = calculateSocketPos();
+    item->setPos(point.x(), point.y());
 }
