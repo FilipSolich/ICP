@@ -16,7 +16,7 @@
 #include <QGraphicsProxyWidget>
 #include <QPushButton>
 #include <QGraphicsLayout>
-#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsEllipseItem>
 
 SequenceDiagram::SequenceDiagram(QWidget *parent, Diagram *diagram)
     : QWidget{parent}
@@ -62,9 +62,9 @@ SequenceDiagram::SequenceDiagram(QWidget *parent, Diagram *diagram)
      QVector<QString> v_names(1);
      makeSequence(v_names);
 
+
      connect(add_btn,&QPushButton::clicked,this,&SequenceDiagram::addSeqSlot);
      connect(remove_btn,&QPushButton::clicked,this,&SequenceDiagram::removeSeqSlot);
-
      connect(async_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_async_slot);
      connect(sync_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_sync_slot);
      connect(create_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_create_slot);
@@ -79,11 +79,22 @@ void SequenceDiagram::makeSequence(QVector<QString> names)
     {
         for(int i=0; i<names.size();i++){
             Sequence *new_seq = new Sequence();
+            auto circle = new QGraphicsEllipseItem(245,50,10,10);
+            circle->setFlag(QGraphicsItem::ItemIsMovable);
+            circle->setFlag(QGraphicsItem::ItemIsSelectable);
 
-            QGraphicsRectItem *seq_rect = sequence_scene->addRect(0,0,200,300);
+
+
+
+            //QGraphicsRectItem *seq_rect = sequence_scene->addRect(0,0,200,300);
+            auto seq_rect = new QGraphicsRectItem(0,0,200,300);
             seq_rect->setFlag(QGraphicsItem::ItemIsMovable);
             seq_rect->setFlag(QGraphicsItem::ItemIsSelectable,true);
             seq_rect->setFlag(QGraphicsItem::ItemIsFocusable);
+           // seq_rect->setParentItem(circle);
+            circle->setParentItem(seq_rect);
+
+             sequence_scene->addItem(seq_rect);
 
             QGraphicsProxyWidget *seq_proxy = sequence_scene->addWidget(new_seq);
 
@@ -149,3 +160,8 @@ void SequenceDiagram::removeSeqSlot(void)
 {
     remove();
 }
+
+/*
+ * TODO
+Function for making circles
+*/

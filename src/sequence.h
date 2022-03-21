@@ -6,12 +6,16 @@
 #include <QFrame>
 #include <QLabel>
 
+
 class Sequence : public QWidget
 {
     Q_OBJECT
+
     QGridLayout *seq_layout = nullptr;
     QLabel *seq_name = nullptr;
     QLabel *seq_line = nullptr;
+    QLabel *seq_circle = nullptr;
+
 
 
 public:
