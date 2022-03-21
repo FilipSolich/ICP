@@ -16,15 +16,17 @@
 
 #include "class.hh"
 #include "classdiagrameditor.hh"
+#include "classdiagrameditorscene.hh"
 #include "diagram.hh"
 
 
 ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
     : QWidget(parent)
 {
-    scene = new QGraphicsScene;
+    scene = new ClassDiagramEditorScene(diagram);
 
     view = new QGraphicsView(this);
+    view->setRenderHint(QPainter::Antialiasing);
     view->setScene(scene);
 
     QVBoxLayout *layout = new QVBoxLayout;

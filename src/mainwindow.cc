@@ -19,6 +19,7 @@
 #include "edgecombobox.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
+#include "itemtype.hh"
 #include "ui_mainwindow.h"
 
 class DiagramTabWidget;
@@ -44,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
     connect(ui->actionAdd_class, &QAction::triggered, this, &MainWindow::addClass);
-    connect(ui->actionRemove_class, &QAction::triggered, this, &MainWindow::removeClass);
+    connect(ui->actionRemove_class, &QAction::triggered, this, &MainWindow::removeSelected);
 }
 
 MainWindow::~MainWindow()
@@ -211,12 +212,16 @@ void MainWindow::addClass()
     }
 }
 
-void MainWindow::removeClass()
+void MainWindow::removeSelected()
 {
-    QWidget *w = tabs->currentWidget();
-    if (tabs->currentIndex() == 0) {
-        static_cast<ClassDiagramEditor *>(w)->removeClass();
-    } else {
-        //static_cast<SequenceDiagramEditor *>(w)->removeClass(); // TODO Add addClass to sequence diagram editor
+    QList<QGraphicsItem *> items = tabs->classTab->scene->selectedItems();
+    for (QGraphicsItem *item : items) {
+        if (item->type() == ItemTypeClass) {
+            ClassItem *i = static_cast<ClassItem *>(item);
+            delete i->parentCls;
+        } else if (item->type() == ItemTypeEdge) {
+            EdgeItem *i = static_cast<EdgeItem *>(item);
+            delete i->parentCls;
+        }
     }
 }

@@ -52,6 +52,6 @@ private slots:
     void undo();
     void about();
     void addClass();
-    void removeClass();
+    void removeSelected();
 };
 #endif // MAINWINDOW_HH

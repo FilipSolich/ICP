@@ -29,9 +29,6 @@ public:
     bool addMethod(QString visibility, QString dt, QString name);
 
     void redrawSockets(void);
-
-    // QPointF getSocketPos(Socket::Position pos); // TODO: remove
-    // void moved(QPointF point); // TODO: remove
 };
 
 #endif // CLASS_HH

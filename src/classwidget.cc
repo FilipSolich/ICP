@@ -66,6 +66,7 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethodSlot);
 }
 
+#include <QDebug>
 void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
 {
     QWidget *attr = new QWidget(this);

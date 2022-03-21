@@ -1,4 +1,5 @@
 #include "class.hh"
+#include "classdiagrameditor.hh"
 #include "socket.hh"
 #include "socketitem.hh"
 
@@ -9,7 +10,7 @@ Socket::Socket(Position position, Class *parentCls, QGraphicsItem *parentItem)
     this->item = new SocketItem(this, parentItem);
 }
 
-QPointF Socket::getSocketPos()
+QPointF Socket::calculateSocketPos()
 {
     int x, y;
 
@@ -35,9 +36,21 @@ QPointF Socket::getSocketPos()
     return QPointF(x, y);
 }
 
+QPointF Socket::getSocketCenter()
+{
+    QPointF point = item->scenePos();
+    point.setX(point.x() + SocketItem::_width / 2);
+    point.setY(point.y() + SocketItem::_heigth/ 2);
+    return point;
+}
+
+void Socket::createEdge()
+{
+    edge = new Edge(parentCls->diagram, this);
+}
 
 void Socket::redraw(void)
 {
-    QPointF point = getSocketPos();
-    item->setRect(point.x(), point.y(), SocketItem::_width, SocketItem::_heigth);
+    QPointF point = calculateSocketPos();
+    item->setPos(point.x(), point.y());
 }

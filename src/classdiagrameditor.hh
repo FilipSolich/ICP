@@ -11,8 +11,9 @@
 #define CLASSDIAGRAMEDITOR_H
 
 #include <QWidget>
-#include <QGraphicsScene>
+#include <QGraphicsView>
 
+#include "classdiagrameditorscene.hh"
 #include "diagram.hh"
 
 class ClassDiagramEditor : public QWidget
@@ -23,7 +24,7 @@ class ClassDiagramEditor : public QWidget
 
 public:
     QGraphicsView *view = nullptr;
-    QGraphicsScene *scene = nullptr;
+    ClassDiagramEditorScene *scene = nullptr;
 
     ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
