@@ -46,8 +46,7 @@ QPointF Socket::getSocketCenter()
 
 void Socket::createEdge()
 {
-    QGraphicsPathItem *item = parentCls->editor->scene->addPath(QPainterPath());
-    edge = new Edge(parentCls->diagram, item, this);
+    edge = new Edge(parentCls->diagram, this);
 }
 
 void Socket::redraw(void)

@@ -8,7 +8,7 @@
 SocketItem::SocketItem(Socket *socket, QGraphicsItem *parentItem)
     : QGraphicsEllipseItem(parentItem)
 {
-    this->socket = socket;
+    this->parentCls = socket;
 
     QPointF point = socket->calculateSocketPos();
     setRect(0, 0, _width, _heigth);
@@ -18,11 +18,11 @@ SocketItem::SocketItem(Socket *socket, QGraphicsItem *parentItem)
 void SocketItem::mousePressEvent(QGraphicsSceneMouseEvent *ev)
 {
     if (ev->button() == Qt::LeftButton) {
-        if (socket->parentCls->diagram->currentEdge) {
-            socket->edge = socket->parentCls->diagram->currentEdge;
-            socket->parentCls->diagram->currentEdge->setSocket(socket, Edge::Type::END);
+        if (parentCls->parentCls->diagram->currentEdge) {
+            parentCls->edge = parentCls->parentCls->diagram->currentEdge;
+            parentCls->parentCls->diagram->currentEdge->setSocket(parentCls, Edge::Type::End);
         } else {
-            socket->createEdge();
+            parentCls->createEdge();
         }
     }
 }

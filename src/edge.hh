@@ -1,17 +1,17 @@
 #ifndef EDGE_HH
 #define EDGE_HH
 
-#include <QGraphicsPathItem>
 #include <QPoint>
 
 #include "socket.hh"
+#include "edgeitem.hh"
 
 class Diagram;
 
 class Edge
 {
 public:
-    enum class Type {START, END};
+    enum class Type {Start, End};
 
     static const int MAX_SOCKETS = 2;
     static const int C_DISTANCE = 30;
@@ -19,14 +19,15 @@ public:
     Diagram *diagram = nullptr;
     Socket *startSocket = nullptr;
     Socket *endSocket = nullptr;
-    QGraphicsPathItem *item = nullptr;
+    EdgeItem *item = nullptr;
 
     QPointF startPoint;
     QPointF endPoint;
     QPointF c1;
     QPointF c2;
 
-    Edge(Diagram *diagram, QGraphicsPathItem *item, Socket *s1 = nullptr, Socket *s2 = nullptr);
+    Edge(Diagram *diagram, Socket *s1, Socket *s2 = nullptr);
+    ~Edge();
 
     bool setSocket(Socket *socket, Type type);
     QPointF calculateC(QPointF point, Socket::Position socPos);

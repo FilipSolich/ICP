@@ -1,23 +1,38 @@
+#include <QGraphicsScene>
+
 #include "diagram.hh"
 #include "edge.hh"
+#include "edgeitem.hh"
 
 #include <QDebug>
 
-Edge::Edge(Diagram *diagram, QGraphicsPathItem *item, Socket *s1, Socket *s2)
+Edge::Edge(Diagram *diagram, Socket *s1, Socket *s2)
 {
     this->diagram = diagram;
     this->diagram->currentEdge = this;
 
-    this->item = item;
-    //this->item->setFlag(QGraphicsItem::ItemIsSelectable);
+    this->item = new EdgeItem(this);
+    s1->item->scene()->addItem(this->item);
 
-    setSocket(s1, Type::START);
-    setSocket(s2, Type::END);
+    setSocket(s1, Type::Start);
+    setSocket(s2, Type::End);
+}
+
+Edge::~Edge()
+{
+    item->scene()->removeItem(item);
+    delete item;
+    if (startSocket) {
+        startSocket->edge = nullptr;
+    }
+    if (endSocket) {
+        endSocket->edge = nullptr;
+    }
 }
 
 bool Edge::setSocket(Socket *socket, Type type)
 {
-    if (type == Type::START) {
+    if (type == Type::Start) {
         startSocket = socket;
     } else {
         endSocket = socket;
@@ -27,7 +42,7 @@ bool Edge::setSocket(Socket *socket, Type type)
         setPoint(type, socket->getSocketCenter(), socket->position);
     }
 
-    if (type == Type::END && socket != nullptr) {
+    if (type == Type::End && socket != nullptr) {
         diagram->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
     }
@@ -58,7 +73,7 @@ QPointF Edge::calculateC(QPointF point, Socket::Position socPos)
 
 void Edge::setPoint(Type type, QPointF point, Socket::Position socPos)
 {
-    if (type == Type::START) {
+    if (type == Type::Start) {
         startPoint = point;
         c1 = calculateC(point, socPos);
     } else {
@@ -78,14 +93,14 @@ void Edge::setPath()
 
 void Edge::setMousePos(QPointF pos)
 {
-    setPoint(Type::END, pos);
+    setPoint(Type::End, pos);
 }
 
 void Edge::socketMoved(Socket *s)
 {
     if (s == startSocket) {
-        setPoint(Type::START, s->getSocketCenter(), s->position);
+        setPoint(Type::Start, s->getSocketCenter(), s->position);
     } else {
-        setPoint(Type::END, s->getSocketCenter(), s->position);
+        setPoint(Type::End, s->getSocketCenter(), s->position);
     }
 }

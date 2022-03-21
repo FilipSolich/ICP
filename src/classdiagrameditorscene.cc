@@ -2,6 +2,7 @@
 
 #include "diagram.hh"
 #include "classdiagrameditorscene.hh"
+#include "itemtype.hh"
 
 #include <QDebug>
 
@@ -18,4 +19,17 @@ void ClassDiagramEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *ev)
     }
 
     QGraphicsScene::mouseMoveEvent(ev);
+}
+
+void ClassDiagramEditorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        QGraphicsItem *item = itemAt(event->scenePos(), QTransform());
+        if (!item || (item && item->type() != ItemTypeSocket)) {
+            delete diagram->currentEdge;
+            diagram->currentEdge = nullptr;
+        }
+    }
+
+    QGraphicsScene::mousePressEvent(event);
 }

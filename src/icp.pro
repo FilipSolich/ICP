@@ -18,6 +18,7 @@ SOURCES += \
     diagramtabwidget.cc \
     edge.cc \
     edgecombobox.cc \
+    edgeitem.cc \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
@@ -37,7 +38,9 @@ HEADERS += \
     diagramtabwidget.hh \
     edge.hh \
     edgecombobox.hh \
+    edgeitem.hh \
     fileprocessor.hh \
+    itemtype.hh \
     mainwindow.hh \
     sequencediagram.hh \
     sequence.h \

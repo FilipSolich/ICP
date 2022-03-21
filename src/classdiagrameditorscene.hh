@@ -13,6 +13,7 @@ public:
     explicit ClassDiagramEditorScene(Diagram *diagram, QObject *parent = nullptr);
 
     void mouseMoveEvent(QGraphicsSceneMouseEvent *ev);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // CLASSDIAGRAMEDITORSCENE_HH
