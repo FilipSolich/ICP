@@ -10,37 +10,37 @@ CDSocket::CDSocket(Position position, CDClass *cdClass, QGraphicsItem *parentIte
     item = new CDSocketItem(this, parentItem);
 }
 
-QPointF CDSocket::calculateSocketPos()
+QPointF CDSocket::calculateNewPos()
 {
-    int x, y;
+    QPointF pos;
 
     switch (position) {
         case CDSocket::Position::Top:
-            x = cdClass->item->rect().width() / 2;
-            y = 0 - (CDSocketItem::_heigth / 2);
+            pos.setX(cdClass->item->rect().width() / 2);
+            pos.setY(0 - (_heigth / 2));
             break;
         case CDSocket::Position::Right:
-            x = cdClass->item->rect().width() - (CDSocketItem::_width / 2);
-            y = cdClass->item->rect().height() / 2;
+            pos.setX(cdClass->item->rect().width() - (_width / 2));
+            pos.setY(cdClass->item->rect().height() / 2);
             break;
         case CDSocket::Position::Bottom:
-            x = cdClass->item->rect().width() / 2;
-            y = cdClass->item->rect().height() - (CDSocketItem::_heigth / 2);
+            pos.setX(cdClass->item->rect().width() / 2);
+            pos.setY(cdClass->item->rect().height() - (_heigth / 2));
             break;
         case CDSocket::Position::Left:
-            x = 0 - (CDSocketItem::_width / 2);
-            y = cdClass->item->rect().height() / 2;
+            pos.setX(0 - (_width / 2));
+            pos.setY(cdClass->item->rect().height() / 2);
             break;
     }
 
-    return QPointF(x, y);
+    return pos;
 }
 
 QPointF CDSocket::getSocketCenter()
 {
     QPointF point = item->scenePos();
-    point.setX(point.x() + CDSocketItem::_width / 2);
-    point.setY(point.y() + CDSocketItem::_heigth/ 2);
+    point.setX(point.x() + _width / 2);
+    point.setY(point.y() + _heigth / 2);
     return point;
 }
 
@@ -49,8 +49,12 @@ void CDSocket::createEdge()
     edge = new CDEdge(cdClass->cls->diagram, this);
 }
 
-void CDSocket::redraw(void)
+void CDSocket::redraw()
 {
-    QPointF point = calculateSocketPos();
-    item->setPos(point.x(), point.y());
+    QPointF pos = calculateNewPos();
+    item->setPos(pos);
+
+    if (edge) {
+        edge->socketMoved(this);
+    }
 }

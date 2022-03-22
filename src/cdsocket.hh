@@ -9,6 +9,9 @@ class CDEdge;
 class CDSocket
 {
 public:
+    const int _width = 10;
+    const int _heigth = 10;
+
     enum class Position {Top, Right, Bottom, Left };
 
     Position position;
@@ -19,7 +22,7 @@ public:
 
     CDSocket(Position position, CDClass *cdClass, QGraphicsItem *parentItem);
 
-    QPointF calculateSocketPos();
+    QPointF calculateNewPos();
     QPointF getSocketCenter();
     void createEdge();
     void redraw();

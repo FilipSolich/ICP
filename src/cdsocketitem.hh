@@ -11,12 +11,9 @@ class CDSocket;
 class CDSocketItem : public QGraphicsEllipseItem
 {
 public:
-    static const int _width = 10;
-    static const int _heigth = 10;
+    CDSocket *cdSocket = nullptr;
 
-    CDSocketItem(CDSocket *socket, QGraphicsItem *parentItem = nullptr);
-
-    CDSocket *parentCls = nullptr;
+    CDSocketItem(CDSocket *cdSocket, QGraphicsItem *parentItem = nullptr);
 
     int type() const { return ItemTypeCDSocket; };
 
