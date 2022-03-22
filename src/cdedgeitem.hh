@@ -10,9 +10,9 @@ class CDEdge;
 class CDEdgeItem : public QGraphicsPathItem
 {
 public:
-    CDEdge *parentCls;
+    CDEdge *cdEdge;
 
-    CDEdgeItem(CDEdge *parentCls);
+    CDEdgeItem(CDEdge *cdEdge);
 
     int type() const { return ItemTypeCDEdge; };
 };

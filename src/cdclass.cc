@@ -8,7 +8,7 @@
 #include "cdsocket.hh"
 #include "cdsocketitem.hh"
 
-CDClass::CDClass(CDEditor *editor, Class *cls, QPointF pos)
+CDClass::CDClass(Class *cls, CDEditor *editor, QPointF pos)
     : editor{editor},
       cls{cls}
 {
@@ -19,10 +19,10 @@ CDClass::CDClass(CDEditor *editor, Class *cls, QPointF pos)
     proxy->setPos(pos);
     proxy->setParentItem(item);
 
-    sockets.push_back(new CDSocket(CDSocket::Position::Top, this, item));
-    sockets.push_back(new CDSocket(CDSocket::Position::Right, this, item));
-    sockets.push_back(new CDSocket(CDSocket::Position::Bottom, this, item));
-    sockets.push_back(new CDSocket(CDSocket::Position::Left, this, item));
+    sockets.push_back(new CDSocket(CDSocket::Position::Top, this));
+    sockets.push_back(new CDSocket(CDSocket::Position::Right, this));
+    sockets.push_back(new CDSocket(CDSocket::Position::Bottom, this));
+    sockets.push_back(new CDSocket(CDSocket::Position::Left, this));
 }
 
 CDClass::~CDClass()
@@ -34,7 +34,6 @@ CDClass::~CDClass()
     editor->scene->removeItem(item);
     delete widget;
     delete item;
-    delete proxy;
 }
 
 bool CDClass::addAttribute(QString visibility, QString dt, QString name)

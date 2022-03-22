@@ -10,12 +10,11 @@
 #ifndef DIAGRAM_HH
 #define DIAGRAM_HH
 
+#include <QPointF>
 #include <QVector>
 
-#include "cdclass.hh"
-#include "cdedge.hh"
-#include "class.hh"
-
+class Class;
+class CDEditor;
 class SequenceDiagram;
 
 class Diagram

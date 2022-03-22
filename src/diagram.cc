@@ -7,6 +7,7 @@
  * \author Filip Solich
  */
 
+#include "class.hh"
 #include "diagram.hh"
 
 Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors)

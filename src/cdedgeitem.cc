@@ -1,6 +1,5 @@
 #include "cdedgeitem.hh"
 
-CDEdgeItem::CDEdgeItem(CDEdge *parentCls)
-{
-    this->parentCls = parentCls;
-}
+CDEdgeItem::CDEdgeItem(CDEdge *cdEdge)
+    : cdEdge{cdEdge}
+{}

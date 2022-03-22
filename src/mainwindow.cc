@@ -11,11 +11,13 @@
 
 #include <QComboBox>
 #include <QFileDialog>
+#include <QGraphicsItem>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
 #include <QTextStream>
 
+#include "cdeditorscene.hh"
 #include "edgecombobox.hh"
 #include "fileprocessor.hh"
 #include "itemtype.hh"
@@ -209,15 +211,21 @@ void MainWindow::addClass()
 
 void MainWindow::removeSelected()
 {
-    // TODO Properly delete whole Class
-    //QList<QGraphicsItem *> items = tabs->classTab->scene->selectedItems();
-    //for (QGraphicsItem *item : items) {
-    //    if (item->type() == ItemTypeClass) {
-    //        CDClassItem *i = static_cast<CDClassItem *>(item);
-    //        delete i->parentCls;
-    //    } else if (item->type() == ItemTypeEdge) {
-    //        CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
-    //        delete i->parentCls;
-    //    }
-    //}
+    QList<QGraphicsItem *> items;
+    if (tabs->currentIndex() == 0) {
+        CDEditorScene *scene = static_cast<CDEditor *>(tabs->currentWidget())->scene;
+        items = scene->selectedItems();
+    } else {
+        // TODO sequence scene
+    }
+
+    for (QGraphicsItem *item : qAsConst(items)) {
+        if (item->type() == ItemTypeCDClass) {
+            CDClassItem *i = static_cast<CDClassItem *>(item);
+            delete i->cdClass->cls;
+        } else if (item->type() == ItemTypeCDEdge) {
+            CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
+            delete i->cdEdge;
+        }
+    }
 }

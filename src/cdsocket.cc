@@ -1,13 +1,18 @@
 #include "cdclass.hh"
-#include "cdeditor.hh"
+#include "cdedge.hh"
 #include "cdsocket.hh"
 #include "cdsocketitem.hh"
 
-CDSocket::CDSocket(Position position, CDClass *cdClass, QGraphicsItem *parentItem)
+CDSocket::CDSocket(Position position, CDClass *cdClass)
     : position{position},
       cdClass{cdClass}
 {
-    item = new CDSocketItem(this, parentItem);
+    item = new CDSocketItem(this, cdClass->item);
+}
+
+CDSocket::~CDSocket()
+{
+    delete edge;
 }
 
 QPointF CDSocket::calculateNewPos()
@@ -46,7 +51,7 @@ QPointF CDSocket::getSocketCenter()
 
 void CDSocket::createEdge()
 {
-    edge = new CDEdge(cdClass->cls->diagram, this);
+    edge = new CDEdge(this);
 }
 
 void CDSocket::redraw()

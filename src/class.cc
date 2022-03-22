@@ -5,7 +5,7 @@ Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *s
     : diagram{diagram}
 {
     // TODO: Create CDClass and SDClass
-    cdClass = new CDClass(cdEditor, this, pos);
+    cdClass = new CDClass(this, cdEditor, pos);
 }
 
 Class::~Class()

@@ -20,7 +20,7 @@ public:
 
     QVector<CDSocket *> sockets;
 
-    CDClass(CDEditor *editor, Class *cls, QPointF pos);
+    CDClass(Class *cls, CDEditor *editor, QPointF pos);
     ~CDClass();
 
     bool addAttribute(QString visibility, QString dt, QString name);
