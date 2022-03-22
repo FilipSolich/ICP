@@ -6,7 +6,7 @@
 #include <QVector>
 #include "diagram.hh"
 #include "sequence.h"
-
+#include <QPainter>
 class SequenceDiagram : public QWidget
 {
     Q_OBJECT

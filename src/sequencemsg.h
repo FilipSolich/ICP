@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <sequencediagram.hh>
 
+#include <QPainter>
+#include <QPoint>
 class SequenceDiagram;
 
 class SequenceMsg : public QWidget
@@ -15,10 +17,13 @@ public:
 
     SequenceDiagram *parentDiagram;
 
+
     void draw_sync();
     void draw_async();
     void draw_create();
     void draw_destroy();
+
+    //void draw_arrow(QPainter& painter, QPoint start, QPoint end);
 
  public slots:
         void draw_sync_slot(void);
