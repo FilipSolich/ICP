@@ -5,30 +5,28 @@
 #include "cdclasswidget.hh"
 #include "cdsocket.hh"
 
-class Diagram;
 class CDEditor;
+class Class;
 
 class CDClass
 {
 public:
     CDEditor *editor = nullptr;
+    Class *cls = nullptr;
+
     CDClassItem *item = nullptr;
     CDClassWidget *widget = nullptr;
     QGraphicsProxyWidget *proxy = nullptr;
 
-    CDSocket *sockets[4];
-    Diagram *diagram;
+    QVector<CDSocket *> sockets;
 
-    CDClass(Diagram *diagram, CDEditor *editor, int x = 0, int y = 0);
+    CDClass(CDEditor *editor, Class *cls, QPointF pos);
     ~CDClass();
-
-    void setName(QString name);
-    QString getName(void);
 
     bool addAttribute(QString visibility, QString dt, QString name);
     bool addMethod(QString visibility, QString dt, QString name);
 
-    void redrawSockets(void);
+    void redrawSockets();
 };
 
 #endif // CDCLASS_H

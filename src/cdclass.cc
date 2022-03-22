@@ -4,44 +4,37 @@
 #include "cdclassitem.hh"
 #include "cdclasswidget.hh"
 #include "cdeditor.hh"
-#include "diagram.hh"
+#include "cdeditorscene.hh"
 #include "cdsocket.hh"
 #include "cdsocketitem.hh"
 
-#include <QDebug>
-
-CDClass::CDClass(Diagram *diagram, CDEditor *editor, int x, int y)
+CDClass::CDClass(CDEditor *editor, Class *cls, QPointF pos)
     : editor{editor},
-      diagram{diagram}
+      cls{cls}
 {
     widget = new CDClassWidget(this);
-    item = new CDClassItem(this);
+    item = new CDClassItem(this, pos);
 
     proxy = editor->scene->addWidget(widget);
-    proxy->setPos(x, y);
+    proxy->setPos(pos);
     proxy->setParentItem(item);
 
-    sockets[0] = new CDSocket(CDSocket::Position::Top, this, item);
-    sockets[1] = new CDSocket(CDSocket::Position::Right, this, item);
-    sockets[2] = new CDSocket(CDSocket::Position::Bottom, this, item);
-    sockets[3] = new CDSocket(CDSocket::Position::Left, this, item);
+    sockets.push_back(new CDSocket(CDSocket::Position::Top, this, item));
+    sockets.push_back(new CDSocket(CDSocket::Position::Right, this, item));
+    sockets.push_back(new CDSocket(CDSocket::Position::Bottom, this, item));
+    sockets.push_back(new CDSocket(CDSocket::Position::Left, this, item));
 }
 
 CDClass::~CDClass()
 {
+    for (CDSocket *socket : qAsConst(sockets)) {
+        delete socket;
+    }
+
     editor->scene->removeItem(item);
-    delete proxy;
+    delete widget;
     delete item;
-}
-
-void CDClass::setName(QString name)
-{
-    widget->name->setText(name);
-}
-
-QString CDClass::getName(void)
-{
-    return widget->name->text();
+    delete proxy;
 }
 
 bool CDClass::addAttribute(QString visibility, QString dt, QString name)
@@ -64,17 +57,9 @@ bool CDClass::addMethod(QString visibility, QString dt, QString name)
     return true;
 }
 
-void CDClass::redrawSockets(void)
+void CDClass::redrawSockets()
 {
-    for (CDSocket *s : sockets) {
+    for (CDSocket *s : qAsConst(sockets)) {
         s->redraw();
     }
 }
-
-// TODO: remove
-// void Class::moved(QPointF point)
-// {
-//     //for (Socket *s : sockets) {
-//     //    s->moveTo(getSocketPos(s->position));
-//     //}
-// }

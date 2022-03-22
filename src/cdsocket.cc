@@ -3,11 +3,11 @@
 #include "cdsocket.hh"
 #include "cdsocketitem.hh"
 
-CDSocket::CDSocket(Position position, CDClass *parentCls, QGraphicsItem *parentItem)
+CDSocket::CDSocket(Position position, CDClass *cdClass, QGraphicsItem *parentItem)
+    : position{position},
+      cdClass{cdClass}
 {
-    this->position = position;
-    this->parentCls = parentCls;
-    this->item = new CDSocketItem(this, parentItem);
+    item = new CDSocketItem(this, parentItem);
 }
 
 QPointF CDSocket::calculateSocketPos()
@@ -16,20 +16,20 @@ QPointF CDSocket::calculateSocketPos()
 
     switch (position) {
         case CDSocket::Position::Top:
-            x = parentCls->item->rect().width() / 2;
+            x = cdClass->item->rect().width() / 2;
             y = 0 - (CDSocketItem::_heigth / 2);
             break;
         case CDSocket::Position::Right:
-            x = parentCls->item->rect().width() - (CDSocketItem::_width / 2);
-            y = parentCls->item->rect().height() / 2;
+            x = cdClass->item->rect().width() - (CDSocketItem::_width / 2);
+            y = cdClass->item->rect().height() / 2;
             break;
         case CDSocket::Position::Bottom:
-            x = parentCls->item->rect().width() / 2;
-            y = parentCls->item->rect().height() - (CDSocketItem::_heigth / 2);
+            x = cdClass->item->rect().width() / 2;
+            y = cdClass->item->rect().height() - (CDSocketItem::_heigth / 2);
             break;
         case CDSocket::Position::Left:
             x = 0 - (CDSocketItem::_width / 2);
-            y = parentCls->item->rect().height() / 2;
+            y = cdClass->item->rect().height() / 2;
             break;
     }
 
@@ -46,7 +46,7 @@ QPointF CDSocket::getSocketCenter()
 
 void CDSocket::createEdge()
 {
-    edge = new CDEdge(parentCls->diagram, this);
+    edge = new CDEdge(cdClass->cls->diagram, this);
 }
 
 void CDSocket::redraw(void)

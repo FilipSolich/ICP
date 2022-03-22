@@ -13,23 +13,19 @@
 #include <QWidget>
 #include <QGraphicsView>
 
-#include "cdeditorscene.hh"
-#include "diagram.hh"
+#include "cdedge.hh"
+
+class CDEditorScene;
 
 class CDEditor : public QWidget
 {
-    Q_OBJECT
-
-    Diagram *diagram = nullptr;
-
 public:
     QGraphicsView *view = nullptr;
     CDEditorScene *scene = nullptr;
 
-    CDEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+    CDEdge *currentEdge = nullptr;
 
-    CDClass *addClass(int x = 0, int y = 0);
-    void removeClass(void);
+    CDEditor(QWidget *parent = nullptr);
 };
 
 #endif // CDEDITOR_H

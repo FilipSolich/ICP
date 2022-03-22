@@ -8,8 +8,8 @@ class EdgeComboBox : public QComboBox
 public:
     EdgeComboBox(QWidget *parent = nullptr);
 
-    void setClassEditorEdges(void);
-    void setSequenceEditorEdges(void);
+    void setClassEditorEdges();
+    void setSequenceEditorEdges();
 };
 
 #endif // EDGECOMBOBOX_HH

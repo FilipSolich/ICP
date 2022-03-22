@@ -23,13 +23,15 @@ class Diagram
 
 public:
     bool unsavedChanges = false; // TODO deal with unsaved changes
-    CDEdge *currentEdge = nullptr; // TODO move to editor
-    QVector<CDClass *> cdClasses; // TODO remove
+
+    CDEditor *cdEditor = nullptr;
+    QVector<SequenceDiagram *> *sqEditors = nullptr;
+
     QVector<Class *> classes;
 
-    Diagram();
+    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors);
 
-    void createClass(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors);
+    void addClass(QPointF pos = {0, 0});
 };
 
 #endif // DIAGRAM_HH

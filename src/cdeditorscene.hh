@@ -3,14 +3,14 @@
 
 #include <QGraphicsScene>
 
-#include "diagram.hh"
+#include "cdeditor.hh"
 
 class CDEditorScene : public QGraphicsScene
 {
 public:
-    Diagram *diagram;
+    CDEditor *editor = nullptr;
 
-    explicit CDEditorScene(Diagram *diagram, QObject *parent = nullptr);
+    CDEditorScene(CDEditor *editor);
 
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

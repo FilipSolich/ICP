@@ -49,7 +49,8 @@ QString FileProcessor::genClasses()
     addLine(text, "start class");
 
     // Add class
-    for (CDClass *cls : qAsConst(diagram->cdClasses)) {
+    for (Class *clss : qAsConst(diagram->classes)) {
+        CDClass *cls = clss->cdClass;
         QString line;
 
         // Add keyword
@@ -95,8 +96,8 @@ QString FileProcessor::genSequences()
 
     addLine(text, "start sequence");
 
-    for (CDClass *cls : qAsConst(diagram->cdClasses)) {
-        addLine(text, "participant " + cls->widget->name->text());
+    for (Class *cls : qAsConst(diagram->classes)) {
+        addLine(text, "participant " + cls->cdClass->widget->name->text());
     }
 
     // TODO
@@ -132,7 +133,7 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
         }
     }
 
-    return new Diagram();
+    return new Diagram(nullptr, nullptr); // must be valid editors
 }
 
 int FileProcessor::createClass(CDEditor *classEditor, QString &line)
@@ -147,8 +148,9 @@ int FileProcessor::createClass(CDEditor *classEditor, QString &line)
     QString x = args[2];
     QString y = args[3];
 
-    CDClass *cls = classEditor->addClass(x.toInt(), y.toInt()); // TODO: check if x and y is interger
-    cls->setName(name);
+    diagram->addClass(QPointF(x.toInt(), y.toInt())); // TODO: check if x and y is interger
+    CDClass *cls = diagram->classes.last()->cdClass;
+    diagram->classes.last()->setName(name);
 
     if (args.size() > 4) {
         bool attributes = true;

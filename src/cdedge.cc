@@ -3,13 +3,14 @@
 #include "diagram.hh"
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
+#include "cdeditor.hh"
 
 #include <QDebug>
 
 CDEdge::CDEdge(Diagram *diagram, CDSocket *s1, CDSocket *s2)
 {
     this->diagram = diagram;
-    this->diagram->currentEdge = this;
+    this->diagram->cdEditor->currentEdge = this;
 
     this->item = new CDEdgeItem(this);
     s1->item->scene()->addItem(this->item);
@@ -43,7 +44,7 @@ bool CDEdge::setSocket(CDSocket *socket, Type type)
     }
 
     if (type == Type::End && socket != nullptr) {
-        diagram->currentEdge = nullptr;
+        diagram->cdEditor->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
     }
 

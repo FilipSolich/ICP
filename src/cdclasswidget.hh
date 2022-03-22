@@ -25,24 +25,24 @@ class CDClassWidget : public QWidget
 public:
     QStringList visibility{"+", "-", "#", "~"};
 
-    CDClass *parentCls = nullptr;
+    CDClass *cdClass = nullptr;
     QLineEdit *name = nullptr;
     QVector<QWidget *> attributes;
     QVector<QWidget *> methods;
 
-    CDClassWidget(CDClass *parentClass, QWidget *parent = nullptr);
+    CDClassWidget(CDClass *cdClass, QWidget *parent = nullptr);
 
     void addAttribute(QString visibility = "+", QString dt = "", QString name = "");
-    void delAttribute(void);
+    void delAttribute();
     void addMethod(QString visibility = "+", QString dt = "", QString name = "");
-    void delMethod(void);
+    void delMethod();
 
 public slots:
-    void addAttributeSlot(void);
-    void delAttributeSlot(void);
-    void addMethodSlot(void);
-    void delMethodSlot(void);
-
+    void addAttributeSlot();
+    void delAttributeSlot();
+    void addMethodSlot();
+    void delMethodSlot();
+    void nameUpdateSlot(const QString &text);
 };
 
 #endif // CDCLASSWIDGET_H

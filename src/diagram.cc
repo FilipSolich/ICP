@@ -9,10 +9,13 @@
 
 #include "diagram.hh"
 
-Diagram::Diagram() {}
+Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors)
+    : cdEditor{cdEditor},
+      sqEditors{sqEditors}
+{}
 
-void Diagram::createClass(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors)
+void Diagram::addClass(QPointF pos)
 {
-    Class *cls = new Class(this, cdEditor, sqEditors);
+    Class *cls = new Class(this, cdEditor, sqEditors, pos);
     classes.push_back(cls);
 }

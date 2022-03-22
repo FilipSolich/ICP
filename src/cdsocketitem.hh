@@ -18,7 +18,7 @@ public:
 
     CDSocket *parentCls = nullptr;
 
-    int type() const { return ItemTypeSocket; };
+    int type() const { return ItemTypeCDSocket; };
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };

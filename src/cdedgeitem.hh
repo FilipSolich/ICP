@@ -14,7 +14,7 @@ public:
 
     CDEdgeItem(CDEdge *parentCls);
 
-    int type() const { return ItemTypeEdge; };
+    int type() const { return ItemTypeCDEdge; };
 };
 
 #endif // CDEDGEITEM_H

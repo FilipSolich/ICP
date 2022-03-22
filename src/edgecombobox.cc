@@ -6,7 +6,7 @@ EdgeComboBox::EdgeComboBox(QWidget *parent)
     setClassEditorEdges();
 }
 
-void EdgeComboBox::setClassEditorEdges(void)
+void EdgeComboBox::setClassEditorEdges()
 {
     clear();
     addItem("Association");
@@ -15,7 +15,7 @@ void EdgeComboBox::setClassEditorEdges(void)
     addItem("Generalization");
 }
 
-void EdgeComboBox::setSequenceEditorEdges(void)
+void EdgeComboBox::setSequenceEditorEdges()
 {
     clear();
     // TODO;

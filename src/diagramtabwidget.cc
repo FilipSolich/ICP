@@ -8,18 +8,17 @@
  */
 
 #include "cdeditor.hh"
-#include "diagram.hh"
 #include "diagramtabwidget.hh"
 #include "sequencediagram.hh"
 
-DiagramTabWidget::DiagramTabWidget(QWidget *parent, Diagram *diagram)
+DiagramTabWidget::DiagramTabWidget(QWidget *parent)
     : QTabWidget{parent}
 {
     this->parent = static_cast<MainWindow *>(parent);
 
     setTabPosition(QTabWidget::South);
 
-    classTab = new CDEditor(this, diagram);
+    classTab = new CDEditor(this);
     SequenceDiagram *sequenceTab = new SequenceDiagram(this);
     sequenceTabs.push_back(sequenceTab);
 
@@ -51,7 +50,7 @@ void DiagramTabWidget::selectTab(int index)
     }
 }
 
-void DiagramTabWidget::addDummyTab(void)
+void DiagramTabWidget::addDummyTab()
 {
     QWidget *dummy = new QWidget;
     addTab(dummy, "+");

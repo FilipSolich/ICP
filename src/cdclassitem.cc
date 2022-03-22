@@ -2,31 +2,27 @@
 
 #include "cdclass.hh"
 #include "cdeditor.hh"
+#include "cdeditorscene.hh"
 #include "cdclassitem.hh"
 
 #include <QDebug>
 
-CDClassItem::CDClassItem(CDClass *parentCls, int x, int y)
+CDClassItem::CDClassItem(CDClass *cdClass, QPointF pos)
+    : cdClass{cdClass}
 {
-    this->parentCls = parentCls;
-
-    setRect(x, y, this->parentCls->widget->width(), this->parentCls->widget->height());
+    setRect(0, 0, cdClass->widget->width(), cdClass->widget->height());
+    setPos(pos);
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemSendsScenePositionChanges);
 
-    this->parentCls->editor->scene->addItem(this);
-}
-
-void CDClassItem::setWidgetSize(QRectF rect)
-{
-    setRect(rect);
+    cdClass->editor->scene->addItem(this);
 }
 
 QVariant CDClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange) {
-        for (CDSocket *s : parentCls->sockets) {
+        for (CDSocket *s : qAsConst(cdClass->sockets)) {
             if (s->edge) {
                 s->edge->socketMoved(s);
             }

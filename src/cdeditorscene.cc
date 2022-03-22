@@ -6,16 +6,14 @@
 
 #include <QDebug>
 
-CDEditorScene::CDEditorScene(Diagram *diagram, QObject *parent)
-    : QGraphicsScene{parent}
-{
-    this->diagram = diagram;
-}
+CDEditorScene::CDEditorScene(CDEditor *editor)
+    : editor{editor}
+{}
 
 void CDEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (diagram->currentEdge) {
-        diagram->currentEdge->setMousePos(event->scenePos());
+    if (editor->currentEdge) {
+        editor->currentEdge->setMousePos(event->scenePos());
     }
 
     QGraphicsScene::mouseMoveEvent(event);
@@ -27,13 +25,13 @@ void CDEditorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         bool anotherSocket = false;
         QList<QGraphicsItem *> itemsList = items(event->scenePos());
         for (QGraphicsItem *item : itemsList) {
-            if (item->type() == ItemTypeSocket) {
+            if (item->type() == ItemTypeCDSocket) {
                 anotherSocket = true;
             }
         }
         if (!anotherSocket) {
-            delete diagram->currentEdge;
-            diagram->currentEdge = nullptr;
+            delete editor->currentEdge;
+            editor->currentEdge = nullptr;
         }
     }
 

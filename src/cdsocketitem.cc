@@ -1,9 +1,10 @@
 #include <QGraphicsSceneMouseEvent>
 
-#include "cdsocketitem.hh"
+#include "diagram.hh"
+#include "cdclass.hh"
 #include "cdeditor.hh"
-
-#include <QDebug>
+#include "cdsocketitem.hh"
+#include "class.hh"
 
 CDSocketItem::CDSocketItem(CDSocket *socket, QGraphicsItem *parentItem)
     : QGraphicsEllipseItem(parentItem)
@@ -18,9 +19,9 @@ CDSocketItem::CDSocketItem(CDSocket *socket, QGraphicsItem *parentItem)
 void CDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        if (parentCls->parentCls->diagram->currentEdge) {
-            parentCls->edge = parentCls->parentCls->diagram->currentEdge;
-            parentCls->parentCls->diagram->currentEdge->setSocket(parentCls, CDEdge::Type::End);
+        if (parentCls->cdClass->cls->diagram->cdEditor->currentEdge) {
+            parentCls->edge = parentCls->cdClass->cls->diagram->cdEditor->currentEdge;
+            parentCls->cdClass->cls->diagram->cdEditor->currentEdge->setSocket(parentCls, CDEdge::Type::End);
         } else {
             parentCls->createEdge();
         }

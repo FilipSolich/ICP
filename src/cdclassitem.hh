@@ -10,14 +10,12 @@ class CDClass;
 class CDClassItem : public QGraphicsRectItem
 {
 public:
-    CDClass *parentCls = nullptr;
+    CDClass *cdClass = nullptr;
 
-    CDClassItem(CDClass *parentCls, int x = 0, int y = 0);
+    CDClassItem(CDClass *cdClass, QPointF pos);
 
-    int type() const { return ItemTypeClass; };
-    void setWidgetSize(QRectF rect);
+    int type() const { return ItemTypeCDClass; };
 
-    // Events
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
 };
 

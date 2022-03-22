@@ -4,14 +4,9 @@
 #include <QGraphicsItem>
 
 enum ItemType {
-    ItemTypeClass = QGraphicsItem::UserType + 1,
-    ItemTypeSocket = QGraphicsItem::UserType + 2,
-    ItemTypeEdge = QGraphicsItem::UserType + 3,
-};
-
-enum class DiagramType {
-    ClassDiagram,
-    SequenceDiagram,
+    ItemTypeCDClass = QGraphicsItem::UserType + 1,
+    ItemTypeCDSocket = QGraphicsItem::UserType + 2,
+    ItemTypeCDEdge = QGraphicsItem::UserType + 3,
 };
 
 #endif // ITEMTYPE_H

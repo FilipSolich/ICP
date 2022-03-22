@@ -2,31 +2,27 @@
 #define CDSOCKET_H
 
 #include "cdsocketitem.hh"
+#include "class.hh"
 
-class CDClass;
 class CDEdge;
 
 class CDSocket
 {
 public:
-    enum class Position {
-        Top,
-        Right,
-        Bottom,
-        Left,
-    };
+    enum class Position {Top, Right, Bottom, Left };
 
-    CDSocket(Position position, CDClass *parentCls, QGraphicsItem *parentItem);
-
-    CDClass *parentCls = nullptr;
-    CDSocketItem *item = nullptr;
     Position position;
+
+    CDClass *cdClass = nullptr;
+    CDSocketItem *item = nullptr;
     CDEdge *edge = nullptr;
+
+    CDSocket(Position position, CDClass *cdClass, QGraphicsItem *parentItem);
 
     QPointF calculateSocketPos();
     QPointF getSocketCenter();
     void createEdge();
-    void redraw(void);
+    void redraw();
 };
 
 #endif // CDSOCKET_H

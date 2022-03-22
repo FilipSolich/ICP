@@ -12,28 +12,28 @@
 #include <QComboBox>
 #include <QFileDialog>
 #include <QHBoxLayout>
-#include <QMessageBox>
 #include <QLabel>
+#include <QMessageBox>
 #include <QTextStream>
 
 #include "edgecombobox.hh"
 #include "fileprocessor.hh"
-#include "mainwindow.hh"
 #include "itemtype.hh"
+#include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
 class DiagramTabWidget;
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow{parent}
+    , ui{new Ui::MainWindow}
 {
     ui->setupUi(this);
 
-    diagram = new Diagram();
-
-    tabs = new DiagramTabWidget(this, diagram);
+    tabs = new DiagramTabWidget(this);
     ui->centralwidget->layout()->addWidget(tabs);
+
+    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs));
 
     edgeComboBox = new EdgeComboBox(this);
     ui->toolBar->addWidget(edgeComboBox);
@@ -57,7 +57,7 @@ void MainWindow::newDocument()
 {
     closeCurrentDiagram();
     currentFile.clear();
-    diagram = new Diagram();
+    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs));
 
     // TODO: clear screen.
 }
@@ -204,19 +204,20 @@ void MainWindow::closeCurrentDiagram(void)
 
 void MainWindow::addClass()
 {
-    diagram->createClass(tabs->classTab, &(tabs->sequenceTabs));
+    diagram->addClass();
 }
 
 void MainWindow::removeSelected()
 {
-    QList<QGraphicsItem *> items = tabs->classTab->scene->selectedItems();
-    for (QGraphicsItem *item : items) {
-        if (item->type() == ItemTypeClass) {
-            CDClassItem *i = static_cast<CDClassItem *>(item);
-            delete i->parentCls;
-        } else if (item->type() == ItemTypeEdge) {
-            CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
-            delete i->parentCls;
-        }
-    }
+    // TODO Properly delete whole Class
+    //QList<QGraphicsItem *> items = tabs->classTab->scene->selectedItems();
+    //for (QGraphicsItem *item : items) {
+    //    if (item->type() == ItemTypeClass) {
+    //        CDClassItem *i = static_cast<CDClassItem *>(item);
+    //        delete i->parentCls;
+    //    } else if (item->type() == ItemTypeEdge) {
+    //        CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
+    //        delete i->parentCls;
+    //    }
+    //}
 }
