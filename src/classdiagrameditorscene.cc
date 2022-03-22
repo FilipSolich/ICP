@@ -24,8 +24,14 @@ void ClassDiagramEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *ev)
 void ClassDiagramEditorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        QGraphicsItem *item = itemAt(event->scenePos(), QTransform());
-        if (!item || (item && item->type() != ItemTypeSocket)) {
+        bool anotherSocket = false;
+        QList<QGraphicsItem *> itemsList = items(event->scenePos());
+        for (QGraphicsItem *item : itemsList) {
+            if (item->type() == ItemTypeSocket) {
+                anotherSocket = true;
+            }
+        }
+        if (!anotherSocket) {
             delete diagram->currentEdge;
             diagram->currentEdge = nullptr;
         }
