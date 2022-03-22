@@ -7,16 +7,16 @@
  * \author Filip Solich
  */
 
-#ifndef CLASSDIAGRAMEDITOR_H
-#define CLASSDIAGRAMEDITOR_H
+#ifndef CDEDITOR_H
+#define CDEDITOR_H
 
 #include <QWidget>
 #include <QGraphicsView>
 
-#include "classdiagrameditorscene.hh"
+#include "cdeditorscene.hh"
 #include "diagram.hh"
 
-class ClassDiagramEditor : public QWidget
+class CDEditor : public QWidget
 {
     Q_OBJECT
 
@@ -24,12 +24,12 @@ class ClassDiagramEditor : public QWidget
 
 public:
     QGraphicsView *view = nullptr;
-    ClassDiagramEditorScene *scene = nullptr;
+    CDEditorScene *scene = nullptr;
 
-    ClassDiagramEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+    CDEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
-    Class *addClass(int x = 0, int y = 0);
+    CDClass *addClass(int x = 0, int y = 0);
     void removeClass(void);
 };
 
-#endif // CLASSDIAGRAMEDITOR_H
+#endif // CDEDITOR_H

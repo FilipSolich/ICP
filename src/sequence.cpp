@@ -1,10 +1,10 @@
 #include "sequence.h"
-#include "classitem.hh"
+#include "cdclassitem.hh"
 #include <QBoxLayout>
 #include <QLabel>
 #include <QFrame>
 
-#include "socketitem.hh"
+#include "cdsocketitem.hh"
 
 Sequence::Sequence(QWidget *parent, QString name)
     : QWidget{parent}

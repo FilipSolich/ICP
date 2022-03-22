@@ -204,12 +204,7 @@ void MainWindow::closeCurrentDiagram(void)
 
 void MainWindow::addClass()
 {
-    QWidget *w = tabs->currentWidget();
-    if (tabs->currentIndex() == 0) {
-        static_cast<ClassDiagramEditor *>(w)->addClass();
-    } else {
-        //static_cast<SequenceDiagramEditor *>(w)->addClass(); // TODO Add addClass to sequence diagram editor
-    }
+    diagram->createClass(tabs->classTab, &(tabs->sequenceTabs));
 }
 
 void MainWindow::removeSelected()
@@ -217,10 +212,10 @@ void MainWindow::removeSelected()
     QList<QGraphicsItem *> items = tabs->classTab->scene->selectedItems();
     for (QGraphicsItem *item : items) {
         if (item->type() == ItemTypeClass) {
-            ClassItem *i = static_cast<ClassItem *>(item);
+            CDClassItem *i = static_cast<CDClassItem *>(item);
             delete i->parentCls;
         } else if (item->type() == ItemTypeEdge) {
-            EdgeItem *i = static_cast<EdgeItem *>(item);
+            CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
             delete i->parentCls;
         }
     }

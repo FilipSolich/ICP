@@ -38,8 +38,6 @@ public:
     DiagramTabWidget *tabs = nullptr;
     EdgeComboBox *edgeComboBox = nullptr;
 
-    static MainWindow *getMainWindow(void);
-
 private slots:
     void newDocument();
     void open();

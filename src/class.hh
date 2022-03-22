@@ -1,34 +1,22 @@
 #ifndef CLASS_HH
 #define CLASS_HH
 
-#include "classitem.hh"
-#include "classwidget.hh"
-#include "socket.hh"
+#include <QString>
 
-class Diagram;
-class ClassDiagramEditor;
+#include "cdclass.hh"
+
+class SequenceDiagram;
 
 class Class
 {
 public:
-    ClassDiagramEditor *editor = nullptr;
-    ClassItem *item = nullptr;
-    ClassWidget *widget = nullptr;
-    QGraphicsProxyWidget *proxy = nullptr;
+    CDClass *cdClass = nullptr;
+    // TODO Add SDClass
 
-    Socket *sockets[4];
-    Diagram *diagram;
-
-    Class(ClassDiagramEditor *editor, Diagram *diagram, int x = 0, int y = 0);
-    ~Class();
+    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors);
 
     void setName(QString name);
-    QString getName(void);
-
-    bool addAttribute(QString visibility, QString dt, QString name);
-    bool addMethod(QString visibility, QString dt, QString name);
-
-    void redrawSockets(void);
+    QString getName();
 };
 
 #endif // CLASS_HH

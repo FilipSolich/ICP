@@ -1,12 +1,12 @@
 #include <QGraphicsSceneDragDropEvent>
 
-#include "class.hh"
-#include "classdiagrameditor.hh"
-#include "classitem.hh"
+#include "cdclass.hh"
+#include "cdeditor.hh"
+#include "cdclassitem.hh"
 
 #include <QDebug>
 
-ClassItem::ClassItem(Class *parentCls, int x, int y)
+CDClassItem::CDClassItem(CDClass *parentCls, int x, int y)
 {
     this->parentCls = parentCls;
 
@@ -18,15 +18,15 @@ ClassItem::ClassItem(Class *parentCls, int x, int y)
     this->parentCls->editor->scene->addItem(this);
 }
 
-void ClassItem::setWidgetSize(QRectF rect)
+void CDClassItem::setWidgetSize(QRectF rect)
 {
     setRect(rect);
 }
 
-QVariant ClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant CDClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange) {
-        for (Socket *s : parentCls->sockets) {
+        for (CDSocket *s : parentCls->sockets) {
             if (s->edge) {
                 s->edge->socketMoved(s);
             }

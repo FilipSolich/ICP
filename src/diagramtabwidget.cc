@@ -7,7 +7,7 @@
  * \author Filip Solich
  */
 
-#include "classdiagrameditor.hh"
+#include "cdeditor.hh"
 #include "diagram.hh"
 #include "diagramtabwidget.hh"
 #include "sequencediagram.hh"
@@ -19,9 +19,9 @@ DiagramTabWidget::DiagramTabWidget(QWidget *parent, Diagram *diagram)
 
     setTabPosition(QTabWidget::South);
 
-    classTab = new ClassDiagramEditor(this, diagram);
+    classTab = new CDEditor(this, diagram);
     SequenceDiagram *sequenceTab = new SequenceDiagram(this);
-    sequnceTabs.push_back(sequenceTab);
+    sequenceTabs.push_back(sequenceTab);
 
     addTab(classTab, "Class diagram");
     addTab(sequenceTab, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
@@ -38,7 +38,7 @@ void DiagramTabWidget::selectTab(int index)
         sequenceDiagramCounter += 1;
 
         SequenceDiagram *sequence = new SequenceDiagram(this);
-        sequnceTabs.push_back(sequence);
+        sequenceTabs.push_back(sequence);
 
         addTab(sequence, QString("Sequence diagram %1").arg(sequenceDiagramCounter));
 

@@ -6,7 +6,7 @@
 
 #include "sequencediagram.hh"
 #include "diagram.hh"
-#include "class.hh"
+#include "cdclass.hh"
 #include "sequence.h"
 #include "sequencemsg.h"
 

@@ -1,27 +1,27 @@
 #include <QGraphicsSceneMouseEvent>
 
 #include "diagram.hh"
-#include "classdiagrameditorscene.hh"
+#include "cdeditorscene.hh"
 #include "itemtype.hh"
 
 #include <QDebug>
 
-ClassDiagramEditorScene::ClassDiagramEditorScene(Diagram *diagram, QObject *parent)
+CDEditorScene::CDEditorScene(Diagram *diagram, QObject *parent)
     : QGraphicsScene{parent}
 {
     this->diagram = diagram;
 }
 
-void ClassDiagramEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *ev)
+void CDEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if (diagram->currentEdge) {
-        diagram->currentEdge->setMousePos(ev->scenePos());
+        diagram->currentEdge->setMousePos(event->scenePos());
     }
 
-    QGraphicsScene::mouseMoveEvent(ev);
+    QGraphicsScene::mouseMoveEvent(event);
 }
 
-void ClassDiagramEditorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void CDEditorScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         bool anotherSocket = false;

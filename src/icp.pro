@@ -9,44 +9,46 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cdclass.cc \
+    cdclassitem.cc \
+    cdclasswidget.cc \
+    cdedge.cc \
+    cdedgeitem.cc \
+    cdeditor.cc \
+    cdeditorscene.cc \
+    cdsocket.cc \
+    cdsocketitem.cc \
     class.cc \
-    classdiagrameditor.cc \
-    classdiagrameditorscene.cc \
-    classitem.cc \
-    classwidget.cc \
     diagram.cc \
     diagramtabwidget.cc \
-    edge.cc \
     edgecombobox.cc \
-    edgeitem.cc \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
     sequencediagram.cc \
     sequence.cpp \
-    sequencemsg.cpp \
-    socket.cc \
-    socketitem.cc
+    sequencemsg.cpp
 
 HEADERS += \
+    cdclass.hh \
+    cdclassitem.hh \
+    cdclasswidget.hh \
+    cdedge.hh \
+    cdedgeitem.hh \
+    cdeditor.hh \
+    cdeditorscene.hh \
+    cdsocket.hh \
+    cdsocketitem.hh \
     class.hh \
-    classdiagrameditor.hh \
-    classdiagrameditorscene.hh \
-    classitem.hh \
-    classwidget.hh \
     diagram.hh \
     diagramtabwidget.hh \
-    edge.hh \
     edgecombobox.hh \
-    edgeitem.hh \
     fileprocessor.hh \
     itemtype.hh \
     mainwindow.hh \
     sequencediagram.hh \
     sequence.h \
-    sequencemsg.h \
-    socket.hh \
-    socketitem.hh
+    sequencemsg.h
 
 FORMS += \
     mainwindow.ui

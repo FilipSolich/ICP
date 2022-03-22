@@ -1,18 +1,18 @@
-#ifndef CLASSITEM_HH
-#define CLASSITEM_HH
+#ifndef CDCLASSITEM_H
+#define CDCLASSITEM_H
 
 #include <QGraphicsRectItem>
 
 #include "itemtype.hh"
 
-class Class;
+class CDClass;
 
-class ClassItem : public QGraphicsRectItem
+class CDClassItem : public QGraphicsRectItem
 {
 public:
-    Class *parentCls = nullptr;
+    CDClass *parentCls = nullptr;
 
-    ClassItem(Class *parentCls, int x = 0, int y = 0);
+    CDClassItem(CDClass *parentCls, int x = 0, int y = 0);
 
     int type() const { return ItemTypeClass; };
     void setWidgetSize(QRectF rect);
@@ -21,4 +21,4 @@ public:
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
 };
 
-#endif // CLASSITEM_HH
+#endif // CDCLASSITEM_H

@@ -1,11 +1,11 @@
 #include <QGraphicsSceneMouseEvent>
 
-#include "socketitem.hh"
-#include "classdiagrameditor.hh"
+#include "cdsocketitem.hh"
+#include "cdeditor.hh"
 
 #include <QDebug>
 
-SocketItem::SocketItem(Socket *socket, QGraphicsItem *parentItem)
+CDSocketItem::CDSocketItem(CDSocket *socket, QGraphicsItem *parentItem)
     : QGraphicsEllipseItem(parentItem)
 {
     this->parentCls = socket;
@@ -15,14 +15,16 @@ SocketItem::SocketItem(Socket *socket, QGraphicsItem *parentItem)
     setPos(point.x(), point.y());
 }
 
-void SocketItem::mousePressEvent(QGraphicsSceneMouseEvent *ev)
+void CDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (ev->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton) {
         if (parentCls->parentCls->diagram->currentEdge) {
             parentCls->edge = parentCls->parentCls->diagram->currentEdge;
-            parentCls->parentCls->diagram->currentEdge->setSocket(parentCls, Edge::Type::End);
+            parentCls->parentCls->diagram->currentEdge->setSocket(parentCls, CDEdge::Type::End);
         } else {
             parentCls->createEdge();
         }
     }
+
+    QGraphicsEllipseItem::mousePressEvent(event);
 }

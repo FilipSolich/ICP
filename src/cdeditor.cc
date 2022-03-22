@@ -14,16 +14,16 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 
-#include "class.hh"
-#include "classdiagrameditor.hh"
-#include "classdiagrameditorscene.hh"
+#include "cdclass.hh"
+#include "cdeditor.hh"
+#include "cdeditorscene.hh"
 #include "diagram.hh"
 
 
-ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
+CDEditor::CDEditor(QWidget *parent, Diagram *diagram)
     : QWidget(parent)
 {
-    scene = new ClassDiagramEditorScene(diagram);
+    scene = new CDEditorScene(diagram);
 
     view = new QGraphicsView(this);
     view->setRenderHint(QPainter::Antialiasing);
@@ -37,20 +37,20 @@ ClassDiagramEditor::ClassDiagramEditor(QWidget *parent, Diagram *diagram)
     this->diagram = diagram;
 }
 
-Class *ClassDiagramEditor::addClass(int x, int y)
+CDClass *CDEditor::addClass(int x, int y)
 {
-    Class *new_class = new Class(this, diagram, x, y);
-    diagram->classes.push_back(new_class);
+    CDClass *new_class = new CDClass(diagram, this, x, y);
+    diagram->cdClasses.push_back(new_class);
 
     return new_class;
 }
 
-void ClassDiagramEditor::removeClass(void)
+void CDEditor::removeClass(void)
 {
     QList<QGraphicsItem *> items = scene->selectedItems();
     if (items.size() > 0) {
-        ClassItem *item = static_cast<ClassItem *>(items[0]);
-        QVector<Class *> *classes = &diagram->classes;
+        CDClassItem *item = static_cast<CDClassItem *>(items[0]);
+        QVector<CDClass *> *classes = &diagram->cdClasses;
         classes->erase(std::remove(classes->begin(), classes->end(), item->parentCls), classes->end());
         delete item->parentCls;
     }

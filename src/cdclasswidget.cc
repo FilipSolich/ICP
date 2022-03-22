@@ -15,10 +15,10 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-#include "class.hh"
-#include "classwidget.hh"
+#include "cdclass.hh"
+#include "cdclasswidget.hh"
 
-ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
+CDClassWidget::CDClassWidget(CDClass *parentClass, QWidget *parent)
     : QWidget{parent}
 {
     this->parentCls = parentClass;
@@ -60,14 +60,14 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     setLayout(layout);
     resize(layout->sizeHint());
 
-    connect(addAttrBtn, &QPushButton::clicked, this, &ClassWidget::addAttributeSlot);
-    connect(delAttrBtn, &QPushButton::clicked, this, &ClassWidget::delAttributeSlot);
-    connect(addMethBtn, &QPushButton::clicked, this, &ClassWidget::addMethodSlot);
-    connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethodSlot);
+    connect(addAttrBtn, &QPushButton::clicked, this, &CDClassWidget::addAttributeSlot);
+    connect(delAttrBtn, &QPushButton::clicked, this, &CDClassWidget::delAttributeSlot);
+    connect(addMethBtn, &QPushButton::clicked, this, &CDClassWidget::addMethodSlot);
+    connect(delMethBtn, &QPushButton::clicked, this, &CDClassWidget::delMethodSlot);
 }
 
 #include <QDebug>
-void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
+void CDClassWidget::addAttribute(QString visibility, QString dt, QString name)
 {
     QWidget *attr = new QWidget(this);
 
@@ -102,7 +102,7 @@ void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
     parentCls->redrawSockets();
 }
 
-void ClassWidget::delAttribute(void)
+void CDClassWidget::delAttribute(void)
 {
     if (attributes.size() > 0) {
         QWidget *w = attributes.last();
@@ -118,7 +118,7 @@ void ClassWidget::delAttribute(void)
     parentCls->redrawSockets();
 }
 
-void ClassWidget::addMethod(QString visibility, QString dt, QString name)
+void CDClassWidget::addMethod(QString visibility, QString dt, QString name)
 {
     QWidget *meth = new QWidget(this);
 
@@ -152,7 +152,7 @@ void ClassWidget::addMethod(QString visibility, QString dt, QString name)
     parentCls->redrawSockets();
 }
 
-void ClassWidget::delMethod(void)
+void CDClassWidget::delMethod(void)
 {
     if (methods.size() > 0) {
         QWidget *w = methods.last();
@@ -168,22 +168,22 @@ void ClassWidget::delMethod(void)
     parentCls->redrawSockets();
 }
 
-void ClassWidget::addAttributeSlot(void)
+void CDClassWidget::addAttributeSlot(void)
 {
     addAttribute();
 }
 
-void ClassWidget::delAttributeSlot(void)
+void CDClassWidget::delAttributeSlot(void)
 {
     delAttribute();
 }
 
-void ClassWidget::addMethodSlot(void)
+void CDClassWidget::addMethodSlot(void)
 {
     addMethod();
 }
 
-void ClassWidget::delMethodSlot(void)
+void CDClassWidget::delMethodSlot(void)
 {
     delMethod();
 }
