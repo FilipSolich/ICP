@@ -10,12 +10,13 @@
 class SequenceDiagram : public QWidget
 {
     Q_OBJECT
-    QGraphicsScene *sequence_scene = nullptr;
     Diagram *diagram = nullptr;
     QVector<Sequence *> v_diagrams;
     QVector<QGraphicsRectItem *> v_rect_diagrams;
 
 public:
+    QGraphicsScene *sequence_scene = nullptr;
+
     explicit SequenceDiagram(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
     void makeSequence(QVector<QString> names);

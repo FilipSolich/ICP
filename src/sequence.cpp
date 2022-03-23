@@ -1,33 +1,44 @@
 #include "sequence.h"
-#include "classitem.hh"
-#include <QBoxLayout>
-#include <QLabel>
-#include <QFrame>
+#include "sdsocket.h"
+#include "sdsocketitem.h"
+#include "sequenceitem.h"
+#include "sequencewidget.h"
+#include "sequencediagram.hh"
 
-#include "socketitem.hh"
+#include <QGraphicsProxyWidget>
 
-Sequence::Sequence(QWidget *parent, QString name)
-    : QWidget{parent}
+Sequence::Sequence(QString name, SequenceDiagram *diagram)
+    : diagram{diagram}
 {
-    seq_layout = new QGridLayout(this);
-    seq_name = new QLabel(name,this);
-    seq_line = new QLabel(this);
+    item = new Sequenceitem(this);
+    widget = new SequenceWidget(this ,name);
 
+    seq_proxy = diagram->sequence_scene->addWidget(widget);
+    seq_proxy->setPos(0,0);
+    seq_proxy->setParentItem(item);
 
-
-    seq_name->setMinimumWidth(200);
-
-    seq_line->setFrameShape(QFrame::VLine);
-    seq_line->setLineWidth(3);
-    seq_line->setMinimumHeight(300);
-
-
-    seq_layout->setGeometry(geometry());
-
-
-    seq_layout->addWidget(seq_name,0,0);
-    seq_layout->addWidget(seq_line,1,1);
-
-
+    sockets[0] = new SDSocket(0,this,item);
+    sockets[1] = new SDSocket(1,this,item);
+    sockets[2] = new SDSocket(2,this,item);
+    sockets[3] = new SDSocket(3,this,item);
+    sockets[4] = new SDSocket(4,this,item);
+    sockets[5] = new SDSocket(5,this,item);
+    sockets[6] = new SDSocket(6,this,item);
+    sockets[7] = new SDSocket(7,this,item);
+    sockets[8] = new SDSocket(8,this,item);
 }
 
+void Sequence::redrawSockets(void)
+{
+    for (SDSocket *s : sockets)
+    {
+        s->redraw();
+    }
+}
+
+Sequence::~Sequence()
+{
+    diagram->sequence_scene->removeItem(item);
+    delete seq_proxy;
+    delete item;
+}

@@ -2,27 +2,27 @@
 #define SEQUENCE_H
 
 #include <QWidget>
-#include <QBoxLayout>
-#include <QFrame>
-#include <QLabel>
 
+#include "sdsocket.h"
+#include "sequenceitem.h"
+#include "sequencewidget.h"
+class SequenceDiagram;
 
-class Sequence : public QWidget
+class Sequence
 {
-    Q_OBJECT
-
-    QGridLayout *seq_layout = nullptr;
-    QLabel *seq_name = nullptr;
-    QLabel *seq_line = nullptr;
-    QLabel *seq_circle = nullptr;
-
-
 
 public:
-    QGraphicsProxyWidget *seq_proxy = nullptr;
-    explicit Sequence(QWidget *parent = nullptr, QString name = "Class diagram not exist yet");
 
-signals:
+    QGraphicsProxyWidget *seq_proxy = nullptr;
+    SequenceDiagram *diagram;
+    Sequenceitem *item = nullptr;
+    SequenceWidget *widget = nullptr;
+    SDSocket *sockets[9];
+    Sequence(QString name = "Class", SequenceDiagram *diagram = nullptr);
+    ~Sequence();
+
+    void redrawSockets(void);
+
 
 };
 
