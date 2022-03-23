@@ -13,7 +13,7 @@ QPointF SDSocket::calculateSocketPos()
 {
 
     int x = 0,y = 0;
-    int x_tmp = parent_sequence->item->rect().width() +42;
+    int x_tmp = parent_sequence->item->rect().width() +22;
     int y_tmp = (parent_sequence->item->rect().height() / 9 );
     switch(position)
     {
@@ -53,6 +53,10 @@ QPointF SDSocket::calculateSocketPos()
         case 8:
             x = x_tmp;
             y = 1*y_tmp;
+            break;
+        default:
+            x = -15;
+            y = (abs(position)%10) * y_tmp +40;
             break;
     }
     return QPointF(x,y);

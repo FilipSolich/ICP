@@ -19,6 +19,7 @@ public:
     Sequence *sequence_parent = nullptr;
 
     SequenceWidget(Sequence *sequence_parent, QString name = "class", QWidget *parent = nullptr);
+
 };
 
 #endif // SEQUENCEWIDGET_H

@@ -5,7 +5,7 @@ Sequenceitem::Sequenceitem(Sequence *parent_sequence)
 {
     this->parent_sequence = parent_sequence;
 
-    setRect(0,0,200,300);
+    setRect(0,0,100,300);
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
     setFlag(QGraphicsItem::ItemIsFocusable);
