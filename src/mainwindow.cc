@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setWindowTitle("UML Editor");
+
     tabs = new DiagramTabWidget(this);
     ui->centralwidget->layout()->addWidget(tabs);
 
