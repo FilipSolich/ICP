@@ -24,7 +24,7 @@ class FileProcessor
     QString genClasses();
     void addLine(QString &text, QString const &increment);
     void addElement(QString &text, QString const &increment, bool leadingSpace = true);
-    int createClass(ClassDiagramEditor *classEditor, QString &line);
+    int createClass(CDEditor *classEditor, QString &line);
 
 public:
     FileProcessor() {};

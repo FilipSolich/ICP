@@ -13,8 +13,7 @@
 #include <QTabWidget>
 #include <QWidget>
 
-#include "diagram.hh"
-#include "classdiagrameditor.hh"
+#include "cdeditor.hh"
 #include "mainwindow.hh"
 #include "sequencediagram.hh"
 
@@ -25,13 +24,13 @@ class DiagramTabWidget : public QTabWidget
     MainWindow *parent;
     int sequenceDiagramCounter = 1;
 
-    void addDummyTab(void);
+    void addDummyTab();
 
 public:
-    explicit DiagramTabWidget(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+    explicit DiagramTabWidget(QWidget *parent = nullptr);
 
-    ClassDiagramEditor *classTab;
-    QVector<SequenceDiagram *> sequnceTabs;
+    CDEditor *classTab;
+    QVector<SequenceDiagram *> sequenceTabs;
 
 private slots:
     void selectTab(int index);

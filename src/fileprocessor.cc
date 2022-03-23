@@ -10,8 +10,8 @@
 #include <QComboBox>
 #include <QTextStream>
 
-#include "classwidget.hh"
-#include "classdiagrameditor.hh"
+#include "cdclasswidget.hh"
+#include "cdeditor.hh"
 #include "diagram.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
@@ -49,14 +49,15 @@ QString FileProcessor::genClasses()
     addLine(text, "start class");
 
     // Add class
-    for (Class *cls : qAsConst(diagram->classes)) {
+    for (Class *clss : qAsConst(diagram->classes)) {
+        CDClass *cls = clss->cdClass;
         QString line;
 
         // Add keyword
         addElement(line, "class", false);
 
         // Add class name
-        addElement(line, "\"" + cls->getName() + "\"");
+        addElement(line, "\"" + cls->cls->getName() + "\"");
 
         // Add class position
         addElement(line, QString::number(cls->item->pos().x()));
@@ -96,7 +97,7 @@ QString FileProcessor::genSequences()
     addLine(text, "start sequence");
 
     for (Class *cls : qAsConst(diagram->classes)) {
-        addLine(text, "participant " + cls->widget->name->text());
+        addLine(text, "participant " + cls->cdClass->widget->name->text());
     }
 
     // TODO
@@ -112,8 +113,8 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
     QString line;
     QTextStream stream{text};
 
-    ClassDiagramEditor *classEditor = tabs->classTab;
-    QVector<SequenceDiagram *> *sequenceEditors = &(tabs->sequnceTabs);
+    CDEditor *classEditor = tabs->classTab;
+    QVector<SequenceDiagram *> *sequenceEditors = &(tabs->sequenceTabs);
 
     ParseState state = ParseState::NoState;
     while (stream.readLineInto(&line)) {
@@ -132,10 +133,10 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
         }
     }
 
-    return new Diagram();
+    return new Diagram(nullptr, nullptr); // must be valid editors
 }
 
-int FileProcessor::createClass(ClassDiagramEditor *classEditor, QString &line)
+int FileProcessor::createClass(CDEditor *classEditor, QString &line)
 {
     QStringList args = line.split(" ");
 
@@ -147,8 +148,9 @@ int FileProcessor::createClass(ClassDiagramEditor *classEditor, QString &line)
     QString x = args[2];
     QString y = args[3];
 
-    Class *cls = classEditor->addClass(x.toInt(), y.toInt()); // TODO: check if x and y is interger
-    cls->setName(name);
+    diagram->addClass(QPointF(x.toInt(), y.toInt())); // TODO: check if x and y is interger
+    CDClass *cls = diagram->classes.last()->cdClass;
+    diagram->classes.last()->setName(name);
 
     if (args.size() > 4) {
         bool attributes = true;

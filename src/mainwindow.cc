@@ -11,29 +11,31 @@
 
 #include <QComboBox>
 #include <QFileDialog>
+#include <QGraphicsItem>
 #include <QHBoxLayout>
-#include <QMessageBox>
 #include <QLabel>
+#include <QMessageBox>
 #include <QTextStream>
 
+#include "cdeditorscene.hh"
 #include "edgecombobox.hh"
 #include "fileprocessor.hh"
-#include "mainwindow.hh"
 #include "itemtype.hh"
+#include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
 class DiagramTabWidget;
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow{parent}
+    , ui{new Ui::MainWindow}
 {
     ui->setupUi(this);
 
-    diagram = new Diagram();
-
-    tabs = new DiagramTabWidget(this, diagram);
+    tabs = new DiagramTabWidget(this);
     ui->centralwidget->layout()->addWidget(tabs);
+
+    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs));
 
     edgeComboBox = new EdgeComboBox(this);
     ui->toolBar->addWidget(edgeComboBox);
@@ -57,7 +59,7 @@ void MainWindow::newDocument()
 {
     closeCurrentDiagram();
     currentFile.clear();
-    diagram = new Diagram();
+    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs));
 
     // TODO: clear screen.
 }
@@ -204,24 +206,26 @@ void MainWindow::closeCurrentDiagram(void)
 
 void MainWindow::addClass()
 {
-    QWidget *w = tabs->currentWidget();
-    if (tabs->currentIndex() == 0) {
-        static_cast<ClassDiagramEditor *>(w)->addClass();
-    } else {
-        //static_cast<SequenceDiagramEditor *>(w)->addClass(); // TODO Add addClass to sequence diagram editor
-    }
+    diagram->addClass();
 }
 
 void MainWindow::removeSelected()
 {
-    QList<QGraphicsItem *> items = tabs->classTab->scene->selectedItems();
-    for (QGraphicsItem *item : items) {
-        if (item->type() == ItemTypeClass) {
-            ClassItem *i = static_cast<ClassItem *>(item);
-            delete i->parentCls;
-        } else if (item->type() == ItemTypeEdge) {
-            EdgeItem *i = static_cast<EdgeItem *>(item);
-            delete i->parentCls;
+    QList<QGraphicsItem *> items;
+    if (tabs->currentIndex() == 0) {
+        CDEditorScene *scene = static_cast<CDEditor *>(tabs->currentWidget())->scene;
+        items = scene->selectedItems();
+    } else {
+        // TODO sequence scene
+    }
+
+    for (QGraphicsItem *item : qAsConst(items)) {
+        if (item->type() == ItemTypeCDClass) {
+            CDClassItem *i = static_cast<CDClassItem *>(item);
+            delete i->cdClass->cls;
+        } else if (item->type() == ItemTypeCDEdge) {
+            CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
+            delete i->cdEdge;
         }
     }
 }

@@ -15,20 +15,19 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-#include "class.hh"
-#include "classwidget.hh"
+#include "cdclass.hh"
+#include "cdclasswidget.hh"
 
-ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
-    : QWidget{parent}
+CDClassWidget::CDClassWidget(CDClass *cdClass, QWidget *parent)
+    : QWidget{parent},
+      cdClass{cdClass}
 {
-    this->parentCls = parentClass;
-
     setMinimumWidth(250);
     setMaximumWidth(250);
 
     layout = new QVBoxLayout(this);
 
-    name = new QLineEdit(this);
+    name = new QLineEdit(cdClass->cls->getName(), this);
 
     // Add and remove attribute buttons
     QWidget *attrBtns = new QWidget(this);
@@ -60,14 +59,14 @@ ClassWidget::ClassWidget(Class *parentClass, QWidget *parent)
     setLayout(layout);
     resize(layout->sizeHint());
 
-    connect(addAttrBtn, &QPushButton::clicked, this, &ClassWidget::addAttributeSlot);
-    connect(delAttrBtn, &QPushButton::clicked, this, &ClassWidget::delAttributeSlot);
-    connect(addMethBtn, &QPushButton::clicked, this, &ClassWidget::addMethodSlot);
-    connect(delMethBtn, &QPushButton::clicked, this, &ClassWidget::delMethodSlot);
+    connect(addAttrBtn, &QPushButton::clicked, this, &CDClassWidget::addAttributeSlot);
+    connect(delAttrBtn, &QPushButton::clicked, this, &CDClassWidget::delAttributeSlot);
+    connect(addMethBtn, &QPushButton::clicked, this, &CDClassWidget::addMethodSlot);
+    connect(delMethBtn, &QPushButton::clicked, this, &CDClassWidget::delMethodSlot);
+    connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot);
 }
 
-#include <QDebug>
-void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
+void CDClassWidget::addAttribute(QString visibility, QString dt, QString name)
 {
     QWidget *attr = new QWidget(this);
 
@@ -96,13 +95,12 @@ void ClassWidget::addAttribute(QString visibility, QString dt, QString name)
     attributes.push_back(attr);
 
     QCoreApplication::processEvents(QEventLoop::AllEvents);
-    this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+    this->cdClass->item->setRect(rect());
 
-    // parentCls->moved(parentCls->item->pos()); // TODO: remove
-    parentCls->redrawSockets();
+    cdClass->redrawSockets();
 }
 
-void ClassWidget::delAttribute(void)
+void CDClassWidget::delAttribute()
 {
     if (attributes.size() > 0) {
         QWidget *w = attributes.last();
@@ -113,12 +111,12 @@ void ClassWidget::delAttribute(void)
         adjustSize();
 
         QCoreApplication::processEvents(QEventLoop::AllEvents);
-        this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+        this->cdClass->item->setRect(rect());
+        cdClass->redrawSockets();
     }
-    parentCls->redrawSockets();
 }
 
-void ClassWidget::addMethod(QString visibility, QString dt, QString name)
+void CDClassWidget::addMethod(QString visibility, QString dt, QString name)
 {
     QWidget *meth = new QWidget(this);
 
@@ -147,12 +145,12 @@ void ClassWidget::addMethod(QString visibility, QString dt, QString name)
     methods.push_back(meth);
 
     QCoreApplication::processEvents(QEventLoop::AllEvents);
-    this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+    this->cdClass->item->setRect(rect());
 
-    parentCls->redrawSockets();
+    cdClass->redrawSockets();
 }
 
-void ClassWidget::delMethod(void)
+void CDClassWidget::delMethod()
 {
     if (methods.size() > 0) {
         QWidget *w = methods.last();
@@ -163,27 +161,32 @@ void ClassWidget::delMethod(void)
         adjustSize();
 
         QCoreApplication::processEvents(QEventLoop::AllEvents);
-        this->parentCls->item->setWidgetSize(QRectF(this->x(), this->y(), this->width(), this->height()));
+        this->cdClass->item->setRect(rect());
+        cdClass->redrawSockets();
     }
-    parentCls->redrawSockets();
 }
 
-void ClassWidget::addAttributeSlot(void)
+void CDClassWidget::addAttributeSlot()
 {
     addAttribute();
 }
 
-void ClassWidget::delAttributeSlot(void)
+void CDClassWidget::delAttributeSlot()
 {
     delAttribute();
 }
 
-void ClassWidget::addMethodSlot(void)
+void CDClassWidget::addMethodSlot()
 {
     addMethod();
 }
 
-void ClassWidget::delMethodSlot(void)
+void CDClassWidget::delMethodSlot()
 {
     delMethod();
+}
+
+void CDClassWidget::nameUpdateSlot(const QString &text)
+{
+    cdClass->cls->setName(text);
 }

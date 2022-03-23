@@ -7,16 +7,16 @@
  * \author Filip Solich
  */
 
-#ifndef CLASSWIDGET_H
-#define CLASSWIDGET_H
+#ifndef CDCLASSWIDGET_H
+#define CDCLASSWIDGET_H
 
 #include <QLineEdit>
 #include <QWidget>
 #include <QVBoxLayout>
 
-class Class;
+class CDClass;
 
-class ClassWidget : public QWidget
+class CDClassWidget : public QWidget
 {
     Q_OBJECT
 
@@ -25,24 +25,24 @@ class ClassWidget : public QWidget
 public:
     QStringList visibility{"+", "-", "#", "~"};
 
-    Class *parentCls = nullptr;
+    CDClass *cdClass = nullptr;
     QLineEdit *name = nullptr;
     QVector<QWidget *> attributes;
     QVector<QWidget *> methods;
 
-    ClassWidget(Class *parentClass, QWidget *parent = nullptr);
+    CDClassWidget(CDClass *cdClass, QWidget *parent = nullptr);
 
     void addAttribute(QString visibility = "+", QString dt = "", QString name = "");
-    void delAttribute(void);
+    void delAttribute();
     void addMethod(QString visibility = "+", QString dt = "", QString name = "");
-    void delMethod(void);
+    void delMethod();
 
 public slots:
-    void addAttributeSlot(void);
-    void delAttributeSlot(void);
-    void addMethodSlot(void);
-    void delMethodSlot(void);
-
+    void addAttributeSlot();
+    void delAttributeSlot();
+    void addMethodSlot();
+    void delMethodSlot();
+    void nameUpdateSlot(const QString &text);
 };
 
-#endif // CLASSWIDGET_H
+#endif // CDCLASSWIDGET_H

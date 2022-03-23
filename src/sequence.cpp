@@ -1,11 +1,15 @@
 #include "sequence.h"
+
 #include "sdsocket.h"
 #include "sdsocketitem.h"
 #include "sequenceitem.h"
 #include "sequencewidget.h"
 #include "sequencediagram.hh"
-
 #include <QGraphicsProxyWidget>
+#include "cdclassitem.hh"
+
+
+
 
 Sequence::Sequence(QString name, SequenceDiagram *diagram)
     : diagram{diagram}

@@ -9,16 +9,19 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cdclass.cc \
+    cdclassitem.cc \
+    cdclasswidget.cc \
+    cdedge.cc \
+    cdedgeitem.cc \
+    cdeditor.cc \
+    cdeditorscene.cc \
+    cdsocket.cc \
+    cdsocketitem.cc \
     class.cc \
-    classdiagrameditor.cc \
-    classdiagrameditorscene.cc \
-    classitem.cc \
-    classwidget.cc \
     diagram.cc \
     diagramtabwidget.cc \
-    edge.cc \
     edgecombobox.cc \
-    edgeitem.cc \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
@@ -26,23 +29,25 @@ SOURCES += \
     sdsocketitem.cpp \
     sequencediagram.cc \
     sequence.cpp \
-    sequenceitem.cpp \
     sequencemsg.cpp \
     sequencewidget.cpp \
-    socket.cc \
-    socketitem.cc
+    sequenceitem.cpp
+
 
 HEADERS += \
+    cdclass.hh \
+    cdclassitem.hh \
+    cdclasswidget.hh \
+    cdedge.hh \
+    cdedgeitem.hh \
+    cdeditor.hh \
+    cdeditorscene.hh \
+    cdsocket.hh \
+    cdsocketitem.hh \
     class.hh \
-    classdiagrameditor.hh \
-    classdiagrameditorscene.hh \
-    classitem.hh \
-    classwidget.hh \
     diagram.hh \
     diagramtabwidget.hh \
-    edge.hh \
     edgecombobox.hh \
-    edgeitem.hh \
     fileprocessor.hh \
     itemtype.hh \
     mainwindow.hh \
@@ -50,12 +55,9 @@ HEADERS += \
     sdsocketitem.h \
     sequencediagram.hh \
     sequence.h \
-    sequenceitem.h \
     sequencemsg.h \
     sequencewidget.h \
-    socket.hh \
-    socketitem.hh
-
+    sequencewidget.h
 FORMS += \
     mainwindow.ui
 

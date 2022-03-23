@@ -10,20 +10,27 @@
 #ifndef DIAGRAM_HH
 #define DIAGRAM_HH
 
+#include <QPointF>
 #include <QVector>
 
-#include "class.hh"
-#include "edge.hh"
+class Class;
+class CDEditor;
+class SequenceDiagram;
 
 class Diagram
 {
 
 public:
     bool unsavedChanges = false; // TODO deal with unsaved changes
-    Edge *currentEdge = nullptr;
+
+    CDEditor *cdEditor = nullptr;
+    QVector<SequenceDiagram *> *sqEditors = nullptr;
+
     QVector<Class *> classes;
 
-    Diagram();
+    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors);
+
+    void addClass(QPointF pos = {0, 0});
 };
 
 #endif // DIAGRAM_HH
