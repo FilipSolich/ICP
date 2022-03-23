@@ -25,9 +25,14 @@ SOURCES += \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
+    sdsocket.cpp \
+    sdsocketitem.cpp \
     sequencediagram.cc \
     sequence.cpp \
-    sequencemsg.cpp
+    sequencemsg.cpp \
+    sequencewidget.cpp \
+    sequenceitem.cpp
+
 
 HEADERS += \
     cdclass.hh \
@@ -46,10 +51,13 @@ HEADERS += \
     fileprocessor.hh \
     itemtype.hh \
     mainwindow.hh \
+    sdsocket.h \
+    sdsocketitem.h \
     sequencediagram.hh \
     sequence.h \
-    sequencemsg.h
-
+    sequencemsg.h \
+    sequencewidget.h \
+    sequencewidget.h
 FORMS += \
     mainwindow.ui
 

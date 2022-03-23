@@ -18,5 +18,8 @@ void EdgeComboBox::setClassEditorEdges()
 void EdgeComboBox::setSequenceEditorEdges()
 {
     clear();
-    // TODO;
+    addItem("Async");
+    addItem("Sync");
+    addItem("Create");
+    addItem("Destroy");
 }
