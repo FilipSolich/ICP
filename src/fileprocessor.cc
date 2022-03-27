@@ -133,7 +133,7 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
         }
     }
 
-    return new Diagram(nullptr, nullptr); // must be valid editors
+    return new Diagram(nullptr, nullptr, mainWindow); // must be valid editors
 }
 
 int FileProcessor::createClass(CDEditor *classEditor, QString &line)

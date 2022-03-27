@@ -10,9 +10,10 @@
 #include "class.hh"
 #include "diagram.hh"
 
-Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors)
+Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, MainWindow *mainWindow)
     : cdEditor{cdEditor},
-      sqEditors{sqEditors}
+      sqEditors{sqEditors},
+      mainWindow{mainWindow}
 {}
 
 void Diagram::addClass(QPointF pos)

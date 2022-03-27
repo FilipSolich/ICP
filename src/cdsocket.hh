@@ -18,7 +18,7 @@ public:
 
     CDClass *cdClass = nullptr;
     CDSocketItem *item = nullptr;
-    CDEdge *edge = nullptr;
+    QVector<CDEdge *> edges;
 
     CDSocket(Position position, CDClass *cdClass);
     ~CDSocket();
@@ -27,6 +27,7 @@ public:
     QPointF getSocketCenter();
     void createEdge();
     void redraw();
+    void removeEdge(CDEdge *edge);
 };
 
 #endif // CDSOCKET_H

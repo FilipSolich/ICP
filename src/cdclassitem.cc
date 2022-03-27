@@ -23,9 +23,12 @@ QVariant CDClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const
 {
     if (change == ItemPositionChange) {
         for (CDSocket *s : qAsConst(cdClass->sockets)) {
-            if (s->edge) {
-                s->edge->socketMoved(s);
+            for (CDEdge *edge : qAsConst(s->edges)) {
+                edge->socketMoved(s);
             }
+            //if (s->edge) { // TODO: remove
+            //    s->edge->socketMoved(s);
+            //}
         }
     }
 

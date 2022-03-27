@@ -2,6 +2,7 @@
 #include "cdedge.hh"
 #include "cdsocket.hh"
 #include "cdsocketitem.hh"
+#include "diagram.hh"
 
 CDSocket::CDSocket(Position position, CDClass *cdClass)
     : position{position},
@@ -12,7 +13,9 @@ CDSocket::CDSocket(Position position, CDClass *cdClass)
 
 CDSocket::~CDSocket()
 {
-    delete edge;
+    for (CDEdge *edge : qAsConst(edges)) {
+        delete edge;
+    }
 }
 
 QPointF CDSocket::calculateNewPos()
@@ -51,7 +54,7 @@ QPointF CDSocket::getSocketCenter()
 
 void CDSocket::createEdge()
 {
-    edge = new CDEdge(this);
+    edges.push_back(new CDEdge(cdClass->cls->diagram->mainWindow->edgeComboBox->currentText(), this));
 }
 
 void CDSocket::redraw()
@@ -59,7 +62,13 @@ void CDSocket::redraw()
     QPointF pos = calculateNewPos();
     item->setPos(pos);
 
-    if (edge) {
+    for (CDEdge *edge : qAsConst(edges)) {
         edge->socketMoved(this);
     }
+}
+
+void CDSocket::removeEdge(CDEdge *edge)
+{
+    int idx = edges.indexOf(edge);
+    edges.remove(idx);
 }

@@ -11,26 +11,35 @@ class Diagram;
 class CDEdge
 {
 public:
-    enum class Type {Start, End};
+    enum class EdgeEndType {Start, End};
+    enum class Type {Association, Aggregation, Composition, Generalization};
 
     static const int C_DISTANCE = 30;
+
+    std::map<QString, Type> typeMap = {
+        {"Association", Type::Association},
+        {"Aggregation", Type::Aggregation},
+        {"Composition", Type::Composition},
+        {"Generalization", Type::Generalization},
+    };
 
     CDEdgeItem *item = nullptr;
 
     CDSocket *startSocket = nullptr;
     CDSocket *endSocket = nullptr;
+    Type type;
 
     QPointF startPoint;
     QPointF endPoint;
     QPointF c1;
     QPointF c2;
 
-    CDEdge(CDSocket *s1, CDSocket *s2 = nullptr);
+    CDEdge(QString type = "Association", CDSocket *s1 = nullptr, CDSocket *s2 = nullptr);
     ~CDEdge();
 
-    void setSocket(CDSocket *socket, Type type);
+    void setSocket(CDSocket *socket, EdgeEndType type);
     QPointF calculateC(QPointF point, CDSocket::Position socPos);
-    void setPoints(Type type, QPointF point, CDSocket::Position socPos = CDSocket::Position::Right);
+    void setPoints(EdgeEndType type, QPointF point, CDSocket::Position socPos = CDSocket::Position::Right);
     void setPath();
     void setMousePos(QPointF pos);
     void socketMoved(CDSocket *s);

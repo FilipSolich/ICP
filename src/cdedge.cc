@@ -4,13 +4,15 @@
 #include "cdedgeitem.hh"
 #include "cdeditor.hh"
 
-CDEdge::CDEdge(CDSocket *s1, CDSocket *s2)
+CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
 {
+    this->type = typeMap[type];
+
     item = new CDEdgeItem(this);
     s1->item->scene()->addItem(item);
 
-    setSocket(s1, Type::Start);
-    setSocket(s2, Type::End);
+    setSocket(s1, EdgeEndType::Start);
+    setSocket(s2, EdgeEndType::End);
 
     this->startSocket->cdClass->editor->currentEdge = this;
 }
@@ -20,16 +22,16 @@ CDEdge::~CDEdge()
     item->scene()->removeItem(item);
     delete item;
     if (startSocket) {
-        startSocket->edge = nullptr;
+        startSocket->removeEdge(this);
     }
     if (endSocket) {
-        endSocket->edge = nullptr;
+        endSocket->removeEdge(this);
     }
 }
 
-void CDEdge::setSocket(CDSocket *socket, Type type)
+void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
 {
-    if (type == Type::Start) {
+    if (type == EdgeEndType::Start) {
         startSocket = socket;
     } else {
         endSocket = socket;
@@ -39,7 +41,7 @@ void CDEdge::setSocket(CDSocket *socket, Type type)
         setPoints(type, socket->getSocketCenter(), socket->position);
     }
 
-    if (type == Type::End && socket != nullptr) {
+    if (type == EdgeEndType::End && socket != nullptr) {
         startSocket->cdClass->editor->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
     }
@@ -66,9 +68,9 @@ QPointF CDEdge::calculateC(QPointF point, CDSocket::Position socPos)
     return c;
 }
 
-void CDEdge::setPoints(Type type, QPointF point, CDSocket::Position socPos)
+void CDEdge::setPoints(EdgeEndType type, QPointF point, CDSocket::Position socPos)
 {
-    if (type == Type::Start) {
+    if (type == EdgeEndType::Start) {
         startPoint = point;
         c1 = calculateC(point, socPos);
     } else {
@@ -88,14 +90,14 @@ void CDEdge::setPath()
 
 void CDEdge::setMousePos(QPointF pos)
 {
-    setPoints(Type::End, pos);
+    setPoints(EdgeEndType::End, pos);
 }
 
 void CDEdge::socketMoved(CDSocket *s)
 {
     if (s == startSocket) {
-        setPoints(Type::Start, s->getSocketCenter(), s->position);
+        setPoints(EdgeEndType::Start, s->getSocketCenter(), s->position);
     } else {
-        setPoints(Type::End, s->getSocketCenter(), s->position);
+        setPoints(EdgeEndType::End, s->getSocketCenter(), s->position);
     }
 }

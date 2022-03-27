@@ -19,6 +19,7 @@
 class FileProcessor
 {
     Diagram *diagram = nullptr;
+    MainWindow *mainWindow = nullptr;
 
     QString genSequences();
     QString genClasses();
@@ -27,7 +28,7 @@ class FileProcessor
     int createClass(CDEditor *classEditor, QString &line);
 
 public:
-    FileProcessor() {};
+    FileProcessor(MainWindow *mainWindow) : mainWindow{mainWindow} {};
 
     enum class ParseState {
         NoState,

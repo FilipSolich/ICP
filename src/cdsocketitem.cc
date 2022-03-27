@@ -16,8 +16,8 @@ void CDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         CDEditor *editor = static_cast<CDEditorScene *>(scene())->editor;
         if (editor->currentEdge) {
-            cdSocket->edge = editor->currentEdge;
-            editor->currentEdge->setSocket(cdSocket, CDEdge::Type::End);
+            cdSocket->edges.push_back(editor->currentEdge);
+            editor->currentEdge->setSocket(cdSocket, CDEdge::EdgeEndType::End);
         } else {
             cdSocket->createEdge();
         }

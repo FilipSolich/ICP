@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     tabs = new DiagramTabWidget(this);
     ui->centralwidget->layout()->addWidget(tabs);
 
-    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs));
+    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs), this);
 
     edgeComboBox = new EdgeComboBox(this);
     ui->toolBar->addWidget(edgeComboBox);
@@ -61,7 +61,7 @@ void MainWindow::newDocument()
 {
     closeCurrentDiagram();
     currentFile.clear();
-    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs));
+    diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs), this);
 
     // TODO: clear screen.
 }
@@ -88,7 +88,7 @@ void MainWindow::open()
     QTextStream in{&file};
     QString text = in.readAll();
 
-    FileProcessor parser;
+    FileProcessor parser{this};
     diagram = parser.parseFile(tabs, &text);
 
     file.close();
@@ -115,7 +115,7 @@ void MainWindow::save()
 
     setWindowTitle("UML Editor - " + fileName);
 
-    FileProcessor generator;
+    FileProcessor generator{this};
     QString text = generator.generateFile(diagram);
 
     QTextStream out{&file};
@@ -144,7 +144,7 @@ void MainWindow::saveAs()
     currentFile = fileName;
     setWindowTitle("UML Editor - " + fileName);
 
-    FileProcessor generator;
+    FileProcessor generator{this};
     QString text = generator.generateFile(diagram);
 
     QTextStream out{&file};

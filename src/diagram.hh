@@ -13,6 +13,8 @@
 #include <QPointF>
 #include <QVector>
 
+#include "mainwindow.hh"
+
 class Class;
 class CDEditor;
 class SequenceDiagram;
@@ -25,10 +27,11 @@ public:
 
     CDEditor *cdEditor = nullptr;
     QVector<SequenceDiagram *> *sqEditors = nullptr;
+    MainWindow *mainWindow = nullptr;
 
     QVector<Class *> classes;
 
-    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors);
+    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, MainWindow *mainWindow);
 
     void addClass(QPointF pos = {0, 0});
 };

@@ -13,13 +13,13 @@
 #include <QMainWindow>
 
 #include "edgecombobox.hh"
-#include "diagram.hh"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class DiagramTabWidget;
+class Diagram;
 
 class MainWindow : public QMainWindow
 {
