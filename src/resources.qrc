@@ -13,5 +13,9 @@
         <file>icons/icons8-undo-24.png</file>
         <file>icons/icons8-add-new-24.png</file>
         <file>icons/icons8-trash-can-24.png</file>
+        <file>icons/aggregation.png</file>
+        <file>icons/association.png</file>
+        <file>icons/composition.png</file>
+        <file>icons/generalization.png</file>
     </qresource>
 </RCC>

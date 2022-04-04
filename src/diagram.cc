@@ -18,6 +18,8 @@ Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, Main
 
 void Diagram::addClass(QPointF pos)
 {
-    Class *cls = new Class(this, cdEditor, sqEditors, pos);
+    Class *cls = new Class(this, cdEditor, sqEditors, QPoint(-500,0));
+    classes.push_back(cls);
+    cls = new Class(this, cdEditor, sqEditors, QPoint(0,0));
     classes.push_back(cls);
 }
