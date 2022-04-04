@@ -21,15 +21,18 @@ class FileProcessor
     Diagram *diagram = nullptr;
     MainWindow *mainWindow = nullptr;
 
-    QString genSequences();
-    QString genClasses();
-    void addLine(QString &text, QString const &increment);
-    void addElement(QString &text, QString const &increment, bool leadingSpace = true);
     int createClass(CDEditor *classEditor, QString &line);
+
+    QJsonObject genCD();
+    QJsonObject genSD();
+    QJsonObject genCDClass(CDClass *cls);
+    QJsonObject genCDProperty(CDClassProperty *property);
+    QJsonObject genCDEdge(CDEdge *edge);
 
 public:
     FileProcessor(MainWindow *mainWindow) : mainWindow{mainWindow} {};
 
+    // TODO: remove
     enum class ParseState {
         NoState,
         Classes,

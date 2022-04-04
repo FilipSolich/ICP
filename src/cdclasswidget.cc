@@ -145,7 +145,6 @@ void CDClassWidget::delMethodSlot()
     delMethod();
 }
 
-// TODO maybe delete
 void CDClassWidget::nameUpdateSlot(const QString &text)
 {
     cdClass->cls->setName(text);

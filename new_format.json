@@ -1,0 +1,29 @@
+{
+  "classDiagram": {
+    "classes": [
+      {
+        "name": "class",
+        "x": 10,
+        "y": 10,
+        "property": [
+          {
+            "visibility": "+",
+            "dt": "int",
+            "name": "a",
+            "attribute": true
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "type": "association",
+        "startClass": "name1",
+        "startSocket": "top",
+        "endClass": "name2",
+        "endSocket": "bottom"
+      }
+    ]
+  },
+  "sequenceDiagram": []
+}

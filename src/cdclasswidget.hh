@@ -43,7 +43,7 @@ public slots:
     void delAttributeSlot();
     void addMethodSlot();
     void delMethodSlot();
-    void nameUpdateSlot(const QString &text); // TODO maybe delete
+    void nameUpdateSlot(const QString &text);
 };
 
 #endif // CDCLASSWIDGET_H

@@ -4,9 +4,16 @@
 #include "cdedgeitem.hh"
 #include "cdeditor.hh"
 
+QMap<CDEdge::Type, QString> CDEdge::typeMap = {
+    {CDEdge::Type::Association, "Association"},
+    {CDEdge::Type::Aggregation, "Aggregation"},
+    {CDEdge::Type::Composition, "Composition"},
+    {CDEdge::Type::Generalization, "Generalization"},
+};
+
 CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
 {
-    this->type = typeMap[type];
+    this->type = CDEdge::typeMap.key(type);
 
     item = new CDEdgeItem(this);
     s1->item->scene()->addItem(item);

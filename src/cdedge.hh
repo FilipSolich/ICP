@@ -16,12 +16,7 @@ public:
 
     static const int C_DISTANCE = 70;
 
-    std::map<QString, Type> typeMap = {
-        {"Association", Type::Association},
-        {"Aggregation", Type::Aggregation},
-        {"Composition", Type::Composition},
-        {"Generalization", Type::Generalization},
-    };
+    static QMap<CDEdge::Type, QString> typeMap;
 
     CDEdgeItem *item = nullptr;
 

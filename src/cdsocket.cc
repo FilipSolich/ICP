@@ -4,6 +4,13 @@
 #include "cdsocketitem.hh"
 #include "diagram.hh"
 
+QMap<CDSocket::Position, QString> CDSocket::positionMap = {
+    {CDSocket::Position::Top, "Top"},
+    {CDSocket::Position::Right, "Right"},
+    {CDSocket::Position::Bottom, "Bottom"},
+    {CDSocket::Position::Left, "Left"},
+};
+
 CDSocket::CDSocket(Position position, CDClass *cdClass)
     : position{position},
       cdClass{cdClass}
