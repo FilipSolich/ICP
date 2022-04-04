@@ -59,6 +59,18 @@ bool CDClass::addMethod(QString visibility, QString dt, QString name)
     return true;
 }
 
+// TODO change to nonbool
+bool CDClass::addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name)
+{
+    if (type == CDClassProperty::Type::Attribute) {
+        widget->addAttribute(visibility, dt, name);
+    } else {
+        widget->addMethod(visibility, dt, name);
+    }
+
+    return true;
+}
+
 void CDClass::setHeredity(CDClass *cls, bool parent)
 {
     if (parent) {

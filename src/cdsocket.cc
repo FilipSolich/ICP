@@ -11,6 +11,13 @@ QMap<CDSocket::Position, QString> CDSocket::positionMap = {
     {CDSocket::Position::Left, "Left"},
 };
 
+QMap<CDSocket::Position, int> CDSocket::positionIndexMap = {
+    {CDSocket::Position::Top, 0},
+    {CDSocket::Position::Right, 1},
+    {CDSocket::Position::Bottom, 2},
+    {CDSocket::Position::Left, 3},
+};
+
 CDSocket::CDSocket(Position position, CDClass *cdClass)
     : position{position},
       cdClass{cdClass}

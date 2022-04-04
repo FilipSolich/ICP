@@ -1,8 +1,9 @@
 #include "class.hh"
 #include "diagram.hh"
 
-Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QPointF pos)
-    : diagram{diagram}
+Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QString name, QPointF pos)
+    : name{name},
+      diagram{diagram}
 {
     // TODO: Create CDClass and SDClass
     cdClass = new CDClass(this, cdEditor, pos);

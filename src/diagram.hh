@@ -32,8 +32,9 @@ public:
     QVector<Class *> classes;
 
     Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, MainWindow *mainWindow);
+    ~Diagram();
 
-    void addClass(QPointF pos = {0, 0});
+    Class *addClass(QString name = "", QPointF pos = {0, 0});
 };
 
 #endif // DIAGRAM_HH

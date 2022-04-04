@@ -17,7 +17,7 @@ public:
     CDClass *cdClass = nullptr;
     // TODO Add SDClass
 
-    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QPointF pos = {0, 0});
+    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QString name = "", QPointF pos = {0, 0});
     ~Class();
 
     void setName(QString newName);

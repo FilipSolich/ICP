@@ -16,8 +16,17 @@ Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, Main
       mainWindow{mainWindow}
 {}
 
-void Diagram::addClass(QPointF pos)
+Diagram::~Diagram()
 {
-    Class *cls = new Class(this, cdEditor, sqEditors, pos);
+    QVector<Class *> test = classes;
+    for (Class *cls : qAsConst(test)) {
+        delete cls;
+    }
+}
+
+Class *Diagram::addClass(QString name, QPointF pos)
+{
+    Class *cls = new Class(this, cdEditor, sqEditors, name, pos);
     classes.push_back(cls);
+    return cls;
 }

@@ -26,9 +26,6 @@ QVariant CDClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const
             for (CDEdge *edge : qAsConst(s->edges)) {
                 edge->socketMoved(s);
             }
-            //if (s->edge) { // TODO: remove
-            //    s->edge->socketMoved(s);
-            //}
         }
     }
 

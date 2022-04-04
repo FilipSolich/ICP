@@ -21,7 +21,9 @@ CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
     setSocket(s1, EdgeEndType::Start);
     setSocket(s2, EdgeEndType::End);
 
-    this->startSocket->cdClass->editor->currentEdge = this;
+    if (!s2) {
+        this->startSocket->cdClass->editor->currentEdge = this;
+    }
 }
 
 CDEdge::~CDEdge()

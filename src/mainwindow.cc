@@ -62,8 +62,6 @@ void MainWindow::newDocument()
     closeCurrentDiagram();
     currentFile.clear();
     diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs), this);
-
-    // TODO: clear screen.
 }
 
 void MainWindow::open()

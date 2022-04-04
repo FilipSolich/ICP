@@ -15,6 +15,7 @@ public:
     enum class Position {Top, Right, Bottom, Left };
 
     static QMap<CDSocket::Position, QString> positionMap;
+    static QMap<CDSocket::Position, int> positionIndexMap;
 
     Position position;
 
