@@ -3,7 +3,7 @@
  *
  * \brief Source code for MainWindow class.
  *
- * \date 5. 3. 2022
+ * \date 4. 4. 2022
  * \author Filip Solich
  */
 

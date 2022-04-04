@@ -1,3 +1,12 @@
+/**
+ * \file class.cc
+ *
+ * \brief Source code for Class class.
+ *
+ * \date 4. 4. 2022
+ * \author Filip Solich
+ */
+
 #include "class.hh"
 #include "diagram.hh"
 

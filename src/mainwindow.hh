@@ -1,9 +1,9 @@
 /**
  * \file mainwindow.hh
  *
- * \brief Main window class.
+ * \brief Class implementing application main window.
  *
- * \date 4. 3. 2022
+ * \date 4. 4. 2022
  * \author Filip Solich
  */
 
@@ -21,6 +21,9 @@ QT_END_NAMESPACE
 class DiagramTabWidget;
 class Diagram;
 
+/**
+ * Class implementing application main window.
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -29,6 +32,9 @@ class MainWindow : public QMainWindow
     QString currentFile;
     Diagram *diagram = nullptr;
 
+    /**
+     * Function close current diagram and clear graphics scenes.
+     */
     void closeCurrentDiagram(void);
 
 public:
@@ -39,17 +45,54 @@ public:
     EdgeComboBox *edgeComboBox = nullptr;
 
 private slots:
+    /**
+     * Slot for 'New' button.
+     */
     void newDocument();
+
+    /**
+     * Slot for 'Open' button.
+     */
     void open();
+
+    /**
+     * Slot for 'Save' button.
+     */
     void save();
+
+    /**
+     * Slot for 'Save as' button.
+     */
     void saveAs();
+
+    /**
+     * Slot for 'Exit' button.
+     */
     void exit();
+
+    // TODO delete
     void cut();
     void copy();
     void paste();
+
+    /**
+     * Slot for 'Undo' button.
+     */
     void undo();
+
+    /**
+     * Slot for about window.
+     */
     void about();
+
+    /**
+     * Slot for 'Add class' button.
+     */
     void addClass();
+
+    /**
+     * Slot for 'Remove selected' button.
+     */
     void removeSelected();
 };
 #endif // MAINWINDOW_HH

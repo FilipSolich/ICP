@@ -64,7 +64,7 @@ CDClassWidget::CDClassWidget(CDClass *cdClass, QWidget *parent)
     connect(delAttrBtn, &QPushButton::clicked, this, &CDClassWidget::delAttributeSlot);
     connect(addMethBtn, &QPushButton::clicked, this, &CDClassWidget::addMethodSlot);
     connect(delMethBtn, &QPushButton::clicked, this, &CDClassWidget::delMethodSlot);
-    connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot); // TODO maybe delete
+    connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot);
 }
 
 void CDClassWidget::addAttribute(QString visibility, QString dt, QString name)

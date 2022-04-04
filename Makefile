@@ -25,11 +25,12 @@ run: $(TARGET)
 	./$(TARGET)
 
 example: $(TARGET)
-	./$(TARGET) $(EXAMPLES_DIR)/config.json
+	./$(TARGET) $(EXAMPLES_DIR)/export.json
 
 clean:
 	make clean -C $(SRC_DIR)
 	$(RM) $(SRC_DIR)/Makefile
+	$(RM) $(SRC_DIR)/.qmake.stash
 	$(RM) -r $(TARGET) $(PACK) $(DOC_DIR)/html
 
 doxygen:

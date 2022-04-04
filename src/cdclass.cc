@@ -39,36 +39,13 @@ CDClass::~CDClass()
     delete item;
 }
 
-bool CDClass::addAttribute(QString visibility, QString dt, QString name)
-{
-    if (!widget->visibility.contains(visibility)) {
-        return false;
-    }
-
-    widget->addAttribute(visibility, dt, name);
-    return true;
-}
-
-bool CDClass::addMethod(QString visibility, QString dt, QString name)
-{
-    if (!widget->visibility.contains(visibility)) {
-        return false;
-    }
-
-    widget->addMethod(visibility, dt, name);
-    return true;
-}
-
-// TODO change to nonbool
-bool CDClass::addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name)
+void CDClass::addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name)
 {
     if (type == CDClassProperty::Type::Attribute) {
         widget->addAttribute(visibility, dt, name);
     } else {
         widget->addMethod(visibility, dt, name);
     }
-
-    return true;
 }
 
 void CDClass::setHeredity(CDClass *cls, bool parent)

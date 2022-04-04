@@ -26,9 +26,7 @@ public:
     CDClass(Class *cls, CDEditor *editor, QPointF pos);
     ~CDClass();
 
-    bool addAttribute(QString visibility, QString dt, QString name); // TODO remove
-    bool addMethod(QString visibility, QString dt, QString name); // TODO remove
-    bool addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name);
+    void addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name);
 
     void setHeredity(CDClass *cls, bool parent);
     void removeHeredity(CDClass *cls, bool parent);
