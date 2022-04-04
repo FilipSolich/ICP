@@ -17,6 +17,7 @@
 
 #include "cdclass.hh"
 #include "cdclasswidget.hh"
+#include "cdclassproperty.hh"
 
 CDClassWidget::CDClassWidget(CDClass *cdClass, QWidget *parent)
     : QWidget{parent},
@@ -63,33 +64,12 @@ CDClassWidget::CDClassWidget(CDClass *cdClass, QWidget *parent)
     connect(delAttrBtn, &QPushButton::clicked, this, &CDClassWidget::delAttributeSlot);
     connect(addMethBtn, &QPushButton::clicked, this, &CDClassWidget::addMethodSlot);
     connect(delMethBtn, &QPushButton::clicked, this, &CDClassWidget::delMethodSlot);
-    connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot);
+    connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot); // TODO maybe delete
 }
 
 void CDClassWidget::addAttribute(QString visibility, QString dt, QString name)
 {
-    QWidget *attr = new QWidget(this);
-
-    QHBoxLayout *layout= new QHBoxLayout(attr);
-
-    QComboBox *visibilityBox = new QComboBox(attr);
-    visibilityBox ->addItems(this->visibility);
-    visibilityBox->setCurrentText(visibility);
-
-    QLineEdit *dtLine = new QLineEdit(dt, attr);
-    dtLine->setObjectName("dt");
-
-    QLabel *divider = new QLabel(":", attr);
-
-    QLineEdit *nameLine = new QLineEdit(name, attr);
-    nameLine->setObjectName("name");
-
-    layout->addWidget(visibilityBox);
-    layout->addWidget(dtLine);
-    layout->addWidget(divider);
-    layout->addWidget(nameLine);
-
-    attr->setLayout(layout);
+    CDClassProperty *attr = new CDClassProperty(CDClassProperty::Type::Attribute, visibility, dt, name, this);
 
     this->layout->insertWidget(1 + attributes.size(), attr);
     attributes.push_back(attr);
@@ -103,7 +83,7 @@ void CDClassWidget::addAttribute(QString visibility, QString dt, QString name)
 void CDClassWidget::delAttribute()
 {
     if (attributes.size() > 0) {
-        QWidget *w = attributes.last();
+        CDClassProperty *w = attributes.last();
         attributes.pop_back();
         this->layout->removeWidget(w);
         delete w;
@@ -118,28 +98,7 @@ void CDClassWidget::delAttribute()
 
 void CDClassWidget::addMethod(QString visibility, QString dt, QString name)
 {
-    QWidget *meth = new QWidget(this);
-
-    QHBoxLayout *layout = new QHBoxLayout(meth);
-
-    QComboBox *visibilityBox = new QComboBox(meth);
-    visibilityBox ->addItems(this->visibility);
-    visibilityBox->setCurrentText(visibility);
-
-    QLineEdit *returnDt = new QLineEdit(dt, meth);
-    returnDt->setObjectName("dt");
-
-    QLabel *divider = new QLabel(":", meth);
-
-    QLineEdit *nameLine = new QLineEdit(name, meth);
-    nameLine->setObjectName("name");
-
-    layout->addWidget(visibilityBox);
-    layout->addWidget(returnDt);
-    layout->addWidget(divider);
-    layout->addWidget(nameLine);
-
-    meth->setLayout(layout);
+    CDClassProperty *meth = new CDClassProperty(CDClassProperty::Type::Method, visibility, dt, name, this);
 
     this->layout->insertWidget(this->layout->count() - 1, meth);
     methods.push_back(meth);
@@ -186,6 +145,7 @@ void CDClassWidget::delMethodSlot()
     delMethod();
 }
 
+// TODO maybe delete
 void CDClassWidget::nameUpdateSlot(const QString &text)
 {
     cdClass->cls->setName(text);

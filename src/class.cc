@@ -12,8 +12,7 @@ Class::~Class()
 {
     delete cdClass;
     // TODO add delete sdClass
-    int idx = diagram->classes.indexOf(this);
-    diagram->classes.remove(idx);
+    diagram->classes.remove(diagram->classes.indexOf(this));
 }
 
 void Class::setName(QString newName)

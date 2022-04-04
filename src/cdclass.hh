@@ -19,12 +19,20 @@ public:
     QGraphicsProxyWidget *proxy = nullptr;
 
     QVector<CDSocket *> sockets;
+    QVector<CDClass *> inherits;
+    QVector<CDClass *> inheritedBy;
 
     CDClass(Class *cls, CDEditor *editor, QPointF pos);
     ~CDClass();
 
     bool addAttribute(QString visibility, QString dt, QString name);
     bool addMethod(QString visibility, QString dt, QString name);
+
+    void setHeredity(CDClass *cls, bool parent);
+    void removeHeredity(CDClass *cls, bool parent);
+
+    void checkHeredity();
+    QSet<CDClassProperty *> compareMethods(CDClass *child);
 
     void redrawSockets();
 };

@@ -15,6 +15,7 @@
 #include <QVBoxLayout>
 
 class CDClass;
+class CDClassProperty;
 
 class CDClassWidget : public QWidget
 {
@@ -27,8 +28,8 @@ public:
 
     CDClass *cdClass = nullptr;
     QLineEdit *name = nullptr;
-    QVector<QWidget *> attributes;
-    QVector<QWidget *> methods;
+    QVector<CDClassProperty *> attributes;
+    QVector<CDClassProperty *> methods;
 
     CDClassWidget(CDClass *cdClass, QWidget *parent = nullptr);
 
@@ -42,7 +43,7 @@ public slots:
     void delAttributeSlot();
     void addMethodSlot();
     void delMethodSlot();
-    void nameUpdateSlot(const QString &text);
+    void nameUpdateSlot(const QString &text); // TODO maybe delete
 };
 
 #endif // CDCLASSWIDGET_H

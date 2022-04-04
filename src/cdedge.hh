@@ -14,7 +14,7 @@ public:
     enum class EdgeEndType {Start, End};
     enum class Type {Association, Aggregation, Composition, Generalization};
 
-    static const int C_DISTANCE = 30;
+    static const int C_DISTANCE = 70;
 
     std::map<QString, Type> typeMap = {
         {"Association", Type::Association},

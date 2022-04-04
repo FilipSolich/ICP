@@ -69,6 +69,5 @@ void CDSocket::redraw()
 
 void CDSocket::removeEdge(CDEdge *edge)
 {
-    int idx = edges.indexOf(edge);
-    edges.remove(idx);
+    edges.remove(edges.indexOf(edge));
 }

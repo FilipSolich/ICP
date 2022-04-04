@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
     connect(ui->actionAdd_class, &QAction::triggered, this, &MainWindow::addClass);
-    connect(ui->actionRemove_class, &QAction::triggered, this, &MainWindow::removeSelected);
+    connect(ui->actionRemove_selected, &QAction::triggered, this, &MainWindow::removeSelected);
 }
 
 MainWindow::~MainWindow()

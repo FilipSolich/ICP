@@ -4,8 +4,6 @@
 #include "cdeditorscene.hh"
 #include "itemtype.hh"
 
-#include <QDebug>
-
 CDEditorScene::CDEditorScene(CDEditor *editor)
     : editor{editor}
 {}

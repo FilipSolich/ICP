@@ -64,20 +64,20 @@ QString FileProcessor::genClasses()
         addElement(line, QString::number(cls->item->pos().y()));
 
         // Add attributes
-        for (QWidget *attr : qAsConst(cls->widget->attributes)) {
-            addElement(line, attr->findChild<QComboBox *>()->currentText());
-            addElement(line, attr->findChild<QLineEdit *>("dt")->text());
-            addElement(line, attr->findChild<QLineEdit *>("name")->text());
-        }
+        ///for (QWidget *attr : qAsConst(cls->widget->attributes)) {
+        ///    addElement(line, attr->findChild<QComboBox *>()->currentText());
+        ///    addElement(line, attr->findChild<QLineEdit *>("dt")->text());
+        ///    addElement(line, attr->findChild<QLineEdit *>("name")->text());
+        ///}
 
         addElement(line, ":");
 
         // Add methods
-        for (QWidget *meth : qAsConst(cls->widget->methods)) {
-            addElement(line, meth->findChild<QComboBox *>()->currentText());
-            addElement(line, meth->findChild<QLineEdit *>("dt")->text());
-            addElement(line, meth->findChild<QLineEdit *>("name")->text());
-        }
+        //for (QWidget *meth : qAsConst(cls->widget->methods)) {
+        //    addElement(line, meth->findChild<QComboBox *>()->currentText());
+        //    addElement(line, meth->findChild<QLineEdit *>("dt")->text());
+        //    addElement(line, meth->findChild<QLineEdit *>("name")->text());
+        //}
 
         addLine(text, line);
     }

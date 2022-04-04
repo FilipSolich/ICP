@@ -22,9 +22,15 @@ CDEdge::~CDEdge()
     item->scene()->removeItem(item);
     delete item;
     if (startSocket) {
+        if (type == Type::Generalization) {
+            startSocket->cdClass->removeHeredity(endSocket->cdClass, true);
+        }
         startSocket->removeEdge(this);
     }
     if (endSocket) {
+        if (type == Type::Generalization) {
+            endSocket->cdClass->removeHeredity(startSocket->cdClass, false);
+        }
         endSocket->removeEdge(this);
     }
 }
