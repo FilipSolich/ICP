@@ -5,7 +5,7 @@
 #include "sdedge.h"
 
 class SDClass;
-
+class SDEdge;
 class SDSocket
 {
 

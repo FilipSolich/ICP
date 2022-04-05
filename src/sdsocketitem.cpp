@@ -23,7 +23,7 @@ void SDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
             sd_socket->edges.push_back(editor->currentEdge);
             editor->currentEdge->setSocket(sd_socket, SDEdge::EdgeEndType::End);
         } else {
-            sd_socket->createEdge();
+            sd_socket->CreateEdge(); //tady
         }
     }
 

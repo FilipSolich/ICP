@@ -27,19 +27,7 @@ SequenceEditor::SequenceEditor(QWidget *parent, Diagram *diagram)
     QVBoxLayout *seq_layout = new QVBoxLayout;
     QWidget *seqBtns = new QWidget(this);
 
-    QGridLayout *seq_layout_btns = new QGridLayout(seqBtns);
 
-    QPushButton *remove_btn = new QPushButton("-",seqBtns);
-
-
-
-    seq_layout_btns->addWidget(remove_btn,0,1);
-
-    seq_layout_btns->setColumnStretch(0,1);
-    seq_layout_btns->setColumnStretch(1,1);
-    seq_layout_btns->setColumnStretch(2,30);
-
-    seqBtns->setLayout(seq_layout_btns);
     this->setLayout(seq_layout);
 
     sequence_scene = new SDEditorScene(this);
@@ -49,15 +37,8 @@ SequenceEditor::SequenceEditor(QWidget *parent, Diagram *diagram)
     seq_layout->addWidget(seqBtns);
     seq_layout->addWidget(sequence_view);
 
-     QVector<QString> v_names(1);
-     makeSequence(v_names);
-
-
-     connect(remove_btn,&QPushButton::clicked,this,&SequenceEditor::addSeqSlot);
-
-
 }
-
+/*
 void SequenceEditor::makeSequence(QVector<QString> names)
 {
 
@@ -71,12 +52,8 @@ void SequenceEditor::makeSequence(QVector<QString> names)
         }
     }
 }
+*/
 
-void SequenceEditor::add()
-{
-    QVector<QString> v_names(1);
-    makeSequence(v_names);
-}
 void SequenceEditor::remove()
 {
     for(int i = 0; i<v_rect_diagrams.size();++i)
@@ -97,15 +74,6 @@ void SequenceEditor::remove()
 }
 
 
-
-void SequenceEditor::addSeqSlot(void)
-{
-    add();
-}
-void SequenceEditor::removeSeqSlot(void)
-{
-    remove();
-}
 
 /*
  * TODO

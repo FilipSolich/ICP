@@ -27,11 +27,7 @@ public:
 
 
     void remove();
-    void add();
 
-public slots:
-    void addSeqSlot(void);
-    void removeSeqSlot(void);
 
 
 };

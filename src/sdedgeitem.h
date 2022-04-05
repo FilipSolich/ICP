@@ -8,7 +8,7 @@ class SDEdgeItem : public QGraphicsPathItem
 {
 public:
     SDEdge *sdEdge;
-    SDEdgeItem(SDEdge *sdEdge);
+    SDEdgeItem(SDEdge *sdEdge,QPointF start_point);
 
     int type() const { return ItemTypeSDEdge; };
 };

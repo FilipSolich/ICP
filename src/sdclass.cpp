@@ -11,7 +11,7 @@
 
 
 
-SDClass::SDClass(QString name, SequenceEditor *diagram, int position,Class *cls)
+SDClass::SDClass(QString name, SequenceEditor *diagram, QPointF position,Class *cls)
     : diagram{diagram}, cls{cls}
 {
     item = new Sequenceitem(this);
@@ -20,7 +20,7 @@ SDClass::SDClass(QString name, SequenceEditor *diagram, int position,Class *cls)
     this->position = position;
     seq_proxy = diagram->sequence_scene->addWidget(widget);
     seq_proxy->setParentItem(item);
-    item->setPos(position,0);
+    item->setPos(position);
 
     for (int i = 0 ; i < 18; ++i)
     {

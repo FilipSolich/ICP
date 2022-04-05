@@ -1,8 +1,9 @@
 #include "sdsocket.h"
 #include "sdclass.h"
-
-
+#include "diagram.hh"
+#include "class.hh"
 SDSocket::SDSocket(int position, SDClass *parent_sequence, QGraphicsItem *parentItem)
+    : parent_sequence{parent_sequence}
 {
     this->position = position;
     this->parent_sequence = parent_sequence;
@@ -73,7 +74,7 @@ QPointF SDSocket::getSocketCenter(void)
 
 void SDSocket::CreateEdge()
 {
-    edges.push_back(new SDEdge(parent_sequence->cls))
+    edges.push_back(new SDEdge(parent_sequence->cls->diagram->mainWindow->edgeComboBox->currentText(),this));
 }
 /*void RemoveEdge(SDEdge *edge){
 

@@ -34,7 +34,7 @@ public:
 
     QVector<Class *> classes; /** Pointers on all classes */
 
-    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, MainWindow *mainWindow);
+    Diagram(CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, MainWindow *mainWindow);
     ~Diagram();
 
     /**

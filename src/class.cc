@@ -12,13 +12,13 @@
 #include "sequenceeditor.hh"
 #include "sdclass.h"
 
-Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QString name, QPointF pos)
+Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QString name, QPointF pos)
     : name{name},
       diagram{diagram}
 {
     cdClass = new CDClass(this, cdEditor, pos);
     for(SequenceEditor *sq_i : *sqEditors){
-        new SDClass("jmeno",sq_i);
+        new SDClass("jmeno",sq_i,pos,this);
     }
 }
 

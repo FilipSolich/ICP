@@ -32,12 +32,12 @@ public:
     QPointF c2;
 
     SDEdge(QString type="async", SDSocket *s1 = nullptr, SDSocket *s2 = nullptr );
-
+    ~SDEdge();
     void setSocket(SDSocket *socket, EdgeEndType type);
     void setPath();
     void setMousePos(QPointF pos);
     void socketMoved(SDSocket *s);
-    void setPoints(EdgeEndType type, QPointF point, SDSocket::Position socPos);
+    void setPoints(EdgeEndType type, QPointF point);
 
 };
 
