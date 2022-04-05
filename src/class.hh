@@ -21,8 +21,10 @@ class SequenceDiagram;
 /**
  * This class encapsulate data about diagram "class" in all editors instances.
  */
-class Class
+class Class : public QObject
 {
+    Q_OBJECT
+
 public:
     QString name;
     Diagram *diagram = nullptr;
@@ -39,6 +41,8 @@ public:
      * \param pos Position of class in scene.
      */
     Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QString name = "", QPointF pos = {0, 0});
+
+    /** Destructor */
     ~Class();
 
     /**
@@ -54,6 +58,9 @@ public:
      * \return Class name.
      */
     QString getName();
+
+signals:
+    void setNameSignal(const QString &newName);
 };
 
 #endif // CLASS_HH

@@ -65,6 +65,7 @@ CDClassWidget::CDClassWidget(CDClass *cdClass, QWidget *parent)
     connect(addMethBtn, &QPushButton::clicked, this, &CDClassWidget::addMethodSlot);
     connect(delMethBtn, &QPushButton::clicked, this, &CDClassWidget::delMethodSlot);
     connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot);
+    connect(cdClass->cls, &Class::setNameSignal, this, &CDClassWidget::newNameSlot);
 }
 
 void CDClassWidget::addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name)
@@ -135,4 +136,11 @@ void CDClassWidget::delMethodSlot()
 void CDClassWidget::nameUpdateSlot(const QString &text)
 {
     cdClass->cls->setName(text);
+}
+
+void CDClassWidget::newNameSlot(const QString &name)
+{
+    if (this->name->text() != name) {
+        this->name->setText(name);
+    }
 }

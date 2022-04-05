@@ -27,7 +27,10 @@ Class::~Class()
 
 void Class::setName(QString newName)
 {
-    name = newName;
+    if (name != newName) {
+        name = newName;
+        emit setNameSignal(name);
+    }
 }
 
 QString Class::getName()

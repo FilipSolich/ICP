@@ -86,6 +86,11 @@ public slots:
      * Slot for updating name of class.
      */
     void nameUpdateSlot(const QString &text);
+
+    /**
+     * Slot for name change.
+     */
+    void newNameSlot(const QString &name);
 };
 
 #endif // CDCLASSWIDGET_H
