@@ -1,3 +1,12 @@
+/**
+ * \file cdedgeitem.cc
+ *
+ * \brief Source code file for `CDEdgeItem` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QPen>
 
 #include "cdedge.hh"

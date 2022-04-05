@@ -1,3 +1,12 @@
+/**
+ * \file cdedge.cc
+ *
+ * \brief Source code file for `CDEdge` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QGraphicsScene>
 
 #include "cdedge.hh"

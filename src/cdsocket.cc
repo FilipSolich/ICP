@@ -1,3 +1,12 @@
+/**
+ * \file cdsocket.cc
+ *
+ * \brief Source code file for `CDSocket` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include "cdclass.hh"
 #include "cdedge.hh"
 #include "cdsocket.hh"

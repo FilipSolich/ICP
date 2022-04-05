@@ -1,7 +1,7 @@
 /**
  * \file diagram.hh
  *
- * \brief Header file for Diagram class.
+ * \brief Header file for `Diagram` class.
  *
  * \date 4. 4. 2022
  * \author Filip Solich

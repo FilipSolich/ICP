@@ -1,3 +1,12 @@
+/**
+ * \file classproperty.cc
+ *
+ * \brief Source code file for `ClassProperty` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QLabel>

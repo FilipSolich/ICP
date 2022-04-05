@@ -1,7 +1,7 @@
 /**
  * \file class.hh
  *
- * \brief Header file for Class class.
+ * \brief Header file for `Class` class.
  *
  * \date 4. 4. 2022
  * \author Filip Solich
@@ -30,11 +30,11 @@ public:
     // TODO Add SDClass
 
     /**
-     * Constructor create new class in CDEditor and all SDEditors.
+     * Constructor create new class in `CDEditor` and all `SDEditor`.
      *
-     * \param diagram Pointer to diagram.
-     * \param cdEditor Pointer to CDEditor.
-     * \param sqEditor Pointer to SequenceDiagram.
+     * \param diagram Pointer to `Diagram``.
+     * \param cdEditor Pointer to `CDEditor`.
+     * \param sqEditor Pointer to `SequenceDiagram`.
      * \param name Name of class.
      * \param pos Position of class in scene.
      */

@@ -1,9 +1,9 @@
 /**
- * \file class.hh
+ * \file classwidget.hh
  *
- * \brief Header file for Class class.
+ * \brief Header file for `ClassWidget` class.
  *
- * \date 6. 4. 2022
+ * \date 5. 4. 2022
  * \author Filip Solich
  */
 
@@ -11,12 +11,16 @@
 #define CDCLASSWIDGET_H
 
 #include <QLineEdit>
-#include <QWidget>
 #include <QVBoxLayout>
+#include <QWidget>
+
+#include "cdclassproperty.hh"
 
 class CDClass;
-class CDClassProperty;
 
+/*
+ * This class represent class widget in Class diagram.
+ */
 class CDClassWidget : public QWidget
 {
     Q_OBJECT
@@ -31,18 +35,56 @@ public:
     QVector<CDClassProperty *> attributes;
     QVector<CDClassProperty *> methods;
 
+    /**
+     * Constructor create new class widget in `CDEditor`.
+     *
+     * \param cdClass Pointer to `CDClass`.
+     * \param parent Pointer to parent widget.
+     */
     CDClassWidget(CDClass *cdClass, QWidget *parent = nullptr);
 
-    void addAttribute(QString visibility = "+", QString dt = "", QString name = "");
-    void delAttribute();
-    void addMethod(QString visibility = "+", QString dt = "", QString name = "");
-    void delMethod();
+    /**
+     * Add property to this widget.
+     *
+     * \param type Type of property (attribute or method).
+     * \param visibility Visibility of property (public, private, protected, ...).
+     * \param dtype Data type of property.
+     * \param name Name of property.
+     */
+    void addProperty(CDClassProperty::Type type, QString visibility = "+", QString dt = "", QString name = "");
+    
+    /**
+     * Remove property from this widget.
+     *
+     * \param type Type of property (attribute or method).
+     */
+    void delProperty(CDClassProperty::Type type);
 
 public slots:
+
+    /**
+     * Slot for adding new attribute to this widget.
+     */
     void addAttributeSlot();
+
+    /**
+     * Slot for removing attribute from this widget.
+     */
     void delAttributeSlot();
+
+    /**
+     * Slot for adding new method to this widget.
+     */
     void addMethodSlot();
+
+    /**
+     * Slot for removing method from this widget.
+     */
     void delMethodSlot();
+
+    /**
+     * Slot for updating name of class.
+     */
     void nameUpdateSlot(const QString &text);
 };
 

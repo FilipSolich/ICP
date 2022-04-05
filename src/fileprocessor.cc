@@ -3,7 +3,7 @@
  *
  * \brief Source code for FileProcessor class.
  *
- * \date 10. 3. 2022
+ * \date 5. 4. 2022
  * \author Filip Solich
  */
 
@@ -147,7 +147,7 @@ void FileProcessor::createClass(QJsonObject data)
     for (QJsonValue const &propVal: qAsConst(property)) {
         QJsonObject prop = propVal.toObject();
         CDClassProperty::Type type = prop["attribute"].toBool() ? CDClassProperty::Type::Attribute : CDClassProperty::Type::Method;
-        cls->addProperty(type, prop["visibility"].toString(), prop["dt"].toString(), prop["name"].toString());
+        cls->widget->addProperty(type, prop["visibility"].toString(), prop["dt"].toString(), prop["name"].toString());
     }
 }
 

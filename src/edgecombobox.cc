@@ -1,3 +1,12 @@
+/**
+ * \file edgecombobox.cc
+ *
+ * \brief Source code file for `EdgeComboBox` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include "edgecombobox.hh"
 
 EdgeComboBox::EdgeComboBox(QWidget *parent)

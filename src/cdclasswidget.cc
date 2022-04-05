@@ -1,9 +1,9 @@
 /**
- * \file class.cc
+ * \file classwidget.cc
  *
- * \brief Source code for Class class.
+ * \brief Source code for `ClassWidget` class.
  *
- * \date 15. 4. 2022
+ * \date 5. 4. 2022
  * \author Filip Solich
  */
 
@@ -67,41 +67,17 @@ CDClassWidget::CDClassWidget(CDClass *cdClass, QWidget *parent)
     connect(name, &QLineEdit::textChanged, this, &CDClassWidget::nameUpdateSlot);
 }
 
-void CDClassWidget::addAttribute(QString visibility, QString dt, QString name)
+void CDClassWidget::addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name)
 {
-    CDClassProperty *attr = new CDClassProperty(CDClassProperty::Type::Attribute, visibility, dt, name, this);
+    CDClassProperty *prop = new CDClassProperty(type, visibility, dt, name, this);
 
-    this->layout->insertWidget(1 + attributes.size(), attr);
-    attributes.push_back(attr);
-
-    QCoreApplication::processEvents(QEventLoop::AllEvents);
-    this->cdClass->item->setRect(rect());
-
-    cdClass->redrawSockets();
-}
-
-void CDClassWidget::delAttribute()
-{
-    if (attributes.size() > 0) {
-        CDClassProperty *w = attributes.last();
-        attributes.pop_back();
-        this->layout->removeWidget(w);
-        delete w;
-
-        adjustSize();
-
-        QCoreApplication::processEvents(QEventLoop::AllEvents);
-        this->cdClass->item->setRect(rect());
-        cdClass->redrawSockets();
+    if (type == CDClassProperty::Type::Attribute) {
+        this->layout->insertWidget(1 + attributes.size(), prop);
+        attributes.push_back(prop);
+    } else {
+        this->layout->insertWidget(this->layout->count() - 1, prop);
+        methods.push_back(prop);
     }
-}
-
-void CDClassWidget::addMethod(QString visibility, QString dt, QString name)
-{
-    CDClassProperty *meth = new CDClassProperty(CDClassProperty::Type::Method, visibility, dt, name, this);
-
-    this->layout->insertWidget(this->layout->count() - 1, meth);
-    methods.push_back(meth);
 
     QCoreApplication::processEvents(QEventLoop::AllEvents);
     this->cdClass->item->setRect(rect());
@@ -109,11 +85,22 @@ void CDClassWidget::addMethod(QString visibility, QString dt, QString name)
     cdClass->redrawSockets();
 }
 
-void CDClassWidget::delMethod()
+void CDClassWidget::delProperty(CDClassProperty::Type type)
 {
-    if (methods.size() > 0) {
-        QWidget *w = methods.last();
-        methods.pop_back();
+    CDClassProperty *w = nullptr;
+    if (type == CDClassProperty::Type::Attribute) {
+        if (attributes.size() > 0) {
+            w = attributes.last();
+            attributes.pop_back();
+        }
+    } else {
+        if (methods.size() > 0) {
+            w = methods.last();
+            methods.pop_back();
+        }
+    }
+
+    if (w) {
         this->layout->removeWidget(w);
         delete w;
 
@@ -127,22 +114,22 @@ void CDClassWidget::delMethod()
 
 void CDClassWidget::addAttributeSlot()
 {
-    addAttribute();
+    addProperty(CDClassProperty::Type::Attribute);
 }
 
 void CDClassWidget::delAttributeSlot()
 {
-    delAttribute();
+    delProperty(CDClassProperty::Type::Attribute);
 }
 
 void CDClassWidget::addMethodSlot()
 {
-    addMethod();
+    addProperty(CDClassProperty::Type::Method);
 }
 
 void CDClassWidget::delMethodSlot()
 {
-    delMethod();
+    delProperty(CDClassProperty::Type::Method);
 }
 
 void CDClassWidget::nameUpdateSlot(const QString &text)

@@ -1,7 +1,7 @@
 /**
  * \file class.cc
  *
- * \brief Source code for Class class.
+ * \brief Source code for `Class` class.
  *
  * \date 4. 4. 2022
  * \author Filip Solich

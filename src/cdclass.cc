@@ -1,5 +1,13 @@
+/**
+ * \file cdclass.cc
+ *
+ * \brief Source code file for `CDClass` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QGraphicsProxyWidget>
-#include <QComboBox>
 
 #include "cdclass.hh"
 #include "cdclassitem.hh"
@@ -37,15 +45,6 @@ CDClass::~CDClass()
     editor->scene->removeItem(item);
     delete widget;
     delete item;
-}
-
-void CDClass::addProperty(CDClassProperty::Type type, QString visibility, QString dt, QString name)
-{
-    if (type == CDClassProperty::Type::Attribute) {
-        widget->addAttribute(visibility, dt, name);
-    } else {
-        widget->addMethod(visibility, dt, name);
-    }
 }
 
 void CDClass::setHeredity(CDClass *cls, bool parent)

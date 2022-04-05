@@ -1,3 +1,12 @@
+/**
+ * \file cdsocketitem.cc
+ *
+ * \brief Source code file for `CDSocketItem` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QGraphicsSceneMouseEvent>
 
 #include "cdeditor.hh"
@@ -9,6 +18,7 @@ CDSocketItem::CDSocketItem(CDSocket *cdSocket, QGraphicsItem *parentItem)
 {
     setRect(0, 0, cdSocket->_width, cdSocket->_heigth);
     setPos(cdSocket->calculateNewPos());
+    setBrush(QBrush(Qt::white));
 }
 
 void CDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
