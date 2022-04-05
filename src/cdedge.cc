@@ -1,12 +1,28 @@
+/**
+ * \file cdedge.cc
+ *
+ * \brief Source code file for `CDEdge` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QGraphicsScene>
 
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
 #include "cdeditor.hh"
 
+QMap<CDEdge::Type, QString> CDEdge::typeMap = {
+    {CDEdge::Type::Association, "Association"},
+    {CDEdge::Type::Aggregation, "Aggregation"},
+    {CDEdge::Type::Composition, "Composition"},
+    {CDEdge::Type::Generalization, "Generalization"},
+};
+
 CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
 {
-    this->type = typeMap[type];
+    this->type = CDEdge::typeMap.key(type);
 
     item = new CDEdgeItem(this);
     s1->item->scene()->addItem(item);
@@ -14,7 +30,9 @@ CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
     setSocket(s1, EdgeEndType::Start);
     setSocket(s2, EdgeEndType::End);
 
-    this->startSocket->cdClass->editor->currentEdge = this;
+    if (!s2) {
+        this->startSocket->cdClass->editor->currentEdge = this;
+    }
 }
 
 CDEdge::~CDEdge()
@@ -22,9 +40,15 @@ CDEdge::~CDEdge()
     item->scene()->removeItem(item);
     delete item;
     if (startSocket) {
+        if (type == Type::Generalization) {
+            startSocket->cdClass->removeHeredity(endSocket->cdClass, true);
+        }
         startSocket->removeEdge(this);
     }
     if (endSocket) {
+        if (type == Type::Generalization) {
+            endSocket->cdClass->removeHeredity(startSocket->cdClass, false);
+        }
         endSocket->removeEdge(this);
     }
 }

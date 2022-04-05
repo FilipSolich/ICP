@@ -1,8 +1,31 @@
+/**
+ * \file cdsocket.cc
+ *
+ * \brief Source code file for `CDSocket` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include "cdclass.hh"
 #include "cdedge.hh"
 #include "cdsocket.hh"
 #include "cdsocketitem.hh"
 #include "diagram.hh"
+
+QMap<CDSocket::Position, QString> CDSocket::positionMap = {
+    {CDSocket::Position::Top, "Top"},
+    {CDSocket::Position::Right, "Right"},
+    {CDSocket::Position::Bottom, "Bottom"},
+    {CDSocket::Position::Left, "Left"},
+};
+
+QMap<CDSocket::Position, int> CDSocket::positionIndexMap = {
+    {CDSocket::Position::Top, 0},
+    {CDSocket::Position::Right, 1},
+    {CDSocket::Position::Bottom, 2},
+    {CDSocket::Position::Left, 3},
+};
 
 CDSocket::CDSocket(Position position, CDClass *cdClass)
     : position{position},
@@ -69,6 +92,5 @@ void CDSocket::redraw()
 
 void CDSocket::removeEdge(CDEdge *edge)
 {
-    int idx = edges.indexOf(edge);
-    edges.remove(idx);
+    edges.remove(edges.indexOf(edge));
 }

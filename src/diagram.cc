@@ -1,7 +1,7 @@
 /**
  * \file diagram.cc
  *
- * \brief Source code for Diagram class.
+ * \brief Source code for `Diagram` class.
  *
  * \date 4. 4. 2022
  * \author Filip Solich
@@ -16,8 +16,17 @@ Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, MainW
       mainWindow{mainWindow}
 {}
 
-void Diagram::addClass(QPointF pos)
+Diagram::~Diagram()
 {
-    Class *cls = new Class(this, cdEditor, sqEditors, pos);
+    QVector<Class *> test = classes;
+    for (Class *cls : qAsConst(test)) {
+        delete cls;
+    }
+}
+
+Class *Diagram::addClass(QString name, QPointF pos)
+{
+    Class *cls = new Class(this, cdEditor, sqEditors, name, pos);
     classes.push_back(cls);
+    return cls;
 }

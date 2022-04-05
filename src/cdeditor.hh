@@ -1,9 +1,9 @@
 /**
- * \file classdiagrameditor.hh
+ * \file cdeditor.hh
  *
- * \brief ClassDiagramEditor class representing editor for class diagrams.
+ * \brief `CDEditor` class representing editor for class diagrams.
  *
- * \date 8. 4. 2022
+ * \date 5. 4. 2022
  * \author Filip Solich
  */
 
@@ -17,6 +17,9 @@
 
 class CDEditorScene;
 
+/**
+ * Widget for class diagram editor.
+ */
 class CDEditor : public QWidget
 {
 public:
@@ -25,6 +28,11 @@ public:
 
     CDEdge *currentEdge = nullptr;
 
+    /**
+     * Constructor.
+     *
+     * \param parent Pointer to parent widget.
+     */
     CDEditor(QWidget *parent = nullptr);
 };
 

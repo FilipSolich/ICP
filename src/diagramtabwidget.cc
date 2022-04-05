@@ -1,7 +1,7 @@
 /**
  * \file diagramtabwidget.cc
  *
- * \brief Source code for DiagramTabWidget class.
+ * \brief Source code for `DiagramTabWidget` class.
  *
  * \date 4. 4. 2022
  * \author Filip Solich

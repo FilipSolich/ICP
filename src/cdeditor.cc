@@ -1,18 +1,14 @@
 /**
- * \file classdiagrameditor.cc
+ * \file cdeditor.cc
  *
- * \brief Source code for ClassDiagramEditor.
+ * \brief Source code for `CDEditor`.
  *
- * \date 8. 4. 2022
+ * \date 5. 4. 2022
  * \author Filip Solich
  */
 
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QGraphicsProxyWidget>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QGraphicsRectItem>
 
 #include "cdclass.hh"
 #include "cdeditor.hh"

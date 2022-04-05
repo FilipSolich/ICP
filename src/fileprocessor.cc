@@ -3,177 +3,177 @@
  *
  * \brief Source code for FileProcessor class.
  *
- * \date 10. 3. 2022
+ * \date 5. 4. 2022
  * \author Filip Solich
  */
 
+#include <QCoreApplication>
 #include <QComboBox>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QSet>
 #include <QTextStream>
 
 #include "cdclasswidget.hh"
+#include "cdclassproperty.hh"
 #include "cdeditor.hh"
+#include "cdedge.hh"
 #include "diagram.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
-
-#include <QDebug>
 
 QString FileProcessor::generateFile(Diagram *diagram)
 {
     this->diagram = diagram;
 
-    QString text;
-    text += genClasses();
-    text += genSequences();
-    return text;
+    QJsonObject data;
+    data["classDiagram"] = genCD();
+    //data.insert("sequenceDiagram", genSD()); // TODO uncoment
+
+    QJsonDocument doc{data};
+    return QString{doc.toJson(QJsonDocument::Indented)};
 }
 
-void FileProcessor::addLine(QString &text, QString const &increment)
+QJsonObject FileProcessor::genCD()
 {
-    text += increment;
-    text += "\n";
-}
+    QJsonObject data;
 
-void FileProcessor::addElement(QString &text, QString const &increment, bool leadingSpace)
-{
-    if (leadingSpace) {
-        text += " ";
-    }
-    text += increment;
-}
-
-QString FileProcessor::genClasses()
-{
-    QString text;
-
-    addLine(text, "start class");
-
-    // Add class
-    for (Class *clss : qAsConst(diagram->classes)) {
-        CDClass *cls = clss->cdClass;
-        QString line;
-
-        // Add keyword
-        addElement(line, "class", false);
-
-        // Add class name
-        addElement(line, "\"" + cls->cls->getName() + "\"");
-
-        // Add class position
-        addElement(line, QString::number(cls->item->pos().x()));
-        addElement(line, QString::number(cls->item->pos().y()));
-
-        // Add attributes
-        for (QWidget *attr : qAsConst(cls->widget->attributes)) {
-            addElement(line, attr->findChild<QComboBox *>()->currentText());
-            addElement(line, attr->findChild<QLineEdit *>("dt")->text());
-            addElement(line, attr->findChild<QLineEdit *>("name")->text());
-        }
-
-        addElement(line, ":");
-
-        // Add methods
-        for (QWidget *meth : qAsConst(cls->widget->methods)) {
-            addElement(line, meth->findChild<QComboBox *>()->currentText());
-            addElement(line, meth->findChild<QLineEdit *>("dt")->text());
-            addElement(line, meth->findChild<QLineEdit *>("name")->text());
-        }
-
-        addLine(text, line);
-    }
-
-    //TODO
-    // Add connections
-
-    addLine(text, "end class");
-
-    return text;
-}
-
-QString FileProcessor::genSequences()
-{
-    QString text;
-
-    addLine(text, "start sequence");
-
+    QSet<CDEdge *> edgesSet;
+    QJsonArray classes;
     for (Class *cls : qAsConst(diagram->classes)) {
-        addLine(text, "participant " + cls->cdClass->widget->name->text());
+        classes.push_back(genCDClass(cls->cdClass));
+
+        for (CDSocket *socket : qAsConst(cls->cdClass->sockets)) {
+            for (CDEdge *edge : qAsConst(socket->edges)) {
+                edgesSet.insert(edge);
+            }
+        }
     }
+    data["classes"] = classes;
 
+    QJsonArray edges;
+    for (CDEdge *edge : edgesSet) {
+        edges.push_back(genCDEdge(edge));
+    }
+    data["edges"] = edges;
+
+    return data;
+}
+
+QJsonObject FileProcessor::genSD()
+{
     // TODO
-    // Add connections
+}
 
-    addLine(text, "end sequence");
+QJsonObject FileProcessor::genCDClass(CDClass *cls)
+{
+    QJsonObject data;
 
-    return text;
+    data["name"] = cls->widget->name->text();
+    data["x"] = cls->item->scenePos().x();
+    data["y"] = cls->item->scenePos().y();
+
+    QJsonArray property;
+    QVector<CDClassProperty *> vec = cls->widget->attributes + cls->widget->methods;
+    for (CDClassProperty *prop: qAsConst(vec)) {
+        property.push_back(genCDProperty(prop));
+    }
+    data["property"] = property;
+
+    return data;
+}
+
+QJsonObject FileProcessor::genCDProperty(CDClassProperty *property)
+{
+    QJsonObject data;
+
+    data["visibility"] = property->visibility->currentText();
+    data["dt"] = property->dt->text();
+    data["name"] = property->name->text();
+    data["attribute"] = property->type == CDClassProperty::Type::Attribute;
+
+    return data;
+}
+
+QJsonObject FileProcessor::genCDEdge(CDEdge *edge)
+{
+    QJsonObject data;
+
+    data["type"] = CDEdge::typeMap[edge->type];
+    data["startClass"] = edge->startSocket->cdClass->cls->getName();
+    data["endClass"] = edge->endSocket->cdClass->cls->getName();
+    data["startSocket"] = CDSocket::positionMap[edge->startSocket->position];
+    data["endSocket"] = CDSocket::positionMap[edge->endSocket->position];
+
+    return data;
 }
 
 Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
 {
-    QString line;
-    QTextStream stream{text};
+    diagram = new Diagram(tabs->classTab, &tabs->sequenceTabs, mainWindow);
 
-    CDEditor *classEditor = tabs->classTab;
-    QVector<SequenceEditor *> *sequenceEditors = &(tabs->sequenceTabs);
+    QJsonObject data = QJsonDocument::fromJson(text->toUtf8()).object();
 
-    ParseState state = ParseState::NoState;
-    while (stream.readLineInto(&line)) {
-        if (line == "start class" && state == ParseState::NoState) {
-            state = ParseState::Classes;
-        } else if (line == "end class" && state == ParseState::Classes) {
-            state = ParseState::NoState;
-        } else if (line == "start sequence" && state == ParseState::Classes) {
-            state = ParseState::Sequences;
-        } else if (line == "end sequence" && state == ParseState::Sequences) {
-            state = ParseState::NoState;
-        } else {
-            if (state == ParseState::Classes) {
-                createClass(classEditor, line); // TODO: check for return
-            }
-        }
-    }
+    parseCD(data["classDiagram"].toObject());
 
-    return new Diagram(nullptr, nullptr, mainWindow); // must be valid editors
+    // TODO add parse SD
+
+    return diagram;
 }
 
-int FileProcessor::createClass(CDEditor *classEditor, QString &line)
+void FileProcessor::parseCD(QJsonObject data)
 {
-    QStringList args = line.split(" ");
-
-    if (args.size() < 4 || args[0] != "class") {
-        return 1;
+    QJsonArray classes = data["classes"].toArray();
+    for (QJsonValue const &cls : qAsConst(classes)) {
+        createClass(cls.toObject());
     }
 
-    QString name = args[1].replace("\"", "");
-    QString x = args[2];
-    QString y = args[3];
+    QJsonArray edges = data["edges"].toArray();
+    for (QJsonValue const &edge : qAsConst(edges)) {
+        createCDEdge(edge.toObject());
+    }
+}
 
-    diagram->addClass(QPointF(x.toInt(), y.toInt())); // TODO: check if x and y is interger
-    CDClass *cls = diagram->classes.last()->cdClass;
-    diagram->classes.last()->setName(name);
+void FileProcessor::createClass(QJsonObject data)
+{
+    QString name{data["name"].toString()};
+    QPointF pos{data["x"].toDouble(), data["y"].toDouble()};
+    CDClass *cls = diagram->addClass(name, pos)->cdClass;
 
-    if (args.size() > 4) {
-        bool attributes = true;
-        for (int i = 4; i < args.size(); i++) {
-            if (args[i] == ":") {
-                attributes = true;
-            } else {
-                // Attribute or method is unparsable
-                if (i+2 > args.size()) {
-                    return 1;
-                }
-                if (attributes) {
-                    if (!cls->addAttribute(args[i], args[++i], args[++i])) {
-                        return 1;
-                    }
-                } else {
-                    if (!cls->addMethod(args[i], args[++i], args[++i])) {
-                        return 1;
-                    }
-                }
-            }
+    QCoreApplication::processEvents(QEventLoop::AllEvents);
+
+    QJsonArray property = data["property"].toArray();
+    for (QJsonValue const &propVal: qAsConst(property)) {
+        QJsonObject prop = propVal.toObject();
+        CDClassProperty::Type type = prop["attribute"].toBool() ? CDClassProperty::Type::Attribute : CDClassProperty::Type::Method;
+        cls->widget->addProperty(type, prop["visibility"].toString(), prop["dt"].toString(), prop["name"].toString());
+    }
+}
+
+void FileProcessor::createCDEdge(QJsonObject data)
+{
+    QString startClsName{data["startClass"].toString()};
+    QString endClsName{data["endClass"].toString()};
+    CDSocket::Position startPos = CDSocket::positionMap.key(data["startSocket"].toString());
+    CDSocket::Position endPos = CDSocket::positionMap.key(data["endSocket"].toString());
+
+    CDSocket *startSocket = nullptr;
+    CDSocket *endSocket = nullptr;
+
+    for (Class *cls : qAsConst(diagram->classes)) {
+        if (startClsName == cls->getName()) {
+            startSocket = cls->cdClass->sockets[CDSocket::positionIndexMap[startPos]];
+        } else if (endClsName == cls->getName()) {
+            endSocket = cls->cdClass->sockets[CDSocket::positionIndexMap[endPos]];
         }
     }
 
-    return 0;
+    if (!startSocket || !endSocket) {
+        return;
+    }
+
+    CDEdge *edge = new CDEdge(data["type"].toString(), startSocket, endSocket);
+    startSocket->edges.push_back(edge);
+    endSocket->edges.push_back(edge);
 }

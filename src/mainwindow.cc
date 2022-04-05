@@ -3,7 +3,7 @@
  *
  * \brief Source code for MainWindow class.
  *
- * \date 5. 3. 2022
+ * \date 4. 4. 2022
  * \author Filip Solich
  */
 
@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
     connect(ui->actionAdd_class, &QAction::triggered, this, &MainWindow::addClass);
-    connect(ui->actionRemove_class, &QAction::triggered, this, &MainWindow::removeSelected);
+    connect(ui->actionRemove_selected, &QAction::triggered, this, &MainWindow::removeSelected);
 }
 
 MainWindow::~MainWindow()
@@ -62,8 +62,6 @@ void MainWindow::newDocument()
     closeCurrentDiagram();
     currentFile.clear();
     diagram = new Diagram(tabs->classTab, &(tabs->sequenceTabs), this);
-
-    // TODO: clear screen.
 }
 
 void MainWindow::open()
@@ -163,9 +161,6 @@ void MainWindow::exit()
     close();
 }
 
-void MainWindow::cut(){} // TODO
-void MainWindow::copy(){} // TODO
-void MainWindow::paste(){} // TODO
 void MainWindow::undo(){} // TODO
 
 void MainWindow::about()

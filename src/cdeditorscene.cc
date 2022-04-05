@@ -1,10 +1,17 @@
+/**
+ * \file cdeditorscene.cc
+ *
+ * \brief Source code file for `CDEditorScene` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QGraphicsSceneMouseEvent>
 
 #include "diagram.hh"
 #include "cdeditorscene.hh"
 #include "itemtype.hh"
-
-#include <QDebug>
 
 CDEditorScene::CDEditorScene(CDEditor *editor)
     : editor{editor}

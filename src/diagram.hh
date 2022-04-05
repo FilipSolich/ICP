@@ -1,7 +1,7 @@
 /**
  * \file diagram.hh
  *
- * \brief Diagram is top class for evry open diagrams.
+ * \brief Header file for `Diagram` class.
  *
  * \date 4. 4. 2022
  * \author Filip Solich
@@ -19,6 +19,9 @@ class Class;
 class CDEditor;
 class SequenceEditor;
 
+/**
+ * Diagram class contains pointers on all classes.
+ */
 class Diagram
 {
 
@@ -29,11 +32,18 @@ public:
     QVector<SequenceEditor *> *sqEditors = nullptr;
     MainWindow *mainWindow = nullptr;
 
-    QVector<Class *> classes;
+    QVector<Class *> classes; /** Pointers on all classes */
 
-    Diagram(CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, MainWindow *mainWindow);
+    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, MainWindow *mainWindow);
+    ~Diagram();
 
-    void addClass(QPointF pos = {0, 0});
+    /**
+     * Function adds new class to diagram.
+     *
+     * \param name Name of new class.
+     * \param pos New class postion in scene.
+     */
+    Class *addClass(QString name = "", QPointF pos = {0, 0});
 };
 
 #endif // DIAGRAM_HH

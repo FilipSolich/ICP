@@ -1,7 +1,17 @@
+/**
+ * \file cdclass.cc
+ *
+ * \brief Source code file for `CDClass` class.
+ *
+ * \date 5. 4. 2022
+ * \author Filip Solich
+ */
+
 #include <QGraphicsProxyWidget>
 
 #include "cdclass.hh"
 #include "cdclassitem.hh"
+#include "cdclassproperty.hh"
 #include "cdclasswidget.hh"
 #include "cdeditor.hh"
 #include "cdeditorscene.hh"
@@ -16,8 +26,9 @@ CDClass::CDClass(Class *cls, CDEditor *editor, QPointF pos)
     item = new CDClassItem(this, pos);
 
     proxy = editor->scene->addWidget(widget);
-    proxy->setPos(pos);
     proxy->setParentItem(item);
+
+    item->setPos(pos);
 
     sockets.push_back(new CDSocket(CDSocket::Position::Top, this));
     sockets.push_back(new CDSocket(CDSocket::Position::Right, this));
@@ -36,24 +47,64 @@ CDClass::~CDClass()
     delete item;
 }
 
-bool CDClass::addAttribute(QString visibility, QString dt, QString name)
+void CDClass::setHeredity(CDClass *cls, bool parent)
 {
-    if (!widget->visibility.contains(visibility)) {
-        return false;
+    if (parent) {
+        inherits.push_back(cls);
+        checkHeredity();
+    } else {
+        inheritedBy.push_back(cls);
     }
-
-    widget->addAttribute(visibility, dt, name);
-    return true;
 }
 
-bool CDClass::addMethod(QString visibility, QString dt, QString name)
+void CDClass::removeHeredity(CDClass *cls, bool parent)
 {
-    if (!widget->visibility.contains(visibility)) {
-        return false;
+    if (parent) {
+        inherits.remove(inherits.indexOf(cls));
+        checkHeredity();
+    } else {
+        inheritedBy.remove(inheritedBy.indexOf(cls));
+    }
+}
+void CDClass::checkHeredity()
+{
+    QSet<CDClassProperty *> overwriten;
+    for (CDClass *parent : qAsConst(inherits)) {
+        overwriten += parent->compareMethods(this);
     }
 
-    widget->addMethod(visibility, dt, name);
-    return true;
+    for (CDClassProperty *method : qAsConst(widget->methods)) {
+        if (overwriten.contains(method)) {
+            method->setPalette(QPalette(QColor(211, 0, 211)));
+        } else {
+            method->setPalette(QPalette());
+        }
+    }
+
+    for (CDClass *child : qAsConst(inheritedBy)) {
+        child->checkHeredity();
+    }
+}
+
+QSet<CDClassProperty *> CDClass::compareMethods(CDClass *child)
+{
+    QVector<CDClassProperty *> *thisMethods = &(this->widget->methods);
+    QVector<CDClassProperty *> *childMethods = &(child->widget->methods);
+
+    QSet<CDClassProperty *> overwriten;
+    for (CDClassProperty *thisMethod : qAsConst(*thisMethods)){
+        for (CDClassProperty *childMethod : qAsConst(*childMethods)) {
+            if (thisMethod->compareMethodOverwrite(childMethod)) {
+                overwriten.insert(childMethod);
+            }
+        }
+    }
+
+    for (CDClass *parent : qAsConst(inherits)) {
+        overwriten += parent->compareMethods(child);
+    }
+
+    return overwriten;
 }
 
 void CDClass::redrawSockets()

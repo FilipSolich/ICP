@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     cdclass.cc \
     cdclassitem.cc \
+    cdclassproperty.cc \
     cdclasswidget.cc \
     cdedge.cc \
     cdedgeitem.cc \
@@ -40,6 +41,7 @@ SOURCES += \
 HEADERS += \
     cdclass.hh \
     cdclassitem.hh \
+    cdclassproperty.hh \
     cdclasswidget.hh \
     cdedge.hh \
     cdedgeitem.hh \
