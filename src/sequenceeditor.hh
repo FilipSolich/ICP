@@ -1,29 +1,30 @@
-#ifndef SEQUENCEDIAGRAM_HH
-#define SEQUENCEDIAGRAM_HH
+#ifndef SEQUENCEEDITOR_H
+#define SEQUENCEEDITOR_H
 
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QVector>
 #include "diagram.hh"
-#include "sequence.h"
+#include "sdclass.h"
+#include "sdedge.h"
 #include <QPainter>
-class SequenceDiagram : public QWidget
+class SequenceEditor : public QWidget
 {
     Q_OBJECT
+
     Diagram *diagram = nullptr;
-    QVector<Sequence *> v_diagrams;
+    QVector<SDClass *> v_diagrams;
     QVector<QGraphicsRectItem *> v_rect_diagrams;
 
 public:
+    SDEdge *currentEdge = nullptr;
+
     QGraphicsScene *sequence_scene = nullptr;
 
-    explicit SequenceDiagram(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+    explicit SequenceEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
     void makeSequence(QVector<QString> names);
-    void addConnection();
-    void Activate();
-    void Deactivate();
-    void Timestamp();
+
 
     void remove();
     void add();
@@ -34,4 +35,4 @@ public slots:
 
 
 };
-#endif // SEQUENCEDIAGRAM_HH
+#endif // SEQUENCEEDITOR_H

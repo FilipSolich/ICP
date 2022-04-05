@@ -114,7 +114,7 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
     QTextStream stream{text};
 
     CDEditor *classEditor = tabs->classTab;
-    QVector<SequenceDiagram *> *sequenceEditors = &(tabs->sequenceTabs);
+    QVector<SequenceEditor *> *sequenceEditors = &(tabs->sequenceTabs);
 
     ParseState state = ParseState::NoState;
     while (stream.readLineInto(&line)) {

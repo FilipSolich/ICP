@@ -1,10 +1,10 @@
 #include "sequencemsg.h"
-#include "sequencediagram.hh"
+#include "sequenceeditor.hh"
 #include <QPainter>
 #include <QPoint>
 
 #include <math.h>
-SequenceMsg::SequenceMsg(SequenceDiagram *parentDiagram)
+SequenceMsg::SequenceMsg(SequenceEditor *parentDiagram)
 {
     this->parentDiagram = parentDiagram;
     //todo sockets

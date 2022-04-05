@@ -3,7 +3,7 @@
 #include <QLabel>
 #include <QFrame>
 
-SequenceWidget::SequenceWidget(Sequence *sequence_parent ,QString name ,QWidget *parent )
+SequenceWidget::SequenceWidget(SDClass *sequence_parent ,QString name ,QWidget *parent )
     :QWidget{parent}
 {
     this->sequence_parent = sequence_parent;

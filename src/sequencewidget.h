@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QGridLayout>
 
-class Sequence;
+class SDClass;
 
 class SequenceWidget : public QWidget
 {
@@ -16,9 +16,9 @@ class SequenceWidget : public QWidget
     QLabel *seq_circle = nullptr;
 
 public:
-    Sequence *sequence_parent = nullptr;
+    SDClass *sequence_parent = nullptr;
 
-    SequenceWidget(Sequence *sequence_parent, QString name = "class", QWidget *parent = nullptr);
+    SequenceWidget(SDClass *sequence_parent, QString name = "class", QWidget *parent = nullptr);
 
 };
 

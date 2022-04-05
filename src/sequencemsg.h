@@ -2,20 +2,20 @@
 #define SEQUENCEMSG_H
 
 #include <QWidget>
-#include <sequencediagram.hh>
+#include <sequenceeditor.hh>
 
 #include <QPainter>
 #include <QPoint>
-class SequenceDiagram;
+class SequenceEditor;
 
 class SequenceMsg : public QWidget
 {
     Q_OBJECT
 
 public:
-    SequenceMsg(SequenceDiagram *parentDiagram);
+    SequenceMsg(SequenceEditor *parentDiagram);
 
-    SequenceDiagram *parentDiagram;
+    SequenceEditor *parentDiagram;
 
 
     void draw_sync();

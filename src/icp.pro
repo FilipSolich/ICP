@@ -25,10 +25,13 @@ SOURCES += \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
+    sdclass.cpp \
+    sdedge.cpp \
+    sdedgeitem.cpp \
+    sdeditorscene.cpp \
     sdsocket.cpp \
     sdsocketitem.cpp \
-    sequencediagram.cc \
-    sequence.cpp \
+    sequenceeditor.cc \
     sequencemsg.cpp \
     sequencewidget.cpp \
     sequenceitem.cpp
@@ -51,10 +54,14 @@ HEADERS += \
     fileprocessor.hh \
     itemtype.hh \
     mainwindow.hh \
+    sdclass.h \
+    sdedge.h \
+    sdedgeitem.h \
+    sdeditorscene.h \
     sdsocket.h \
     sdsocketitem.h \
-    sequencediagram.hh \
-    sequence.h \
+    sequenceeditor.hh \
+    sequenceitem.h \
     sequencemsg.h \
     sequencewidget.h \
     sequencewidget.h

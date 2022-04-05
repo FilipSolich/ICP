@@ -17,7 +17,7 @@
 
 class Class;
 class CDEditor;
-class SequenceDiagram;
+class SequenceEditor;
 
 class Diagram
 {
@@ -26,12 +26,12 @@ public:
     bool unsavedChanges = false; // TODO deal with unsaved changes
 
     CDEditor *cdEditor = nullptr;
-    QVector<SequenceDiagram *> *sqEditors = nullptr;
+    QVector<SequenceEditor *> *sqEditors = nullptr;
     MainWindow *mainWindow = nullptr;
 
     QVector<Class *> classes;
 
-    Diagram(CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, MainWindow *mainWindow);
+    Diagram(CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, MainWindow *mainWindow);
 
     void addClass(QPointF pos = {0, 0});
 };

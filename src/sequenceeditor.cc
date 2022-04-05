@@ -4,11 +4,12 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 
-#include "sequencediagram.hh"
+#include "sequenceeditor.hh"
 #include "diagram.hh"
 #include "cdclass.hh"
-#include "sequence.h"
+#include "sdclass.h"
 #include "sequencemsg.h"
+#include "sdeditorscene.h"
 
 #include <QLabel>
 #include <QGraphicsItem>
@@ -18,24 +19,21 @@
 #include <QGraphicsLayout>
 #include <QGraphicsEllipseItem>
 
-SequenceDiagram::SequenceDiagram(QWidget *parent, Diagram *diagram)
+SequenceEditor::SequenceEditor(QWidget *parent, Diagram *diagram)
     : QWidget{parent}
 {
     this->diagram = diagram;
 
     QVBoxLayout *seq_layout = new QVBoxLayout;
-
     QWidget *seqBtns = new QWidget(this);
 
     QGridLayout *seq_layout_btns = new QGridLayout(seqBtns);
-    QPushButton *add_btn = new QPushButton("+",seqBtns);
+
     QPushButton *remove_btn = new QPushButton("-",seqBtns);
 
 
-    seq_layout_btns->addWidget(add_btn,0,0);
+
     seq_layout_btns->addWidget(remove_btn,0,1);
-
-
 
     seq_layout_btns->setColumnStretch(0,1);
     seq_layout_btns->setColumnStretch(1,1);
@@ -44,7 +42,7 @@ SequenceDiagram::SequenceDiagram(QWidget *parent, Diagram *diagram)
     seqBtns->setLayout(seq_layout_btns);
     this->setLayout(seq_layout);
 
-    sequence_scene = new QGraphicsScene;
+    sequence_scene = new SDEditorScene(this);
     QGraphicsView *sequence_view = new QGraphicsView(this);
     sequence_view->setScene(sequence_scene);
 
@@ -55,22 +53,18 @@ SequenceDiagram::SequenceDiagram(QWidget *parent, Diagram *diagram)
      makeSequence(v_names);
 
 
-     connect(add_btn,&QPushButton::clicked,this,&SequenceDiagram::addSeqSlot);
-     connect(remove_btn,&QPushButton::clicked,this,&SequenceDiagram::removeSeqSlot);
-    /* connect(async_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_async_slot);
-     connect(sync_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_sync_slot);
-     connect(create_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_create_slot);
-     connect(destroy_btn,&QPushButton::clicked,new SequenceMsg(this),&SequenceMsg::draw_destroy_slot);*/
+     connect(remove_btn,&QPushButton::clicked,this,&SequenceEditor::addSeqSlot);
+
 
 }
 
-void SequenceDiagram::makeSequence(QVector<QString> names)
+void SequenceEditor::makeSequence(QVector<QString> names)
 {
 
     if (names.size() != 0 ) //empty
     {
         for(int i=0; i<names.size();i++){
-            Sequence *new_seq = new Sequence("trida",this);
+            SDClass *new_seq = new SDClass("trida",this,-1200);
 
             v_diagrams.push_back(new_seq);
             v_rect_diagrams.push_back(new_seq->item);
@@ -78,12 +72,12 @@ void SequenceDiagram::makeSequence(QVector<QString> names)
     }
 }
 
-void SequenceDiagram::add()
+void SequenceEditor::add()
 {
     QVector<QString> v_names(1);
     makeSequence(v_names);
 }
-void SequenceDiagram::remove()
+void SequenceEditor::remove()
 {
     for(int i = 0; i<v_rect_diagrams.size();++i)
     {
@@ -102,31 +96,13 @@ void SequenceDiagram::remove()
 
 }
 
-void SequenceDiagram::addConnection()
-{
-    // TODO
-}
 
-void SequenceDiagram::Activate()
-{
-    // TODO
-}
 
-void SequenceDiagram::Deactivate()
-{
-    // TODO
-}
-
-void SequenceDiagram::Timestamp()
-{
-    //TODO
-}
-
-void SequenceDiagram::addSeqSlot(void)
+void SequenceEditor::addSeqSlot(void)
 {
     add();
 }
-void SequenceDiagram::removeSeqSlot(void)
+void SequenceEditor::removeSeqSlot(void)
 {
     remove();
 }
