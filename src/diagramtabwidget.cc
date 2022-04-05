@@ -9,7 +9,7 @@
 
 #include "cdeditor.hh"
 #include "diagramtabwidget.hh"
-#include "sequencediagram.hh"
+#include "sequenceeditor.hh"
 
 DiagramTabWidget::DiagramTabWidget(QWidget *parent)
     : QTabWidget{parent}
@@ -19,7 +19,7 @@ DiagramTabWidget::DiagramTabWidget(QWidget *parent)
     setTabPosition(QTabWidget::South);
 
     classTab = new CDEditor(this);
-    SequenceDiagram *sequenceTab = new SequenceDiagram(this);
+    SequenceEditor *sequenceTab = new SequenceEditor(this);
     sequenceTabs.push_back(sequenceTab);
 
     addTab(classTab, "Class diagram");
@@ -36,7 +36,7 @@ void DiagramTabWidget::selectTab(int index)
 
         sequenceDiagramCounter += 1;
 
-        SequenceDiagram *sequence = new SequenceDiagram(this);
+        SequenceEditor *sequence = new SequenceEditor(this);
         sequenceTabs.push_back(sequence);
 
         addTab(sequence, QString("Sequence diagram %1").arg(sequenceDiagramCounter));

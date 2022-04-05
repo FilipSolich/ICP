@@ -1,35 +1,41 @@
-#include "sequence.h"
+#include "sdclass.h"
 
 #include "sdsocket.h"
 #include "sdsocketitem.h"
 #include "sequenceitem.h"
 #include "sequencewidget.h"
-#include "sequencediagram.hh"
+#include "sequenceeditor.hh"
 #include <QGraphicsProxyWidget>
 #include "cdclassitem.hh"
 
 
 
 
-Sequence::Sequence(QString name, SequenceDiagram *diagram)
-    : diagram{diagram}
+SDClass::SDClass(QString name, SequenceEditor *diagram, QPointF position,Class *cls)
+    : diagram{diagram}, cls{cls}
 {
     item = new Sequenceitem(this);
     widget = new SequenceWidget(this ,name);
 
+    this->position = position;
     seq_proxy = diagram->sequence_scene->addWidget(widget);
-    seq_proxy->setPos(0,0);
     seq_proxy->setParentItem(item);
+    item->setPos(position);
 
-    for (int i = 0 ; i < 9; ++i)
+    for (int i = 0 ; i < 18; ++i)
     {
-        sockets[i] = new SDSocket(i,this,item);
-        sockets[i] = new SDSocket(i-18,this,item);
+        if( i > 8){
+            sockets[i] = new SDSocket(i-27,this,item);
+        }
+        else{
+            sockets[i] = new SDSocket(i,this,item);
+        }
     }
 }
 
-void Sequence::redrawSockets(void)
+void SDClass::redrawSockets(void)
 {
+
     for (SDSocket *s : sockets)
     {
         s->redraw();
@@ -37,7 +43,10 @@ void Sequence::redrawSockets(void)
 }
 
 
-Sequence::~Sequence()
+
+
+
+SDClass::~SDClass()
 {
     diagram->sequence_scene->removeItem(item);
     delete seq_proxy;

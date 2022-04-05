@@ -13,10 +13,11 @@
 #include <QString>
 
 #include "cdclass.hh"
+#include "sdclass.h"
 
 class Diagram;
 class CDEditor;
-class SequenceDiagram;
+class SequenceEditor;
 
 /**
  * This class encapsulate data about diagram "class" in all editors instances.
@@ -29,18 +30,21 @@ public:
     QString name;
     Diagram *diagram = nullptr;
     CDClass *cdClass = nullptr;
-    // TODO Add SDClass
+    SDClass *sdClass = nullptr;
+    SequenceEditor *sequence = nullptr;
+
+    //Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QPointF pos = {0, 0});
 
     /**
      * Constructor create new class in `CDEditor` and all `SDEditor`.
      *
      * \param diagram Pointer to `Diagram``.
      * \param cdEditor Pointer to `CDEditor`.
-     * \param sqEditor Pointer to `SequenceDiagram`.
+     * \param sqEditor Pointer to `SequenceEditor`.
      * \param name Name of class.
      * \param pos Position of class in scene.
      */
-    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceDiagram *> *sqEditors, QString name = "", QPointF pos = {0, 0});
+    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QString name = "", QPointF pos = {0, 0});
 
     /** Destructor */
     ~Class();

@@ -1,8 +1,9 @@
 #include "sdsocket.h"
-#include "sequence.h"
-
-
-SDSocket::SDSocket(int position, Sequence *parent_sequence, QGraphicsItem *parentItem)
+#include "sdclass.h"
+#include "diagram.hh"
+#include "class.hh"
+SDSocket::SDSocket(int position, SDClass *parent_sequence, QGraphicsItem *parentItem)
+    : parent_sequence{parent_sequence}
 {
     this->position = position;
     this->parent_sequence = parent_sequence;
@@ -13,8 +14,8 @@ QPointF SDSocket::calculateSocketPos()
 {
 
     int x = 0,y = 0;
-    int x_tmp = parent_sequence->item->rect().width() +22;
-    int y_tmp = (parent_sequence->item->rect().height() / 9 );
+    int x_tmp = (parent_sequence->item->rect().width() +22) ;
+    int y_tmp = ((parent_sequence->item->rect().height() / 9 ) );
     switch(position)
     {
 
@@ -55,16 +56,33 @@ QPointF SDSocket::calculateSocketPos()
             y = 1*y_tmp;
             break;
         default:
-            x = -15;
+            x = x_tmp -130 ;
             y = (abs(position)%10) * y_tmp +40;
             break;
     }
     return QPointF(x,y);
 
 }
+QPointF SDSocket::getSocketCenter(void)
+{
+    QPointF center_point = item->scenePos();
+    center_point.setX(center_point.x() + 10/2 );
+    center_point.setY(center_point.y() +10/2);
+
+    return center_point;
+}
+
+void SDSocket::CreateEdge()
+{
+    edges.push_back(new SDEdge(parent_sequence->cls->diagram->mainWindow->edgeComboBox->currentText(),this));
+}
+/*void RemoveEdge(SDEdge *edge){
+
+}*/
 
 void SDSocket::redraw(void)
 {
     QPointF seq_point = calculateSocketPos();
     item->setPos(seq_point.x(), seq_point.y());
 }
+

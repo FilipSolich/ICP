@@ -2,13 +2,14 @@
 #define SEQUENCEITEM_H
 
 #include <QGraphicsRectItem>
-class Sequence;
+
+class SDClass;
 
 class Sequenceitem : public QGraphicsRectItem
 {
 public:
-    Sequence *parent_sequence = nullptr;
-    Sequenceitem(Sequence *parent_sequence);
+    SDClass *parent_sequence = nullptr;
+    Sequenceitem(SDClass *parent_sequence);
 };
 
 #endif // SEQUENCEITEM_H

@@ -17,11 +17,11 @@ public:
 
     SDSocketItem(SDSocket *socket, QGraphicsItem *parentItem = nullptr);
     ~SDSocketItem();
-    SDSocket *parent_sequence = nullptr;
+    SDSocket *sd_socket = nullptr;
 
-    //int type const { return ItemTypeSocket; } ;
+    int type() const { return ItemTypeCDSocket; } ;
 
-    //void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // SDSOCKETITEM_H
