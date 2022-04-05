@@ -70,11 +70,6 @@ private slots:
      */
     void exit();
 
-    // TODO delete
-    void cut();
-    void copy();
-    void paste();
-
     /**
      * Slot for 'Undo' button.
      */

@@ -161,9 +161,6 @@ void MainWindow::exit()
     close();
 }
 
-void MainWindow::cut(){} // TODO
-void MainWindow::copy(){} // TODO
-void MainWindow::paste(){} // TODO
 void MainWindow::undo(){} // TODO
 
 void MainWindow::about()
