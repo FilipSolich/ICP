@@ -10,17 +10,21 @@ Sequenceitem::Sequenceitem(SDClass *parent_sequence)
     setFlag(QGraphicsItem::ItemIsMovable);
     setFlag(QGraphicsItem::ItemIsSelectable,true);
     setFlag(QGraphicsItem::ItemIsFocusable);
+    setFlag(QGraphicsItem::ItemSendsScenePositionChanges);
     this->parent_sequence->diagram->sequence_scene->addItem(this);
 
 }
 
 QVariant Sequenceitem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == ItemPositionChange) {
-        for (SDSocket *s : qAsConst(parent_sequence->sockets)) {
-            for (SDEdge *edge : qAsConst(s->edges)) {
+    if (change == ItemPositionChange)
+    {
+        for (SDSocket *s : qAsConst(parent_sequence->sockets))
+        {
+           for (SDEdge *edge : qAsConst(s->edges))
+           {
                 edge->socketMoved(s);
-            }
+           }
         }
     }
 

@@ -79,12 +79,12 @@ void SDEdge::setPath()
 }
 
 void SDEdge::socketMoved(SDSocket *s){
-    if (s)
+    if (s == startSocket)
     {
-        setPoints(EdgeEndType::Start, s->calculateSocketPos());
+        setPoints(EdgeEndType::End, s->getSocketCenter());
     }
     else
     {
-        setPoints(EdgeEndType::End, s->calculateSocketPos());
+        setPoints(EdgeEndType::Start, s->getSocketCenter());
     }
 }
