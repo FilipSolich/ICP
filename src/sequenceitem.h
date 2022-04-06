@@ -10,6 +10,8 @@ class Sequenceitem : public QGraphicsRectItem
 public:
     SDClass *parent_sequence = nullptr;
     Sequenceitem(SDClass *parent_sequence);
+
+    QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
 };
 
 #endif // SEQUENCEITEM_H

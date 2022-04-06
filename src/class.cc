@@ -18,7 +18,8 @@ Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sq
 {
     cdClass = new CDClass(this, cdEditor, pos);
     for(SequenceEditor *sq_i : *sqEditors){
-        new SDClass("jmeno",sq_i,pos,this);
+        new SDClass(sq_i,this);
+
     }
 }
 

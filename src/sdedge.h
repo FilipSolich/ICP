@@ -39,6 +39,7 @@ public:
     void socketMoved(SDSocket *s);
     void setPoints(EdgeEndType type, QPointF point);
 
+
 };
 
 #endif // SDEDGE_H

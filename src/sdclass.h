@@ -23,7 +23,7 @@ public:
     SequenceWidget *widget = nullptr;
     SDSocket *sockets[18];
     QPointF position;
-    SDClass(QString name = "Class", SequenceEditor *diagram = nullptr, QPointF position = {0,0} , Class *cls = nullptr);
+    SDClass(SequenceEditor *diagram = nullptr , Class *cls = nullptr);
     ~SDClass();
 
     void redrawSockets(void);

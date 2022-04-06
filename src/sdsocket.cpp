@@ -84,5 +84,9 @@ void SDSocket::redraw(void)
 {
     QPointF seq_point = calculateSocketPos();
     item->setPos(seq_point.x(), seq_point.y());
+    for( SDEdge *edge: qAsConst(edges)){
+        edge->socketMoved(this);
+    }
+
 }
 
