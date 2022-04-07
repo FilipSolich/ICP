@@ -4,8 +4,7 @@
 #include <sequenceeditor.hh>
 #include "sdeditorscene.h"
 #include "sdedgeitem.h"
-#include <math.h>
-#include <QPainter>
+
 SDEdge::SDEdge(QString type, SDSocket *s1, SDSocket *s2 )
 {
     this->type = typeMap[type];
@@ -64,17 +63,10 @@ void SDEdge::setPoints(EdgeEndType type, QPointF point)
 
 void SDEdge::setPath()
 {
-   /* const qreal Pi = 3.14;
-    double angle = 30.0;
-    QPointF p1 = startPoint + QPointF(sin(angle + Pi/3) * 20,cos(angle +Pi/3)*20);
-    QPointF p2 = startPoint + QPointF(sin(angle + Pi - Pi / 3) * 20,
-                                           cos(angle + Pi - Pi / 3) * 20);
-*/
 
-    QPainterPath path{startPoint};
-    path.lineTo(endPoint);
-    item->setPath(path);
-
+    QPainterPath arrow{startPoint};
+    arrow.lineTo(endPoint);
+    item->setPath(arrow);
 
 }
 
