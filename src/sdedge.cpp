@@ -40,7 +40,6 @@ void SDEdge::setSocket(SDSocket *socket, EdgeEndType type)
         startSocket->parent_sequence->diagram->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
         this->item->setFlag(QGraphicsItem::ItemIsFocusable);
-
     }
 }
 
