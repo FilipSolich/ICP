@@ -13,9 +13,20 @@ class SDEditorScene : public QGraphicsScene
 {
 public:
     SequenceEditor *editor = nullptr;
+    /**
+     * \brief SDEditorScene Constructor.
+     * \param editor pointer on SequenceEditor
+     */
     SDEditorScene(SequenceEditor *editor);;
-
+    /**
+     * @brief mouseMoveEvent Mouse MOVE event handler.
+     * @param event pointer to mouse event.
+     */
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    /**
+     * @brief mousePressEvent Mouse PRESS event handler.
+     * @param event pointer to mouse event.
+     */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 

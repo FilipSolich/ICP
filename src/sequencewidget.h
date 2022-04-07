@@ -6,7 +6,9 @@
 #include <QGridLayout>
 
 class SDClass;
-
+/**
+ * \brief The SequenceWidget class
+ */
 class SequenceWidget : public QWidget
 {
     Q_OBJECT
@@ -17,7 +19,12 @@ class SequenceWidget : public QWidget
 
 public:
     SDClass *sequence_parent = nullptr;
-
+    /**
+     * \brief SequenceWidget constructor.
+     * \param sequence_parent pointer on SDClass(parent)
+     * \param name name of the class
+     * \param parent pointer on QWidget
+     */
     SequenceWidget(SDClass *sequence_parent, QString name = "class", QWidget *parent = nullptr);
 
 };
