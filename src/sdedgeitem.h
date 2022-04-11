@@ -17,8 +17,8 @@ public:
      */
     SDEdgeItem(SDEdge *sdEdge);
     /**
-     * @brief type
-     * @return ItemTypeSDEdge
+     * \brief type
+     * \return ItemTypeSDEdge
      */
     int type() const { return ItemTypeSDEdge; };
 };

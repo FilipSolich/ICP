@@ -19,13 +19,13 @@ public:
      */
     SDEditorScene(SequenceEditor *editor);;
     /**
-     * @brief mouseMoveEvent Mouse MOVE event handler.
-     * @param event pointer to mouse event.
+     * \brief mouseMoveEvent Mouse MOVE event handler.
+     * \param event pointer to mouse event.
      */
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     /**
-     * @brief mousePressEvent Mouse PRESS event handler.
-     * @param event pointer to mouse event.
+     * \brief mousePressEvent Mouse PRESS event handler.
+     * \param event pointer to mouse event.
      */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
