@@ -33,8 +33,6 @@ public:
     SDClass *sdClass = nullptr;
     SequenceEditor *sequence = nullptr;
 
-    //Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QPointF pos = {0, 0});
-
     /**
      * Constructor create new class in `CDEditor` and all `SDEditor`.
      *

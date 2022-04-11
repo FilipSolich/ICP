@@ -52,6 +52,6 @@ void DiagramTabWidget::selectTab(int index)
 
 void DiagramTabWidget::addDummyTab()
 {
-    QWidget *dummy = new QWidget;
+    QWidget *dummy = new QWidget(this);
     addTab(dummy, "+");
 }

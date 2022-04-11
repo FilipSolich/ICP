@@ -63,6 +63,8 @@ void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
 
     if (socket) {
         setPoints(type, socket->getSocketCenter(), socket->position);
+    } else if (type == EdgeEndType::End) {
+        setPoints(type, startSocket->getSocketCenter(), startSocket->position);
     }
 
     if (type == EdgeEndType::End && socket != nullptr) {
