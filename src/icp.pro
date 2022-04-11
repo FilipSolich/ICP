@@ -33,7 +33,6 @@ SOURCES += \
     sdsocket.cpp \
     sdsocketitem.cpp \
     sequenceeditor.cc \
-    sequencemsg.cpp \
     sequencewidget.cpp \
     sequenceitem.cpp
 
@@ -64,7 +63,6 @@ HEADERS += \
     sdsocketitem.h \
     sequenceeditor.hh \
     sequenceitem.h \
-    sequencemsg.h \
     sequencewidget.h \
     sequencewidget.h
 FORMS += \

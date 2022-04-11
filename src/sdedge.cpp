@@ -1,14 +1,14 @@
 #include <QGraphicsScene>
-#include <QPainter>
+
 #include "sdedge.h"
 #include <sequenceeditor.hh>
 #include "sdeditorscene.h"
 #include "sdedgeitem.h"
-#include <math.h>
+
 SDEdge::SDEdge(QString type, SDSocket *s1, SDSocket *s2 )
 {
     this->type = typeMap[type];
-    item = new SDEdgeItem(this,this->startPoint);
+    item = new SDEdgeItem(this);
     s1->item->scene()->addItem(item);
 
     setSocket(s1,EdgeEndType::Start);
@@ -40,7 +40,6 @@ void SDEdge::setSocket(SDSocket *socket, EdgeEndType type)
         startSocket->parent_sequence->diagram->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
         this->item->setFlag(QGraphicsItem::ItemIsFocusable);
-
     }
 }
 
@@ -63,16 +62,20 @@ void SDEdge::setPoints(EdgeEndType type, QPointF point)
 
 void SDEdge::setPath()
 {
-    const qreal Pi = 3.14;
-    double angle = 30.0;
-    QPointF p1 = startPoint + QPointF(sin(angle + Pi/3) * 20,cos(angle +Pi/3)*20);
-    QPointF p2 = startPoint + QPointF(sin(angle + Pi - Pi / 3) * 20,
-                                        cos(angle + Pi - Pi / 3) * 20);
-    QPainterPath arrow_path{startPoint};
-    arrow_path.lineTo(p1);
-    arrow_path.lineTo(p2);
-    QPainterPath path{startPoint};
-    path.lineTo(endPoint);
-    item->setPath(path);
 
+    QPainterPath arrow{startPoint};
+    arrow.lineTo(endPoint);
+    item->setPath(arrow);
+
+}
+
+void SDEdge::socketMoved(SDSocket *s){
+    if (s == startSocket)
+    {
+        setPoints(EdgeEndType::End, s->getSocketCenter());
+    }
+    else
+    {
+        setPoints(EdgeEndType::Start, s->getSocketCenter());
+    }
 }

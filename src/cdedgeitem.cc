@@ -8,7 +8,7 @@
  */
 
 #include <QPen>
-
+#include <QWidget>
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
 

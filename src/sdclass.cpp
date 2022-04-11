@@ -8,16 +8,16 @@
 #include <QGraphicsProxyWidget>
 #include "cdclassitem.hh"
 
+#include "class.hh"
 
 
-
-SDClass::SDClass(QString name, SequenceEditor *diagram, QPointF position,Class *cls)
+SDClass::SDClass(SequenceEditor *diagram,Class *cls)
     : diagram{diagram}, cls{cls}
 {
     item = new Sequenceitem(this);
-    widget = new SequenceWidget(this ,name);
+    widget = new SequenceWidget(this ,cls->name);
 
-    this->position = position;
+    //this->position = position;
     seq_proxy = diagram->sequence_scene->addWidget(widget);
     seq_proxy->setParentItem(item);
     item->setPos(position);

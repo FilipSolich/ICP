@@ -8,9 +8,12 @@
 #include "sdclass.h"
 #include "sdedge.h"
 #include <QPainter>
+
+/**
+ * \brief The SequenceEditor class
+ */
 class SequenceEditor : public QWidget
 {
-    Q_OBJECT
 
     Diagram *diagram = nullptr;
     QVector<SDClass *> v_diagrams;
@@ -20,12 +23,15 @@ public:
     SDEdge *currentEdge = nullptr;
 
     QGraphicsScene *sequence_scene = nullptr;
-
+    /**
+     * \brief SequenceEditor Constructor
+     * \param parent pointer on parent qwidget
+     * \param diagram pointer on diagram
+     */
     explicit SequenceEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
+    //TODO delete or not, idk yet
     void makeSequence(QVector<QString> names);
-
-
     void remove();
 
 

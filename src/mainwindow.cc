@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 
+#include "sdeditorscene.h"
 #include "cdeditorscene.hh"
 #include "edgecombobox.hh"
 #include "fileprocessor.hh"
@@ -213,7 +214,9 @@ void MainWindow::removeSelected()
         CDEditorScene *scene = static_cast<CDEditor *>(tabs->currentWidget())->scene;
         items = scene->selectedItems();
     } else {
-        // TODO sequence scene
+        QGraphicsScene *scene = static_cast<SequenceEditor *>(tabs->currentWidget())->sequence_scene;
+        items = scene->selectedItems();
+
     }
 
     for (QGraphicsItem *item : qAsConst(items)) {
@@ -223,6 +226,14 @@ void MainWindow::removeSelected()
         } else if (item->type() == ItemTypeCDEdge) {
             CDEdgeItem *i = static_cast<CDEdgeItem *>(item);
             delete i->cdEdge;
+        }
+        else if (item->type() == ItemTypeSDClass){
+            Sequenceitem *i = static_cast<Sequenceitem *>(item);
+            delete i->parent_sequence;
+        }
+        else if (item->type() == ItemTypeSDEdge){
+            SDEdgeItem *i = static_cast<SDEdgeItem *>(item);
+            delete i->sdEdge;
         }
     }
 }
