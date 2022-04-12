@@ -44,6 +44,8 @@ public:
      * \param pos Position of class in scene.
      */
     CDClass(Class *cls, CDEditor *editor, QPointF pos);
+
+    /** Destructor */
     ~CDClass();
 
     /**

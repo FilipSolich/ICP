@@ -28,10 +28,10 @@ example: $(TARGET)
 	./$(TARGET) $(EXAMPLES_DIR)/export.json
 
 clean:
-	$(RM) -r $(TARGET) $(PACK) $(DOC_DIR)/html
-	$(RM) $(SRC_DIR)/.qmake.stash
-	make clean -C $(SRC_DIR)
-	$(RM) $(SRC_DIR)/Makefile
+	-rm -rf $(TARGET) $(PACK) $(DOC_DIR)/html
+	-rm -f $(SRC_DIR)/.qmake.stash
+	-make clean -C $(SRC_DIR)
+	-rm -f $(SRC_DIR)/Makefile
 
 doxygen:
 	doxygen
