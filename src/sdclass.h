@@ -31,7 +31,7 @@ public:
      * \param diagram is pointer on  `SequenceEditor`
      * \param cls is pointer on  `Class`
      * */
-    SDClass(SequenceEditor *diagram = nullptr , Class *cls = nullptr);
+    SDClass(SequenceEditor *diagram = nullptr , Class *cls = nullptr, QPointF position = {0,0});
     /**
      * Destructor of SDClass
      *

@@ -75,7 +75,3 @@ void SequenceEditor::remove()
 
 
 
-/*
- * TODO
-Function for making circles
-*/

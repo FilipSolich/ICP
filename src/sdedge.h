@@ -13,15 +13,9 @@ class SDEdge
 {
 public:
     enum class EdgeEndType {Start, End};
-    enum class Type {Async,Sync,Create,Destroy};
+    enum class Type {Async,Sync,Create,Destroy,Activate,Back};
 
-    std::map<QString, Type> typeMap = {
-        {"Async", Type::Async},
-        {"Sync", Type::Sync},
-        {"Create", Type::Create},
-        {"Destroy", Type::Destroy},
-    };
-
+    static QMap<SDEdge::Type, QString> typeMap;
     //SDEdgeItem *item = nullptr;
 
     SDSocket *startSocket = nullptr;
@@ -39,7 +33,7 @@ public:
      * \param s1 pointer to start socket.
      * \param s2 pointer to end socket.
      */
-    SDEdge(QString type="async", SDSocket *s1 = nullptr, SDSocket *s2 = nullptr );
+    SDEdge(QString type="Async", SDSocket *s1 = nullptr, SDSocket *s2 = nullptr );
     /**
      * Desturcor of object,
     */
@@ -72,7 +66,8 @@ public:
      */
     void setPoints(EdgeEndType type, QPointF point);
 
-
+    void setMousePosActivate(QPointF);
+    void setActPath();
 };
 
 #endif // SDEDGE_H

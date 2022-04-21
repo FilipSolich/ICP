@@ -11,13 +11,13 @@
 #include "class.hh"
 
 
-SDClass::SDClass(SequenceEditor *diagram,Class *cls)
+SDClass::SDClass(SequenceEditor *diagram,Class *cls,QPointF position)
     : diagram{diagram}, cls{cls}
 {
     item = new Sequenceitem(this);
     widget = new SequenceWidget(this ,cls->name);
 
-    //this->position = position;
+    this->position = position;
     seq_proxy = diagram->sequence_scene->addWidget(widget);
     seq_proxy->setParentItem(item);
     item->setPos(position);
@@ -41,8 +41,6 @@ void SDClass::redrawSockets(void)
         s->redraw();
     }
 }
-
-
 
 
 

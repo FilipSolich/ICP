@@ -19,6 +19,8 @@
 #include "cdclassproperty.hh"
 #include "cdeditor.hh"
 #include "cdedge.hh"
+#include "sdedge.h"
+#include "sdclass.h"
 #include "diagram.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
@@ -29,7 +31,7 @@ QString FileProcessor::generateFile(Diagram *diagram)
 
     QJsonObject data;
     data["classDiagram"] = genCD();
-    //data.insert("sequenceDiagram", genSD()); // TODO uncoment
+    data.insert("sequenceDiagram", genSD());
 
     QJsonDocument doc{data};
     return QString{doc.toJson(QJsonDocument::Indented)};
@@ -63,7 +65,69 @@ QJsonObject FileProcessor::genCD()
 
 QJsonObject FileProcessor::genSD()
 {
-    // TODO
+    QJsonObject data;
+    QJsonArray arrEditors;
+
+    for(SequenceEditor *tab : qAsConst(*diagram->sqEditors))
+    {
+        arrEditors.push_back(genSDEditor(tab));
+
+    }
+    data["SequenceEditors"] = arrEditors;
+    return data;
+}
+
+QJsonObject FileProcessor::genSDEditor(SequenceEditor *sequence_editor)
+{
+    QJsonObject data;
+    QJsonArray sdclasses;
+    QSet <SDEdge *> edgesSet;
+    for(SDClass *sdclass: qAsConst(sequence_editor->v_diagrams))
+    {
+        sdclasses.push_back(genSDClass(sdclass));
+        for(SDSocket *socket : qAsConst(sdclass->sockets))
+        {
+            for (SDEdge *edge : qAsConst(socket->edges))
+            {
+                edgesSet.insert(edge);
+            }
+        }
+    }
+    QJsonArray edges;
+    for (SDEdge *edge : edgesSet)
+    {
+        edges.push_back(genSdEdge(edge));
+    }
+
+    data["sequences"] = sdclasses;
+    data["edges"] = edges;
+
+
+    return data;
+}
+
+QJsonObject FileProcessor::genSdEdge(SDEdge *SDEdge)
+{
+    QJsonObject data;
+
+    data["type"] = SDEdge::typeMap[SDEdge->type];
+    data["StartSequence"] = SDEdge->startSocket->parent_sequence->cls->getName();
+    data["startSocket"] =   SDEdge->startSocket->position;
+    data["endSequence"]= SDEdge->endSocket->parent_sequence->cls->getName();
+    data["endSocket"]= SDEdge->endSocket->position;
+
+    return data;
+}
+
+QJsonObject FileProcessor ::genSDClass(SDClass *SDclass)
+{
+    QJsonObject data;
+
+    data["name"] = SDclass->cls->name;
+    data["x"] = SDclass->item->scenePos().x();
+    data["y"] = SDclass->item->scenePos().x();
+
+    return data;
 }
 
 QJsonObject FileProcessor::genCDClass(CDClass *cls)

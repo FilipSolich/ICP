@@ -27,6 +27,12 @@ public:
      */
     SequenceWidget(SDClass *sequence_parent, QString name = "class", QWidget *parent = nullptr);
 
+public slots:
+    void newNameSlot(const QString &text);
+
 };
+
+
+
 
 #endif // SEQUENCEWIDGET_H

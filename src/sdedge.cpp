@@ -1,13 +1,23 @@
 #include <QGraphicsScene>
 
 #include "sdedge.h"
-#include <sequenceeditor.hh>
+#include "sequenceeditor.hh"
 #include "sdeditorscene.h"
 #include "sdedgeitem.h"
 
+QMap<SDEdge::Type, QString> SDEdge::typeMap = {
+    {SDEdge::Type::Async, "Async"},
+    {SDEdge::Type::Sync, "Sync"},
+    {SDEdge::Type::Destroy, "Destroy"},
+    {SDEdge::Type::Create, "Create"},
+    {SDEdge::Type::Back, "Back"},
+    {SDEdge::Type::Activate, "Activate"},
+};
+
 SDEdge::SDEdge(QString type, SDSocket *s1, SDSocket *s2 )
 {
-    this->type = typeMap[type];
+    this->type = SDEdge::typeMap.key(type);
+
     item = new SDEdgeItem(this);
     s1->item->scene()->addItem(item);
 
@@ -42,6 +52,12 @@ void SDEdge::setSocket(SDSocket *socket, EdgeEndType type)
         this->item->setFlag(QGraphicsItem::ItemIsFocusable);
     }
 }
+void SDEdge::setMousePosActivate(QPointF pos)
+{
+    QPointF p = pos;
+
+    setPoints(EdgeEndType::End,p);
+}
 
 void SDEdge::setMousePos(QPointF pos)
 {
@@ -56,8 +72,11 @@ void SDEdge::setPoints(EdgeEndType type, QPointF point)
     } else {
         endPoint = point;
     }
+    if(this->type == Type::Activate)
+        setActPath();
 
-    setPath();
+    else
+        setPath();
 }
 
 void SDEdge::setPath()
@@ -67,6 +86,25 @@ void SDEdge::setPath()
     arrow.lineTo(endPoint);
     item->setPath(arrow);
 
+}
+
+void SDEdge::setActPath(){
+    QPointF s = startPoint;
+    QPointF e = endPoint;
+    if(this->startSocket->position >= 8)
+    {
+        s.setX(s.rx()-50);
+        e.setX(e.rx()-50);
+    }
+    else
+    {
+        s.setX(s.rx()+50);
+        e.setX(e.rx()+50);
+    }
+
+    QPainterPath act{s};
+    act.lineTo(e);
+    item->setPath(act);
 }
 
 void SDEdge::socketMoved(SDSocket *s){

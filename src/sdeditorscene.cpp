@@ -1,4 +1,5 @@
 #include "sdeditorscene.h"
+#include "sdedge.h"
 
 SDEditorScene::SDEditorScene(SequenceEditor *editor)
     : editor {editor}
@@ -6,9 +7,15 @@ SDEditorScene::SDEditorScene(SequenceEditor *editor)
 
 void SDEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (editor->currentEdge) {
 
-        editor->currentEdge->setMousePos(event->scenePos());
+    if (editor->currentEdge) {
+        if(editor->currentEdge->type == SDEdge::Type::Activate)
+        {
+             editor->currentEdge->setMousePosActivate(event->scenePos());
+        }
+        else{
+            editor->currentEdge->setMousePos(event->scenePos());
+        }
     }
 
     QGraphicsScene::mouseMoveEvent(event);

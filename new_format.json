@@ -25,5 +25,28 @@
       }
     ]
   },
-  "sequenceDiagram": []
+  "sequenceDiagram": [
+    {
+      "SequenceEditors": [
+        {
+          "sequences": [
+            {
+              "name": "class",
+              "x": 10,
+              "y": 10
+            }
+          ],
+          "edges": [
+            {
+              "type": "Async",
+              "StartSequence": "class1",
+              "startSocket": 1,
+              "endSequence": "class2",
+              "endSocket": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

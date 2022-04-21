@@ -16,10 +16,11 @@ class SequenceEditor : public QWidget
 {
 
     Diagram *diagram = nullptr;
-    QVector<SDClass *> v_diagrams;
+
     QVector<QGraphicsRectItem *> v_rect_diagrams;
 
 public:
+    QVector<SDClass *> v_diagrams;
     SDEdge *currentEdge = nullptr;
 
     QGraphicsScene *sequence_scene = nullptr;

@@ -2,6 +2,8 @@
 #include <QBoxLayout>
 #include <QLabel>
 #include <QFrame>
+#include "sdclass.h"
+#include "class.hh"
 
 SequenceWidget::SequenceWidget(SDClass *sequence_parent ,QString name ,QWidget *parent )
     :QWidget{parent}
@@ -24,6 +26,13 @@ SequenceWidget::SequenceWidget(SDClass *sequence_parent ,QString name ,QWidget *
 
     seq_layout->addWidget(seq_name,0,0);
     seq_layout->addWidget(seq_line,1,0);
+    connect(sequence_parent->cls, &Class::setNameSignal, this, &SequenceWidget::newNameSlot);
 
 }
 
+void SequenceWidget::newNameSlot(const QString &name)
+{
+    if (this->seq_name->text() != name) {
+        this->seq_name->setText(name);
+    }
+}

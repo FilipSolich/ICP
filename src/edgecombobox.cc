@@ -31,4 +31,5 @@ void EdgeComboBox::setSequenceEditorEdges()
     addItem("Sync");
     addItem("Create");
     addItem("Destroy");
+    addItem("Activate");
 }

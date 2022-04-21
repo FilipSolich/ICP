@@ -31,6 +31,15 @@ SDEdgeItem::SDEdgeItem(SDEdge *sdEdge)
         case SDEdge::Type::Destroy:
              pen.setColor(Qt::red);
         break;
+
+        case SDEdge::Type::Activate:
+              pen.setWidth(8);
+              pen.setColor(Qt::blue);
+        break;
+        case SDEdge::Type::Back:
+          pen.setWidth(5);
+          pen.setColor(Qt::yellow);
+        break;
     }
 
     setPen(pen);
