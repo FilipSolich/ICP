@@ -24,6 +24,8 @@
 #include "diagram.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
+#include "sequenceeditor.hh"
+#include "class.hh"
 
 QString FileProcessor::generateFile(Diagram *diagram)
 {
@@ -178,14 +180,21 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
     diagram = new Diagram(tabs->classTab, &tabs->sequenceTabs, mainWindow);
 
     QJsonObject data = QJsonDocument::fromJson(text->toUtf8()).object();
-
+    createTabs(data["sequenceDiagram"].toObject());
     parseCD(data["classDiagram"].toObject());
+    parseSD(data["sequenceDiagram"].toObject());
 
-    // TODO add parse SD
 
     return diagram;
 }
-
+void FileProcessor::createTabs(QJsonObject data)
+{
+    QJsonArray tabs = data["SequenceEditors"].toArray();
+    for(QJsonValue const &diagram : qAsConst(tabs))
+    {
+        emit mainWindow->tabs->tabBarClicked(mainWindow->tabs->count() - 1);
+    }
+}
 void FileProcessor::parseCD(QJsonObject data)
 {
     QJsonArray classes = data["classes"].toArray();
@@ -198,6 +207,39 @@ void FileProcessor::parseCD(QJsonObject data)
         createCDEdge(edge.toObject());
     }
 }
+
+void FileProcessor::parseSD(QJsonObject data)
+{
+    int counter_tabs = 0;
+    QJsonArray tabs = data["SequenceEditors"].toArray();
+    for(QJsonValue const &diagram : qAsConst(tabs))
+    {
+
+        QJsonArray edges = diagram.toObject()["edges"].toArray();
+        QJsonArray sequences =  diagram.toObject()["sequences"].toArray();
+
+        for(QJsonValue const &edge : qAsConst(edges))
+        {
+            createSDEdge(edge.toObject(),counter_tabs);
+        }
+        counter_tabs++;
+    }
+}
+
+
+void FileProcessor::createSDEdge(QJsonObject data,int tab)
+{
+    QString StartSequence{data["StartSequence"].toString()};
+    QString endSequence{data["endSequence"].toString()};
+    int startSocket{data["startSocket"].toInt()};
+    int endSocket{data["endSocket"].toInt()};
+    QString type{data["type"].toString()};
+
+    //todo iter by diagram->sqEditors[tab].v_diagrams
+    // i dont know how :/
+
+}
+
 
 void FileProcessor::createClass(QJsonObject data)
 {

@@ -18,8 +18,10 @@ Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sq
 {
     cdClass = new CDClass(this, cdEditor, pos);
     for(SequenceEditor *sq_i : *sqEditors){
-        new SDClass(sq_i,this);
 
+        SDClass *p =  new SDClass(sq_i,this);
+        sq_i->v_diagrams.push_back(p);
+       // sdClass->push_back(p); //made error
     }
 }
 
@@ -27,7 +29,9 @@ Class::~Class()
 {
     delete cdClass;
     // TODO add delete sdClass
+    sdClass->erase(std::remove(sdClass->begin(), sdClass->end(), nullptr), sdClass->end());
     diagram->classes.remove(diagram->classes.indexOf(this));
+
 }
 
 void Class::setName(QString newName)

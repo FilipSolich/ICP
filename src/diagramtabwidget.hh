@@ -43,7 +43,7 @@ public:
      */
     explicit DiagramTabWidget(QWidget *parent = nullptr);
 
-private slots:
+public slots:
 
     /**
      * Slot for adding new sequence diagram.

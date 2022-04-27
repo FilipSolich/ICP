@@ -38,21 +38,7 @@ SequenceEditor::SequenceEditor(QWidget *parent, Diagram *diagram)
     seq_layout->addWidget(sequence_view);
 
 }
-/*
-void SequenceEditor::makeSequence(QVector<QString> names)
-{
 
-    if (names.size() != 0 ) //empty
-    {
-        for(int i=0; i<names.size();i++){
-            SDClass *new_seq = new SDClass("trida",this,-1200);
-
-            v_diagrams.push_back(new_seq);
-            v_rect_diagrams.push_back(new_seq->item);
-        }
-    }
-}
-*/
 
 void SequenceEditor::remove()
 {

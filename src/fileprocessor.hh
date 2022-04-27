@@ -82,6 +82,11 @@ class FileProcessor
      */
     void createCDEdge(QJsonObject data);
 
+    void parseSD(QJsonObject data);
+    void createTabs(QJsonObject data);
+    void createSequence(QJsonObject data, int tab);
+    void createSDEdge(QJsonObject data, int tab);
+
     QJsonObject genSDEditor(SequenceEditor *sequence_editor);
     QJsonObject genSdEdge(SDEdge *SDEdge);
     QJsonObject genSDClass(SDClass *SDclass);
