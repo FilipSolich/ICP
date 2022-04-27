@@ -22,6 +22,8 @@ Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sq
         SDClass *p =  new SDClass(sq_i,this);
         sq_i->v_diagrams.push_back(p);
        // sdClass->push_back(p); //made error
+        new SDClass(sq_i,this);
+
     }
 }
 
