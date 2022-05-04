@@ -13,11 +13,12 @@ class SequenceWidget : public QWidget
 {
     Q_OBJECT
     QGridLayout *seq_layout = nullptr;
-    QLabel *seq_name = nullptr;
+
     QLabel *seq_line = nullptr;
     QLabel *seq_circle = nullptr;
 
 public:
+    QLabel *seq_name = nullptr;
     SDClass *sequence_parent = nullptr;
     /**
      * \brief SequenceWidget constructor.

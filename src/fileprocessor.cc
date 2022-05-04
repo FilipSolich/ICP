@@ -182,6 +182,7 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
     QJsonObject data = QJsonDocument::fromJson(text->toUtf8()).object();
     createTabs(data["sequenceDiagram"].toObject());
     parseCD(data["classDiagram"].toObject());
+
     parseSD(data["sequenceDiagram"].toObject());
 
 
@@ -189,10 +190,15 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
 }
 void FileProcessor::createTabs(QJsonObject data)
 {
+    bool first_skip = true;
     QJsonArray tabs = data["SequenceEditors"].toArray();
     for(QJsonValue const &diagram : qAsConst(tabs))
     {
-        emit mainWindow->tabs->tabBarClicked(mainWindow->tabs->count() - 1);
+        if(!first_skip)
+        {
+            emit mainWindow->tabs->tabBarClicked(mainWindow->tabs->count() - 1);
+        }
+        first_skip = false;
     }
 }
 void FileProcessor::parseCD(QJsonObject data)
@@ -216,28 +222,49 @@ void FileProcessor::parseSD(QJsonObject data)
     {
 
         QJsonArray edges = diagram.toObject()["edges"].toArray();
-        QJsonArray sequences =  diagram.toObject()["sequences"].toArray();
 
         for(QJsonValue const &edge : qAsConst(edges))
         {
-            createSDEdge(edge.toObject(),counter_tabs);
+             createSDEdge(edge.toObject(),counter_tabs);
         }
-        counter_tabs++;
+         counter_tabs++;
     }
 }
 
 
-void FileProcessor::createSDEdge(QJsonObject data,int tab)
+
+void FileProcessor::createSDEdge(QJsonObject data, int tab)
 {
     QString StartSequence{data["StartSequence"].toString()};
     QString endSequence{data["endSequence"].toString()};
-    int startSocket{data["startSocket"].toInt()};
-    int endSocket{data["endSocket"].toInt()};
+    int start{data["startSocket"].toInt()};
+    int end{data["endSocket"].toInt()};
     QString type{data["type"].toString()};
 
-    //todo iter by diagram->sqEditors[tab].v_diagrams
-    // i dont know how :/
+    SDSocket *startSocket = nullptr;
+    SDSocket *endSocket = nullptr;
 
+    for(SequenceEditor *e : diagram->sqEditors[tab]){
+        for(SDClass *s : e->v_diagrams){
+
+            if(StartSequence == s->widget->seq_name->text())
+            {
+                startSocket = s->sockets[abs(start)];
+            }
+            else if(endSequence == s->widget->seq_name->text())
+            {
+                endSocket = s->sockets[abs(end)];
+            }
+        }
+    }
+    if (!startSocket || !endSocket) {
+        return;
+    }
+
+
+    SDEdge *edge = new SDEdge(type, startSocket, endSocket);
+    startSocket->edges.push_back(edge);
+    endSocket->edges.push_back(edge);
 }
 
 

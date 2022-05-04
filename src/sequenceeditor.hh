@@ -20,6 +20,7 @@ class SequenceEditor : public QWidget
     QVector<QGraphicsRectItem *> v_rect_diagrams;
 
 public:
+
     QVector<SDClass *> v_diagrams;
     SDEdge *currentEdge = nullptr;
 

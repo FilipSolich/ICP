@@ -84,7 +84,7 @@ class FileProcessor
 
     void parseSD(QJsonObject data);
     void createTabs(QJsonObject data);
-    void createSequence(QJsonObject data, int tab);
+
     void createSDEdge(QJsonObject data, int tab);
 
     QJsonObject genSDEditor(SequenceEditor *sequence_editor);
