@@ -1,5 +1,14 @@
-#include "sdclass.h"
+/**
+ * \file sdclass.h
+ *
+ * \brief `SDClass` source code of class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
 
+
+#include "sdclass.h"
 #include "sdsocket.h"
 #include "sdsocketitem.h"
 #include "sequenceitem.h"

@@ -1,3 +1,13 @@
+/**
+ * \file sdedge.h
+ *
+ * \brief `SDEdge` class representing edge for SDCLass.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
+
 #ifndef SDEDGE_H
 #define SDEDGE_H
 

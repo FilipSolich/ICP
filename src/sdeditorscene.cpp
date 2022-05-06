@@ -1,3 +1,12 @@
+/**
+ * \file sdeditorscene.cpp
+ *
+ * \brief `SDEditorScene` source code of class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #include "sdeditorscene.h"
 #include "sdedge.h"
 

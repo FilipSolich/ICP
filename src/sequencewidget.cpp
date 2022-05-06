@@ -1,3 +1,12 @@
+/**
+ * \file sequencewidget.cpp
+ *
+ * \brief `SequenceWidget` source code of that class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #include "sequencewidget.h"
 #include <QBoxLayout>
 #include <QLabel>

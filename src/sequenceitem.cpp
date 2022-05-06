@@ -1,3 +1,12 @@
+/**
+ * \file sequenceitem.cpp
+ *
+ * \brief `Sequenceitem` source code of that class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #include "sequenceitem.h"
 #include "sequenceeditor.hh"
 #include "sdclass.h"

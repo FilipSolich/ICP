@@ -1,3 +1,12 @@
+/**
+ * \file sdedgeitem.h
+ *
+ * \brief `SDEdgeItem` class representing GraphicItem for SDSocket.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #ifndef SDEDGEITEM_H
 #define SDEDGEITEM_H
 #include <QGraphicsPathItem>

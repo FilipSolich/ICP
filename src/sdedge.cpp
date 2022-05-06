@@ -1,5 +1,13 @@
-#include <QGraphicsScene>
+/**
+ * \file sdedge.h
+ *
+ * \brief `SDEdge` source code of class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
 
+#include <QGraphicsScene>
 #include "sdedge.h"
 #include "sequenceeditor.hh"
 #include "sdeditorscene.h"

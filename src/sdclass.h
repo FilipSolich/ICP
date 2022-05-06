@@ -1,3 +1,12 @@
+/**
+ * \file sdclass.h
+ *
+ * \brief `SDClass` class representing SequenceDiagram class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #ifndef SDCLASS_H
 #define SDCLASS_H
 

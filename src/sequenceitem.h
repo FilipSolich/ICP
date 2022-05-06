@@ -1,3 +1,13 @@
+/**
+ * \file sequenceitem.h
+ *
+ * \brief `Sequenceitem` class representing sequence item for SDClass.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
+
 #ifndef SEQUENCEITEM_H
 #define SEQUENCEITEM_H
 

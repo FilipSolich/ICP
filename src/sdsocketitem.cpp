@@ -1,3 +1,12 @@
+/**
+ * \file sdsocketitem.cpp
+ *
+ * \brief `SDSocketItem` source code of class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #include "sdsocketitem.h"
 #include <QGraphicsSceneMouseEvent>
 #include <sequenceeditor.hh>

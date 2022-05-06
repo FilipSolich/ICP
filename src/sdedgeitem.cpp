@@ -1,3 +1,12 @@
+/**
+ * \file sdedgeitem.h
+ *
+ * \brief `SDEdgeItem` source code.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #include "sdedgeitem.h"
 #include "sdsocket.h"
 #include <math.h>
