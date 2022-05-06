@@ -12,7 +12,7 @@ EXAMPLES_DIR = examples
 SRC_DIR      = src
 
 PACK       = 1-xsolic00-xsechr00.tar.gz
-PACK_FILES = $(EXAMPLES_DIR) $(SRC_DIR) Doxyfile Makefile README.txt
+PACK_FILES = $(DOC_DIR) $(EXAMPLES_DIR) $(SRC_DIR) Doxyfile Makefile README.txt
 
 .PHONY: all run example clean doxygen pack
 
