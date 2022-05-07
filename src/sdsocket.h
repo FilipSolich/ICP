@@ -1,3 +1,12 @@
+/**
+ * \file sdsocket.h
+ *
+ * \brief `SDSocket` class representing sdsocket.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #ifndef SDSOCKET_H
 #define SDSOCKET_H
 

@@ -1,3 +1,12 @@
+/**
+ * \file sequencewidget.hh
+ *
+ * \brief `SequenceWidget` class representing sequence widget.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #ifndef SEQUENCEWIDGET_H
 #define SEQUENCEWIDGET_H
 

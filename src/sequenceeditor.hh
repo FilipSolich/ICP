@@ -1,3 +1,13 @@
+/**
+ * \file sequenceeditor.h
+ *
+ * \brief `SequenceEditor` class representing Editor of SDClass.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
+
 #ifndef SEQUENCEEDITOR_H
 #define SEQUENCEEDITOR_H
 

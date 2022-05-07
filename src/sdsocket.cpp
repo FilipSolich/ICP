@@ -1,3 +1,12 @@
+/**
+ * \file sdsocket.cpp
+ *
+ * \brief `SDSocket` source code of class.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #include "sdsocket.h"
 #include "sdclass.h"
 #include "diagram.hh"

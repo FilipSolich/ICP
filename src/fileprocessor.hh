@@ -5,6 +5,7 @@
  *
  * \date 5. 4. 2022
  * \author Filip Solich
+ * \author Marek Sechra
  */
 
 #ifndef FILEPROCESSOR_HH

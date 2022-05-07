@@ -1,3 +1,12 @@
+/**
+ * \file sdeditorscene.h
+ *
+ * \brief `SDEditorScene` class representing editor for scene.
+ *
+ * \date 6. 5. 2022
+ * \author Marek Sechra
+ */
+
 #ifndef SDEDITORSCENE_H
 #define SDEDITORSCENE_H
 
