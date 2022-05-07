@@ -55,6 +55,11 @@ void SDClass::redrawSockets(void)
 
 SDClass::~SDClass()
 {
+    for(SDSocket *socket : qAsConst(sockets))
+    {
+        if(socket != nullptr)
+            delete socket;
+    }
     diagram->sequence_scene->removeItem(item);
     delete seq_proxy;
     delete item;

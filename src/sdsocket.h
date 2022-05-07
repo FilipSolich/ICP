@@ -54,7 +54,11 @@ public:
      * \brief CreateEdge add edge to SDSocket object.
      */
     void CreateEdge();
-    //void RemoveEdge(SDEdge *edge);
+    void removeEdge(SDEdge *edge);
+
+    /** Destructor */
+    ~SDSocket();
+
 };
 
 #endif // SDSOCKET_H
