@@ -40,13 +40,14 @@ CDEdge::~CDEdge()
     item->scene()->removeItem(item);
     delete item;
     if (startSocket) {
-        if (type == Type::Generalization) {
+        if (type == Type::Generalization && !startSocket->cdClass->editor->currentEdge) {
             startSocket->cdClass->removeHeredity(endSocket->cdClass, true);
         }
         startSocket->removeEdge(this);
     }
+
     if (endSocket) {
-        if (type == Type::Generalization) {
+        if (type == Type::Generalization && !startSocket->cdClass->editor->currentEdge) {
             endSocket->cdClass->removeHeredity(startSocket->cdClass, false);
         }
         endSocket->removeEdge(this);
