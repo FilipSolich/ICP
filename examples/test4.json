@@ -1,0 +1,95 @@
+{
+    "classDiagram": {
+        "classes": [
+            {
+                "name": "Bára",
+                "property": [
+                ],
+                "x": -370,
+                "y": -10
+            },
+            {
+                "name": "Tome",
+                "property": [
+                ],
+                "x": 0,
+                "y": 0
+            }
+        ],
+        "edges": [
+        ]
+    },
+    "sequenceDiagram": {
+        "SequenceEditors": [
+            {
+                "edges": [
+                    {
+                        "StartSequence": "Tome",
+                        "endSequence": "Bára",
+                        "endSocket": -15,
+                        "startSocket": 3,
+                        "type": "Async"
+                    }
+                ],
+                "sequences": [
+                    {
+                        "name": "Bára",
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "name": "Tome",
+                        "x": -364,
+                        "y": -364
+                    }
+                ]
+            },
+            {
+                "edges": [
+                    {
+                        "StartSequence": "Tome",
+                        "endSequence": "Bára",
+                        "endSocket": -13,
+                        "startSocket": 6,
+                        "type": "Async"
+                    }
+                ],
+                "sequences": [
+                    {
+                        "name": "Bára",
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "name": "Tome",
+                        "x": -429,
+                        "y": -429
+                    }
+                ]
+            },
+            {
+                "edges": [
+                    {
+                        "StartSequence": "Tome",
+                        "endSequence": "Bára",
+                        "endSocket": -14,
+                        "startSocket": 4,
+                        "type": "Async"
+                    }
+                ],
+                "sequences": [
+                    {
+                        "name": "Bára",
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "name": "Tome",
+                        "x": -496,
+                        "y": -496
+                    }
+                ]
+            }
+        ]
+    }
+}
