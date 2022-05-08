@@ -225,14 +225,13 @@ void FileProcessor::parseSD(QJsonObject data)
     QJsonArray tabs = data["SequenceEditors"].toArray();
     for(QJsonValue const &diagram : qAsConst(tabs))
     {
-
         QJsonArray edges = diagram.toObject()["edges"].toArray();
 
         for(QJsonValue const &edge : qAsConst(edges))
         {
-             createSDEdge(edge.toObject(),counter_tabs);
+             createSDEdge(edge.toObject(), counter_tabs);
         }
-         counter_tabs++;
+        counter_tabs++;
     }
 }
 
@@ -249,51 +248,47 @@ void FileProcessor::createSDEdge(QJsonObject data, int tab)
     SDSocket *startSocket = nullptr;
     SDSocket *endSocket = nullptr;
 
+    for(SDClass *s : (*diagram->sqEditors)[tab]->v_diagrams){
+        if(s->item != nullptr){
+            if (start < 0) {
+                start = start + 8;
+            }
 
-     for(SDClass *s : (*diagram->sqEditors)[tab]->v_diagrams){
+            if (end < 0) {
+                end = end+8;
+            }
 
+            if (StartSequence == s->widget->seq_name->text()) {
+                startSocket = s->sockets[abs(start)];
+            }
+            if (endSequence == s->widget->seq_name->text()) {
+                endSocket = s->sockets[abs(end)];
+            }
 
-                if(s->item != nullptr){
-                    if((start)< 0){
-                        start = start + 8;
-                    }
-
-                    if(end < 0){
-                        end = end+8;
-                    }
-
-                    if(StartSequence == s->widget->seq_name->text())
-                    {
-                        startSocket = s->sockets[abs(start)];
-                    }
-                    if(endSequence == s->widget->seq_name->text())
-                    {
-                        endSocket = s->sockets[abs(end)];
-                    }
-                    for(Class *cls : diagram->classes){
-                       if(cls->getName() != StartSequence and cls->getName() != endSequence){
-                           inputFileInconsistency();
-                       }
-
-                    }
+            bool startExist = false;
+            bool endExist = false;
+            for (Class *cls : diagram->classes) {
+                if (cls->name == StartSequence) {
+                    startExist = true;
                 }
-
+                if (cls->name == endSequence) {
+                    endExist = true;
+                }
+            }
+            if (!startExist || !endExist) {
+                   inputFileInconsistency();
+            }
+        }
     }
-
-
-
 
     if (!startSocket || !endSocket) {
         return;
     }
 
-
     SDEdge *edge = new SDEdge(type, startSocket, endSocket);
     startSocket->edges.push_back(edge);
     endSocket->edges.push_back(edge);
-
 }
-
 
 void FileProcessor::createClass(QJsonObject data)
 {

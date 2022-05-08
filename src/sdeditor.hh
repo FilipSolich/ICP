@@ -24,9 +24,6 @@
  */
 class SDEditor : public QWidget
 {
-
-
-
 public:
     Diagram *diagram = nullptr;
 
@@ -45,8 +42,6 @@ public:
     //TODO delete or not, idk yet
     void makeSequence(QVector<QString> names);
     void remove();
-
-
-
 };
+
 #endif // SDEDITOR_H

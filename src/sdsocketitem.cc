@@ -23,7 +23,6 @@ SDSocketItem::SDSocketItem(SDSocket *socket, QGraphicsItem *parentItem)
 }
 SDSocketItem::~SDSocketItem(){};
 
-
 void SDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
@@ -32,11 +31,9 @@ void SDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
             sd_socket->edges.push_back(editor->currentEdge);
             editor->currentEdge->setSocket(sd_socket, SDEdge::EdgeEndType::End);
         } else {
-            sd_socket->CreateEdge(); //tady
+            sd_socket->CreateEdge();
         }
     }
 
     QGraphicsEllipseItem::mousePressEvent(event);
 }
-
-

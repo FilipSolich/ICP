@@ -26,7 +26,7 @@ class Diagram
 {
 
 public:
-    bool unsavedChanges = false; // TODO deal with unsaved changes
+    bool unsavedChanges = false;
 
     CDEditor *cdEditor = nullptr;
     QVector<SDEditor *> *sqEditors = nullptr;

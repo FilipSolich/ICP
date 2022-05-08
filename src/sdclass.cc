@@ -7,7 +7,6 @@
  * \author Marek Sechra
  */
 
-
 #include "sdclass.hh"
 #include "sdsocket.hh"
 #include "sdsocketitem.hh"
@@ -43,14 +42,11 @@ SDClass::SDClass(SDEditor *diagram,Class *cls,QPointF position)
 
 void SDClass::redrawSockets(void)
 {
-
     for (SDSocket *s : sockets)
     {
         s->redraw();
     }
 }
-
-
 
 SDClass::~SDClass()
 {
