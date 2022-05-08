@@ -37,7 +37,7 @@ QString FileProcessor::generateFile(Diagram *diagram)
 
     QJsonObject data;
     data["classDiagram"] = genCD();
-    data.insert("sequenceDiagram", genSD());
+    data["sequenceDiagram"] =  genSD();
 
     QJsonDocument doc{data};
     return QString{doc.toJson(QJsonDocument::Indented)};
