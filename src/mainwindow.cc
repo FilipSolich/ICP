@@ -243,7 +243,7 @@ void MainWindow::removeSelected()
         }
         else if (item->type() == ItemTypeSDClass){
             Sequenceitem *i = static_cast<Sequenceitem *>(item);
-            delete i->parent_sequence;
+            delete i->parent_sequence->cls;
         }
         else if (item->type() == ItemTypeSDEdge){
             SDEdgeItem *i = static_cast<SDEdgeItem *>(item);

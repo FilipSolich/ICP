@@ -30,7 +30,7 @@ public:
     QString name;
     Diagram *diagram = nullptr;
     CDClass *cdClass = nullptr;
-    QVector<SDClass *> *sdClass = nullptr;
+    QVector<SDClass *> sdClass;
     SequenceEditor *sequence = nullptr;
 
     /**

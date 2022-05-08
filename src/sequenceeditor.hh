@@ -25,12 +25,12 @@
 class SequenceEditor : public QWidget
 {
 
+
+
+public:
     Diagram *diagram = nullptr;
 
     QVector<QGraphicsRectItem *> v_rect_diagrams;
-
-public:
-
     QVector<SDClass *> v_diagrams;
     SDEdge *currentEdge = nullptr;
 
