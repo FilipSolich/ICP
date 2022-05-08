@@ -11,6 +11,8 @@
 #define MAINWINDOW_HH
 
 #include <QMainWindow>
+#include <QUndoStack>
+#include <QGraphicsItem>
 
 #include "edgecombobox.hh"
 
@@ -32,17 +34,28 @@ class MainWindow : public QMainWindow
     QString currentFile;
     Diagram *diagram = nullptr;
 
+    QUndoStack *undoStack = nullptr;
+
     /**
      * Function close current diagram and clear graphics scenes.
      */
     void closeCurrentDiagram(void);
 
 public:
+    DiagramTabWidget *tabs = nullptr;
+    EdgeComboBox *edgeComboBox = nullptr;
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    DiagramTabWidget *tabs = nullptr;
-    EdgeComboBox *edgeComboBox = nullptr;
+public slots:
+    /**
+     * Save old position of QGraphicsItem in undo stack
+     *
+     * @param item moved QGraphicsItem
+     * @param oldPosition old position of moved item
+     */
+    void itemMoved(QGraphicsItem *item, const QPointF &oldPosition);
 
 private slots:
     /**

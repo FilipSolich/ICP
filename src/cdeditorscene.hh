@@ -19,6 +19,8 @@
  */
 class CDEditorScene : public QGraphicsScene
 {
+    Q_OBJECT
+
 public:
     CDEditor *editor = nullptr;
 
@@ -44,6 +46,10 @@ public:
      * \param event Pointer to mouse event.
      */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+signals:
+    void itemMoved(QGraphicsItem *item, const QPointF &movedFrom);
+
 };
 
 #endif // CDEDITORSCENE_H

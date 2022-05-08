@@ -13,6 +13,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMessageBox>
 #include <QSet>
 #include <QTextStream>
 
@@ -310,4 +311,13 @@ void FileProcessor::createCDEdge(QJsonObject data)
     CDEdge *edge = new CDEdge(data["type"].toString(), startSocket, endSocket);
     startSocket->edges.push_back(edge);
     endSocket->edges.push_back(edge);
+}
+
+void FileProcessor::inputFileInconsistency(void)
+{
+    QMessageBox *mg = new QMessageBox;
+    mg->setWindowTitle("Detected inconsistency");
+    mg->setText("Input file contain inconsistent data");
+    mg->addButton(QMessageBox::Ok);
+    mg->exec();
 }

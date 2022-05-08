@@ -23,6 +23,7 @@
 #include "fileprocessor.hh"
 #include "itemtype.hh"
 #include "mainwindow.hh"
+#include "movecommand.hh"
 #include "ui_mainwindow.h"
 
 class DiagramTabWidget;
@@ -34,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     setWindowTitle("UML Editor");
+
+    undoStack = new QUndoStack(this);
 
     tabs = new DiagramTabWidget(this);
     ui->centralwidget->layout()->addWidget(tabs);
@@ -47,15 +50,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
     connect(ui->actionSave_as, &QAction::triggered, this, &MainWindow::saveAs);
+    connect(ui->actionUndo, &QAction::triggered, this, &MainWindow::undo);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
     connect(ui->actionAdd_class, &QAction::triggered, this, &MainWindow::addClass);
     connect(ui->actionRemove_selected, &QAction::triggered, this, &MainWindow::removeSelected);
+
+    connect(diagram->cdEditor->scene, &CDEditorScene::itemMoved, this, &MainWindow::itemMoved);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::itemMoved(QGraphicsItem *item, const QPointF &oldPosition)
+{
+    undoStack->push(new MoveCommand(item, oldPosition));
 }
 
 void MainWindow::newDocument()
@@ -162,7 +173,10 @@ void MainWindow::exit()
     close();
 }
 
-void MainWindow::undo(){} // TODO
+void MainWindow::undo()
+{
+    undoStack->undo();
+}
 
 void MainWindow::about()
 {

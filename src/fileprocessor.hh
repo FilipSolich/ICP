@@ -91,7 +91,13 @@ class FileProcessor
     QJsonObject genSDEditor(SequenceEditor *sequence_editor);
     QJsonObject genSdEdge(SDEdge *SDEdge);
     QJsonObject genSDClass(SDClass *SDclass);
+
+
 public:
+    /**
+     * Inconsistency in input file dialog
+     */
+    void inputFileInconsistency(void);
     /**
      * Constructor.
      *

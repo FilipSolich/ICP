@@ -13,6 +13,8 @@
 
 int main(int argc, char *argv[])
 {
+    //Q_INIT_RESOURCE(undoframework);
+
     QApplication a(argc, argv);
 
     MainWindow w;

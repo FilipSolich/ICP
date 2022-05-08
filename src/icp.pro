@@ -26,6 +26,7 @@ SOURCES += \
     fileprocessor.cc \
     main.cc \
     mainwindow.cc \
+    movecommand.cc \
     sdclass.cpp \
     sdedge.cpp \
     sdedgeitem.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     fileprocessor.hh \
     itemtype.hh \
     mainwindow.hh \
+    movecommand.hh \
     sdclass.h \
     sdedge.h \
     sdedgeitem.h \

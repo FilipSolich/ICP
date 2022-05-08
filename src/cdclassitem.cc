@@ -32,6 +32,8 @@ QVariant CDClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const
                 edge->socketMoved(s);
             }
         }
+
+        emit static_cast<CDEditorScene *>(this->scene())->itemMoved(this, this->pos());
     }
 
     return QGraphicsItem::itemChange(change, value);
