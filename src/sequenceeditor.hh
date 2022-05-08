@@ -15,8 +15,8 @@
 #include <QGraphicsScene>
 #include <QVector>
 #include "diagram.hh"
-#include "sdclass.h"
-#include "sdedge.h"
+#include "sdclass.hh"
+#include "sdedge.hh"
 #include <QPainter>
 
 /**

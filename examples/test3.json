@@ -1,0 +1,88 @@
+{
+    "classDiagram": {
+        "classes": [
+            {
+                "name": "Auto",
+                "property": [
+                    {
+                        "attribute": true,
+                        "dt": "Nazev",
+                        "name": "MojeAuto",
+                        "visibility": "+"
+                    },
+                    {
+                        "attribute": true,
+                        "dt": "SPZ",
+                        "name": "7D452",
+                        "visibility": "+"
+                    }
+                ],
+                "x": -619,
+                "y": 14
+            },
+            {
+                "name": "Motorka",
+                "property": [
+                    {
+                        "attribute": true,
+                        "dt": "km",
+                        "name": "5500",
+                        "visibility": "+"
+                    }
+                ],
+                "x": 36,
+                "y": 72
+            }
+        ],
+        "edges": [
+            {
+                "endClass": "Motorka",
+                "endSocket": "Left",
+                "startClass": "Auto",
+                "startSocket": "Right",
+                "type": "Association"
+            }
+        ]
+    },
+    "sequenceDiagram": {
+        "SequenceEditors": [
+            {
+                "edges": [
+                    {
+                        "StartSequence": "Auto",
+                        "endSequence": "Motorka",
+                        "endSocket": -11,
+                        "startSocket": 7,
+                        "type": "Create"
+                    },
+                    {
+                        "StartSequence": "Auto",
+                        "endSequence": "Auto",
+                        "endSocket": 2,
+                        "startSocket": 7,
+                        "type": "Activate"
+                    },
+                    {
+                        "StartSequence": "Motorka",
+                        "endSequence": "Auto",
+                        "endSocket": 2,
+                        "startSocket": -16,
+                        "type": "Destroy"
+                    }
+                ],
+                "sequences": [
+                    {
+                        "name": "Auto",
+                        "x": -850,
+                        "y": -850
+                    },
+                    {
+                        "name": "Motorka",
+                        "x": -412,
+                        "y": -412
+                    }
+                ]
+            }
+        ]
+    }
+}

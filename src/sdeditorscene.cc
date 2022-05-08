@@ -7,8 +7,8 @@
  * \author Marek Sechra
  */
 
-#include "sdeditorscene.h"
-#include "sdedge.h"
+#include "sdeditorscene.hh"
+#include "sdedge.hh"
 
 SDEditorScene::SDEditorScene(SequenceEditor *editor)
     : editor {editor}

@@ -83,13 +83,48 @@ class FileProcessor
      */
     void createCDEdge(QJsonObject data);
 
+    /**
+     * Parse JSON object into `SDEditor` schema.
+     *
+     * \param data JSON object with `SDEditor` content.
+     */
     void parseSD(QJsonObject data);
-    void createTabs(QJsonObject data);
 
+    /**
+     * Create tabs for SD.
+     *
+     * \param data JSON object with `SDEditor` content.
+     */
+    void createTabs(QJsonObject data);
+    /**
+     * Create SDedge based on JSON object.
+     *
+     * \param data JSON object with `SDEdge` content.
+     */
     void createSDEdge(QJsonObject data, int tab);
 
+    /**
+     * Genererate `SequenceEditor` content from class into JSON object.
+     *
+     * \param property Pointer to `SequenceEditor` object.
+     * \return JSON object with `SequenceEditor` content.
+     */
     QJsonObject genSDEditor(SequenceEditor *sequence_editor);
+
+    /**
+     * Genererate `SDEdge` content from socket edge into JSON object.
+     *
+     * \param edge Pointer to `SDEdge` object.
+     * \return JSON object with `SDEdge` content.
+     */
     QJsonObject genSdEdge(SDEdge *SDEdge);
+
+    /**
+     * Genererate `SDClass` content from class into JSON object.
+     *
+     * \param SDclass Pointer to `SDClass` object.
+     * \return JSON object with `SDClass` content.
+     */
     QJsonObject genSDClass(SDClass *SDclass);
 
 

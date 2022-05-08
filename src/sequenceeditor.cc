@@ -16,9 +16,9 @@
 #include "sequenceeditor.hh"
 #include "diagram.hh"
 #include "cdclass.hh"
-#include "sdclass.h"
+#include "sdclass.hh"
 #include "sequencemsg.h"
-#include "sdeditorscene.h"
+#include "sdeditorscene.hh"
 
 #include <QLabel>
 #include <QGraphicsItem>

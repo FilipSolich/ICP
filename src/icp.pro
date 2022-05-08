@@ -27,15 +27,15 @@ SOURCES += \
     main.cc \
     mainwindow.cc \
     movecommand.cc \
-    sdclass.cpp \
-    sdedge.cpp \
-    sdedgeitem.cpp \
-    sdeditorscene.cpp \
-    sdsocket.cpp \
-    sdsocketitem.cpp \
+    sdclass.cc \
+    sdedge.cc \
+    sdedgeitem.cc \
+    sdeditorscene.cc \
+    sdsocket.cc \
+    sdsocketitem.cc \
     sequenceeditor.cc \
-    sequencewidget.cpp \
-    sequenceitem.cpp
+    sequenceitem.cc \
+    sequencewidget.cc
 
 
 HEADERS += \
@@ -57,16 +57,59 @@ HEADERS += \
     itemtype.hh \
     mainwindow.hh \
     movecommand.hh \
-    sdclass.h \
-    sdedge.h \
-    sdedgeitem.h \
-    sdeditorscene.h \
-    sdsocket.h \
-    sdsocketitem.h \
+    sdclass.hh \
+    sdedge.hh \
+    sdedgeitem.hh \
+    sdeditorscene.hh \
+    sdsocket.hh \
+    sdsocketitem.hh \
     sequenceeditor.hh \
-    sequenceitem.h \
-    sequencewidget.h \
-    sequencewidget.h
+    sequenceitem.hh \
+    sequencewidget.hh \
+    sequencewidget.hh
+FORMS += \
+    mainwindow.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
+
+DISTFILES += \
+    ../save_file_syntax.txt
+
+
+HEADERS += \
+    cdclass.hh \
+    cdclassitem.hh \
+    cdclassproperty.hh \
+    cdclasswidget.hh \
+    cdedge.hh \
+    cdedgeitem.hh \
+    cdeditor.hh \
+    cdeditorscene.hh \
+    cdsocket.hh \
+    cdsocketitem.hh \
+    class.hh \
+    diagram.hh \
+    diagramtabwidget.hh \
+    edgecombobox.hh \
+    fileprocessor.hh \
+    itemtype.hh \
+    mainwindow.hh \
+    movecommand.hh \
+    sdclass.hh \
+    sdedge.hh \
+    sdedgeitem.hh \
+    sdeditorscene.hh \
+    sdsocket.hh \
+    sdsocketitem.hh \
+    sequenceeditor.hh \
+    sequenceitem.hh \
+    sequencewidget.hh
 FORMS += \
     mainwindow.ui
 

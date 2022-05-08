@@ -8,17 +8,16 @@
  */
 
 
-#include "sdclass.h"
-#include "sdsocket.h"
-#include "sdsocketitem.h"
-#include "sequenceitem.h"
-#include "sequencewidget.h"
+#include "sdclass.hh"
+#include "sdsocket.hh"
+#include "sdsocketitem.hh"
+#include "sequenceitem.hh"
+#include "sequencewidget.hh"
 #include "sequenceeditor.hh"
 #include <QGraphicsProxyWidget>
 #include "cdclassitem.hh"
 
 #include "class.hh"
-
 
 SDClass::SDClass(SequenceEditor *diagram,Class *cls,QPointF position)
     : diagram{diagram}, cls{cls}

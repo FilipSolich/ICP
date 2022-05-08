@@ -13,7 +13,7 @@
 #include <QString>
 
 #include "cdclass.hh"
-#include "sdclass.h"
+#include "sdclass.hh"
 
 class Diagram;
 class CDEditor;

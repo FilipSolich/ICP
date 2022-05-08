@@ -7,10 +7,10 @@
  * \author Marek Sechra
  */
 
-#include "sdsocketitem.h"
+#include "sdsocketitem.hh"
 #include <QGraphicsSceneMouseEvent>
 #include <sequenceeditor.hh>
-#include "sdeditorscene.h"
+#include "sdeditorscene.hh"
 
 SDSocketItem::SDSocketItem(SDSocket *socket, QGraphicsItem *parentItem)
     : QGraphicsEllipseItem(parentItem)

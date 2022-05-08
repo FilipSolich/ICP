@@ -14,7 +14,7 @@
 #include <QGraphicsSceneMouseEvent>
 
 #include "diagram.hh"
-#include "sdedge.h"
+#include "sdedge.hh"
 #include "itemtype.hh"
 #include "sequenceeditor.hh"
 

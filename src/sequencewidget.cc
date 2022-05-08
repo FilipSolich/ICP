@@ -7,11 +7,11 @@
  * \author Marek Sechra
  */
 
-#include "sequencewidget.h"
+#include "sequencewidget.hh"
 #include <QBoxLayout>
 #include <QLabel>
 #include <QFrame>
-#include "sdclass.h"
+#include "sdclass.hh"
 #include "class.hh"
 
 SequenceWidget::SequenceWidget(SDClass *sequence_parent ,QString name ,QWidget *parent )

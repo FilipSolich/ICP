@@ -12,8 +12,8 @@
 #define SDEDGE_H
 
 #include <QPoint>
-#include "sdsocket.h"
-#include "sdedgeitem.h"
+#include "sdsocket.hh"
+#include "sdedgeitem.hh"
 
 class Diagram;
 /**
