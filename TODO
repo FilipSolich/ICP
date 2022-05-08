@@ -1,0 +1,4 @@
+- [ ] - Dat vsude Doxygen komentare
+- [ ] - Prejmenovat `.h` na `.hh`
+- [ ] - Volat metodu pro varovne okno v pripade nekonzistence
+- [ ] - Prejmenovat tridy a metody podle konveci `sequenceeditor` -> `sdeditor`
