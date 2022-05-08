@@ -7,8 +7,8 @@
  * \author Marek Sechra
  */
 
-#ifndef SEQUENCEWIDGET_H
-#define SEQUENCEWIDGET_H
+#ifndef SDCLASSWIDGET_H
+#define SDCLASSWIDGET_H
 
 #include <QWidget>
 #include <QLabel>
@@ -45,4 +45,4 @@ public slots:
 
 
 
-#endif // SEQUENCEWIDGET_H
+#endif // SDCLASSWIDGET_H

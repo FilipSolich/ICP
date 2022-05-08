@@ -2,7 +2,7 @@
 #define SEQUENCEMSG_H
 
 #include <QWidget>
-#include <sequenceeditor.hh>
+#include <sdeditor.hh>
 
 #include <QPainter>
 #include <QPoint>

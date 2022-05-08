@@ -9,7 +9,7 @@
 
 #include <QGraphicsScene>
 #include "sdedge.hh"
-#include "sequenceeditor.hh"
+#include "sdeditor.hh"
 #include "sdeditorscene.hh"
 #include "sdedgeitem.hh"
 

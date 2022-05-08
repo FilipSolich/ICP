@@ -16,17 +16,17 @@
 #include "diagram.hh"
 #include "sdedge.hh"
 #include "itemtype.hh"
-#include "sequenceeditor.hh"
+#include "sdeditor.hh"
 
 class SDEditorScene : public QGraphicsScene
 {
 public:
-    SequenceEditor *editor = nullptr;
+    SDEditor *editor = nullptr;
     /**
      * \brief SDEditorScene Constructor.
      * \param editor pointer on SequenceEditor
      */
-    SDEditorScene(SequenceEditor *editor);;
+    SDEditorScene(SDEditor *editor);;
     /**
      * \brief mouseMoveEvent Mouse MOVE event handler.
      * \param event pointer to mouse event.

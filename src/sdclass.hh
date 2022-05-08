@@ -13,9 +13,9 @@
 #include <QWidget>
 
 #include "sdsocket.hh"
-#include "sequenceitem.hh"
-#include "sequencewidget.hh"
-class SequenceEditor;
+#include "sdclassitem.hh"
+#include "sdclasswidget.hh"
+class SDEditor;
 class Class;
 /**
 * This class encapsulates Sequenceitem and SeqeunceWidget(pointers).
@@ -27,11 +27,11 @@ class SDClass
 public:
 
     QGraphicsProxyWidget *seq_proxy = nullptr;
-    SequenceEditor *diagram;
+    SDEditor *diagram;
 
     Class *cls = nullptr;
 
-    Sequenceitem *item = nullptr;
+    SDClassItem *item = nullptr;
     SequenceWidget *widget = nullptr;
     SDSocket *sockets[18];
     QPointF position;
@@ -40,7 +40,7 @@ public:
      * \param diagram is pointer on  `SequenceEditor`
      * \param cls is pointer on  `Class`
      * */
-    SDClass(SequenceEditor *diagram = nullptr , Class *cls = nullptr, QPointF position = {0,0});
+    SDClass(SDEditor *diagram = nullptr , Class *cls = nullptr, QPointF position = {0,0});
     /**
      * Destructor of SDClass
      *

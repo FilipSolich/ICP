@@ -9,7 +9,7 @@
 
 #include "sdsocketitem.hh"
 #include <QGraphicsSceneMouseEvent>
-#include <sequenceeditor.hh>
+#include <sdeditor.hh>
 #include "sdeditorscene.hh"
 
 SDSocketItem::SDSocketItem(SDSocket *socket, QGraphicsItem *parentItem)
@@ -27,7 +27,7 @@ SDSocketItem::~SDSocketItem(){};
 void SDSocketItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        SequenceEditor *editor = static_cast<SDEditorScene *>(scene())->editor;
+        SDEditor *editor = static_cast<SDEditorScene *>(scene())->editor;
         if (editor->currentEdge) {
             sd_socket->edges.push_back(editor->currentEdge);
             editor->currentEdge->setSocket(sd_socket, SDEdge::EdgeEndType::End);

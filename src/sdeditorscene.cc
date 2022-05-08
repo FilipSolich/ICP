@@ -10,7 +10,7 @@
 #include "sdeditorscene.hh"
 #include "sdedge.hh"
 
-SDEditorScene::SDEditorScene(SequenceEditor *editor)
+SDEditorScene::SDEditorScene(SDEditor *editor)
     : editor {editor}
 {}
 

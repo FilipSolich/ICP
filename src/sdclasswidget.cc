@@ -7,7 +7,7 @@
  * \author Marek Sechra
  */
 
-#include "sequencewidget.hh"
+#include "sdclasswidget.hh"
 #include <QBoxLayout>
 #include <QLabel>
 #include <QFrame>

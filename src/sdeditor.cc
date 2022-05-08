@@ -13,7 +13,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 
-#include "sequenceeditor.hh"
+#include "sdeditor.hh"
 #include "diagram.hh"
 #include "cdclass.hh"
 #include "sdclass.hh"
@@ -28,7 +28,7 @@
 #include <QGraphicsLayout>
 #include <QGraphicsEllipseItem>
 
-SequenceEditor::SequenceEditor(QWidget *parent, Diagram *diagram)
+SDEditor::SDEditor(QWidget *parent, Diagram *diagram)
     : QWidget{parent}
 {
     this->diagram = diagram;
@@ -49,7 +49,7 @@ SequenceEditor::SequenceEditor(QWidget *parent, Diagram *diagram)
 }
 
 
-void SequenceEditor::remove()
+void SDEditor::remove()
 {
     for(int i = 0; i<v_rect_diagrams.size();++i)
     {

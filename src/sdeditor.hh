@@ -8,8 +8,8 @@
  */
 
 
-#ifndef SEQUENCEEDITOR_H
-#define SEQUENCEEDITOR_H
+#ifndef SDEDITOR_H
+#define SDEDITOR_H
 
 #include <QWidget>
 #include <QGraphicsScene>
@@ -22,15 +22,15 @@
 /**
  * \brief The SequenceEditor class
  */
-class SequenceEditor : public QWidget
+class SDEditor : public QWidget
 {
 
+
+
+public:
     Diagram *diagram = nullptr;
 
     QVector<QGraphicsRectItem *> v_rect_diagrams;
-
-public:
-
     QVector<SDClass *> v_diagrams;
     SDEdge *currentEdge = nullptr;
 
@@ -40,7 +40,7 @@ public:
      * \param parent pointer on parent qwidget
      * \param diagram pointer on diagram
      */
-    explicit SequenceEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
+    explicit SDEditor(QWidget *parent = nullptr, Diagram *diagram = nullptr);
 
     //TODO delete or not, idk yet
     void makeSequence(QVector<QString> names);
@@ -49,4 +49,4 @@ public:
 
 
 };
-#endif // SEQUENCEEDITOR_H
+#endif // SDEDITOR_H

@@ -17,7 +17,7 @@
 
 class Diagram;
 class CDEditor;
-class SequenceEditor;
+class SDEditor;
 
 /**
  * This class encapsulate data about diagram "class" in all editors instances.
@@ -30,8 +30,8 @@ public:
     QString name;
     Diagram *diagram = nullptr;
     CDClass *cdClass = nullptr;
-    QVector<SDClass *> *sdClass = nullptr;
-    SequenceEditor *sequence = nullptr;
+    QVector<SDClass *> sdClass;
+    SDEditor *sequence = nullptr;
 
     /**
      * Constructor create new class in `CDEditor` and all `SDEditor`.
@@ -42,7 +42,7 @@ public:
      * \param name Name of class.
      * \param pos Position of class in scene.
      */
-    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QString name = "", QPointF pos = {0, 0});
+    Class(Diagram *diagram, CDEditor *cdEditor, QVector<SDEditor *> *sqEditors, QString name = "", QPointF pos = {0, 0});
 
     /** Destructor */
     ~Class();

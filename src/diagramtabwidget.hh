@@ -15,7 +15,7 @@
 
 #include "cdeditor.hh"
 #include "mainwindow.hh"
-#include "sequenceeditor.hh"
+#include "sdeditor.hh"
 
 /**
  * Tab widget for class diagram and sequence diagrams.
@@ -34,7 +34,7 @@ class DiagramTabWidget : public QTabWidget
 
 public:
     CDEditor *classTab;
-    QVector<SequenceEditor *> sequenceTabs;
+    QVector<SDEditor *> sequenceTabs;
 
     /**
      * Constructor.

@@ -17,7 +17,7 @@
 
 class Class;
 class CDEditor;
-class SequenceEditor;
+class SDEditor;
 
 /**
  * Diagram class contains pointers on all classes.
@@ -29,12 +29,12 @@ public:
     bool unsavedChanges = false; // TODO deal with unsaved changes
 
     CDEditor *cdEditor = nullptr;
-    QVector<SequenceEditor *> *sqEditors = nullptr;
+    QVector<SDEditor *> *sqEditors = nullptr;
     MainWindow *mainWindow = nullptr;
 
     QVector<Class *> classes; /** Pointers on all classes */
 
-    Diagram(CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, MainWindow *mainWindow);
+    Diagram(CDEditor *cdEditor, QVector<SDEditor *> *sqEditors, MainWindow *mainWindow);
     ~Diagram();
 
     /**
