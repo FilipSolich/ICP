@@ -32,13 +32,22 @@ SDEdge::SDEdge(QString type, SDSocket *s1, SDSocket *s2 )
     setSocket(s1,EdgeEndType::Start);
     setSocket(s2, EdgeEndType::End);
 
-    this->startSocket->parent_sequence->diagram->currentEdge = this;
+    if(!s2){
+        this->startSocket->parent_sequence->diagram->currentEdge = this;
+    }
 }
 
 SDEdge::~SDEdge(){
     item->scene()->removeItem(item);
     delete item;
+    if(startSocket){
+        startSocket->removeEdge(this);
+    }
+    else{
+        endSocket->removeEdge(this);
+    }
 }
+
 void SDEdge::setSocket(SDSocket *socket, EdgeEndType type)
 {
     if( type == EdgeEndType::Start )
@@ -99,7 +108,7 @@ void SDEdge::setPath()
 void SDEdge::setActPath(){
     QPointF s = startPoint;
     QPointF e = endPoint;
-    if(this->startSocket->position >= 8)
+    if(this->startSocket->position >= 0)
     {
         s.setX(s.rx()-50);
         e.setX(e.rx()-50);

@@ -249,11 +249,19 @@ void FileProcessor::createSDEdge(QJsonObject data, int tab)
     for(SequenceEditor *e : diagram->sqEditors[tab]){
         for(SDClass *s : e->v_diagrams){
 
+            if((start)< 0){
+                start = start + 8;
+            }
+
+            if(end < 0){
+                end = end+8;
+            }
+
             if(StartSequence == s->widget->seq_name->text())
             {
                 startSocket = s->sockets[abs(start)];
             }
-            else if(endSequence == s->widget->seq_name->text())
+            if(endSequence == s->widget->seq_name->text())
             {
                 endSocket = s->sockets[abs(end)];
             }

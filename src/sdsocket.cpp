@@ -19,6 +19,13 @@ SDSocket::SDSocket(int position, SDClass *parent_sequence, QGraphicsItem *parent
     this->item = new SDSocketItem(this, parentItem);
 }
 
+SDSocket::~SDSocket()
+{
+    for (SDEdge *edge : qAsConst(edges)) {
+        delete edge;
+    }
+}
+
 QPointF SDSocket::calculateSocketPos()
 {
 
@@ -85,9 +92,7 @@ void SDSocket::CreateEdge()
 {
     edges.push_back(new SDEdge(parent_sequence->cls->diagram->mainWindow->edgeComboBox->currentText(),this));
 }
-/*void RemoveEdge(SDEdge *edge){
 
-}*/
 
 void SDSocket::redraw(void)
 {
@@ -97,5 +102,10 @@ void SDSocket::redraw(void)
         edge->socketMoved(this);
     }
 
+}
+
+void SDSocket::removeEdge(SDEdge *edge)
+{
+    edges.remove(edges.indexOf(edge));
 }
 
