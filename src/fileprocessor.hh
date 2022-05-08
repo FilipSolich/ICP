@@ -109,7 +109,7 @@ class FileProcessor
      * \param property Pointer to `SequenceEditor` object.
      * \return JSON object with `SequenceEditor` content.
      */
-    QJsonObject genSDEditor(SequenceEditor *sequence_editor);
+    QJsonObject genSDEditor(SDEditor *sequence_editor);
 
     /**
      * Genererate `SDEdge` content from socket edge into JSON object.

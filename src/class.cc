@@ -9,15 +9,15 @@
 
 #include "class.hh"
 #include "diagram.hh"
-#include "sequenceeditor.hh"
+#include "sdeditor.hh"
 #include "sdclass.hh"
 
-Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QString name, QPointF pos)
+Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SDEditor *> *sqEditors, QString name, QPointF pos)
     : name{name},
       diagram{diagram}
 {
     cdClass = new CDClass(this, cdEditor, pos);
-    for(SequenceEditor *sq_i : *sqEditors){
+    for(SDEditor *sq_i : *sqEditors){
 
         SDClass *p =  new SDClass(sq_i,this);
         sq_i->v_diagrams.push_back(p);

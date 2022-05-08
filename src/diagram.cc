@@ -10,7 +10,7 @@
 #include "class.hh"
 #include "diagram.hh"
 
-Diagram::Diagram(CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, MainWindow *mainWindow)
+Diagram::Diagram(CDEditor *cdEditor, QVector<SDEditor *> *sqEditors, MainWindow *mainWindow)
     : cdEditor{cdEditor},
       sqEditors{sqEditors},
       mainWindow{mainWindow}

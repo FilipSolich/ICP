@@ -28,7 +28,7 @@
 #include "diagram.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
-#include "sequenceeditor.hh"
+#include "sdeditor.hh"
 #include "class.hh"
 
 QString FileProcessor::generateFile(Diagram *diagram)
@@ -74,7 +74,7 @@ QJsonObject FileProcessor::genSD()
     QJsonObject data;
     QJsonArray arrEditors;
 
-    for(SequenceEditor *tab : qAsConst(*diagram->sqEditors))
+    for(SDEditor *tab : qAsConst(*diagram->sqEditors))
     {
         arrEditors.push_back(genSDEditor(tab));
 
@@ -83,7 +83,7 @@ QJsonObject FileProcessor::genSD()
     return data;
 }
 
-QJsonObject FileProcessor::genSDEditor(SequenceEditor *sequence_editor)
+QJsonObject FileProcessor::genSDEditor(SDEditor *sequence_editor)
 {
     QJsonObject data;
     QJsonArray sdclasses;

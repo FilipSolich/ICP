@@ -7,10 +7,10 @@
  * \author Marek Sechra
  */
 
-#include "sequenceitem.hh"
-#include "sequenceeditor.hh"
+#include "sdclassitem.hh"
+#include "sdeditor.hh"
 #include "sdclass.hh"
-Sequenceitem::Sequenceitem(SDClass *parent_sequence)
+SDClassItem::SDClassItem(SDClass *parent_sequence)
 {
     this->parent_sequence = parent_sequence;
 
@@ -24,7 +24,7 @@ Sequenceitem::Sequenceitem(SDClass *parent_sequence)
 
 }
 
-QVariant Sequenceitem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant SDClassItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemPositionChange)
     {

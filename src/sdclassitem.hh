@@ -8,14 +8,14 @@
  */
 
 
-#ifndef SEQUENCEITEM_H
-#define SEQUENCEITEM_H
+#ifndef SDCLASSITEM_H
+#define SDCLASSITEM_H
 
 #include <QGraphicsRectItem>
 #include "itemtype.hh"
 class SDClass;
 
-class Sequenceitem : public QGraphicsRectItem
+class SDClassItem : public QGraphicsRectItem
 /**
 * QGraphicsItem for `SDClass` representation.
 */
@@ -27,7 +27,7 @@ public:
      * \param parent_sequence Pointer to `SDClass` which is represented by this graphics rectitem.
      *
      */
-    Sequenceitem(SDClass *parent_sequence);
+    SDClassItem(SDClass *parent_sequence);
     /**
      * \brief type
      * \return ItemTypeSDClass
@@ -42,4 +42,4 @@ public:
     QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value);
 };
 
-#endif // SEQUENCEITEM_H
+#endif // SDCLASSITEM_H

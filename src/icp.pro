@@ -28,14 +28,14 @@ SOURCES += \
     mainwindow.cc \
     movecommand.cc \
     sdclass.cc \
+    sdclassitem.cc \
+    sdclasswidget.cc \
     sdedge.cc \
     sdedgeitem.cc \
+    sdeditor.cc \
     sdeditorscene.cc \
     sdsocket.cc \
-    sdsocketitem.cc \
-    sequenceeditor.cc \
-    sequenceitem.cc \
-    sequencewidget.cc
+    sdsocketitem.cc
 
 
 HEADERS += \
@@ -58,15 +58,15 @@ HEADERS += \
     mainwindow.hh \
     movecommand.hh \
     sdclass.hh \
+    sdclassitem.hh \
+    sdclasswidget.hh \
+    sdclasswidget.hh \
     sdedge.hh \
     sdedgeitem.hh \
+    sdeditor.hh \
     sdeditorscene.hh \
     sdsocket.hh \
-    sdsocketitem.hh \
-    sequenceeditor.hh \
-    sequenceitem.hh \
-    sequencewidget.hh \
-    sequencewidget.hh
+    sdsocketitem.hh
 FORMS += \
     mainwindow.ui
 
@@ -102,14 +102,100 @@ HEADERS += \
     mainwindow.hh \
     movecommand.hh \
     sdclass.hh \
+    sdclassitem.hh \
+    sdclasswidget.hh \
     sdedge.hh \
     sdedgeitem.hh \
+    sdeditor.hh \
     sdeditorscene.hh \
     sdsocket.hh \
-    sdsocketitem.hh \
-    sequenceeditor.hh \
-    sequenceitem.hh \
-    sequencewidget.hh
+    sdsocketitem.hh
+FORMS += \
+    mainwindow.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
+
+DISTFILES += \
+    ../save_file_syntax.txt
+
+
+HEADERS += \
+    cdclass.hh \
+    cdclassitem.hh \
+    cdclassproperty.hh \
+    cdclasswidget.hh \
+    cdedge.hh \
+    cdedgeitem.hh \
+    cdeditor.hh \
+    cdeditorscene.hh \
+    cdsocket.hh \
+    cdsocketitem.hh \
+    class.hh \
+    diagram.hh \
+    diagramtabwidget.hh \
+    edgecombobox.hh \
+    fileprocessor.hh \
+    itemtype.hh \
+    mainwindow.hh \
+    movecommand.hh \
+    sdclass.hh \
+    sdclassitem.hh \
+    sdclasswidget.hh \
+    sdedge.hh \
+    sdedgeitem.hh \
+    sdeditor.hh \
+    sdeditorscene.hh \
+    sdsocket.hh \
+    sdsocketitem.hh
+FORMS += \
+    mainwindow.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
+
+DISTFILES += \
+    ../save_file_syntax.txt
+
+
+HEADERS += \
+    cdclass.hh \
+    cdclassitem.hh \
+    cdclassproperty.hh \
+    cdclasswidget.hh \
+    cdedge.hh \
+    cdedgeitem.hh \
+    cdeditor.hh \
+    cdeditorscene.hh \
+    cdsocket.hh \
+    cdsocketitem.hh \
+    class.hh \
+    diagram.hh \
+    diagramtabwidget.hh \
+    edgecombobox.hh \
+    fileprocessor.hh \
+    itemtype.hh \
+    mainwindow.hh \
+    movecommand.hh \
+    sdclass.hh \
+    sdclassitem.hh \
+    sdclasswidget.hh \
+    sdedge.hh \
+    sdedgeitem.hh \
+    sdeditor.hh \
+    sdeditorscene.hh \
+    sdsocket.hh \
+    sdsocketitem.hh
 FORMS += \
     mainwindow.ui
 

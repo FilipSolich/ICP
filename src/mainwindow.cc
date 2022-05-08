@@ -228,7 +228,7 @@ void MainWindow::removeSelected()
         CDEditorScene *scene = static_cast<CDEditor *>(tabs->currentWidget())->scene;
         items = scene->selectedItems();
     } else {
-        QGraphicsScene *scene = static_cast<SequenceEditor *>(tabs->currentWidget())->sequence_scene;
+        QGraphicsScene *scene = static_cast<SDEditor *>(tabs->currentWidget())->sequence_scene;
         items = scene->selectedItems();
 
     }
@@ -242,7 +242,7 @@ void MainWindow::removeSelected()
             delete i->cdEdge;
         }
         else if (item->type() == ItemTypeSDClass){
-            Sequenceitem *i = static_cast<Sequenceitem *>(item);
+            SDClassItem *i = static_cast<SDClassItem *>(item);
             delete i->parent_sequence->cls;
         }
         else if (item->type() == ItemTypeSDEdge){
