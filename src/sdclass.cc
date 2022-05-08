@@ -19,7 +19,6 @@
 
 #include "class.hh"
 
-
 SDClass::SDClass(SequenceEditor *diagram,Class *cls,QPointF position)
     : diagram{diagram}, cls{cls}
 {

@@ -88,12 +88,14 @@ QJsonObject FileProcessor::genSDEditor(SequenceEditor *sequence_editor)
     QSet <SDEdge *> edgesSet;
     for(SDClass *sdclass: qAsConst(sequence_editor->v_diagrams))
     {
-       // sdclasses.push_back(genSDClass(sdclass));
-        for(SDSocket *socket : qAsConst(sdclass->sockets))
-        {
-            for (SDEdge *edge : qAsConst(socket->edges))
+        if(sdclass->item != nullptr){
+            sdclasses.push_back(genSDClass(sdclass));
+            for(SDSocket *socket : qAsConst(sdclass->sockets))
             {
-                edgesSet.insert(edge);
+                for (SDEdge *edge : qAsConst(socket->edges))
+                {
+                    edgesSet.insert(edge);
+                }
             }
         }
     }
@@ -249,22 +251,23 @@ void FileProcessor::createSDEdge(QJsonObject data, int tab)
     for(SequenceEditor *e : diagram->sqEditors[tab]){
 
         for(SDClass *s : e->v_diagrams){
+            if(s->item != nullptr){
+                if((start)< 0){
+                    start = start + 8;
+                }
 
-            if((start)< 0){
-                start = start + 8;
-            }
+                if(end < 0){
+                    end = end+8;
+                }
 
-            if(end < 0){
-                end = end+8;
-            }
-
-            if(StartSequence == s->widget->seq_name->text())
-            {
-                startSocket = s->sockets[abs(start)];
-            }
-            if(endSequence == s->widget->seq_name->text())
-            {
-                endSocket = s->sockets[abs(end)];
+                if(StartSequence == s->widget->seq_name->text())
+                {
+                    startSocket = s->sockets[abs(start)];
+                }
+                if(endSequence == s->widget->seq_name->text())
+                {
+                    endSocket = s->sockets[abs(end)];
+                }
             }
         }
     }

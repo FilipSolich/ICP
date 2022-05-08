@@ -21,16 +21,12 @@ Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sq
 
         SDClass *p =  new SDClass(sq_i,this);
         sq_i->v_diagrams.push_back(p);
-        //sdClass->push_back(p);
     }
 }
 
 Class::~Class()
 {
-    //sdClass->erase(std::remove(sdClass->begin(), sdClass->end(), nullptr), sdClass->end());
-   // delete sdClass;
-
-
+    delete sdClass;
     delete cdClass;
     diagram->classes.remove(diagram->classes.indexOf(this));
 

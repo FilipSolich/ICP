@@ -1,4 +1,5 @@
-- [ ] - Dat vsude Doxygen komentare
-- [ ] - Prejmenovat `.h` na `.hh`
+- [x] - Dat vsude Doxygen komentare
+- [x] - Prejmenovat `.h` na `.hh`
 - [ ] - Volat metodu pro varovne okno v pripade nekonzistence
-- [ ] - Prejmenovat tridy a metody podle konveci `sequenceeditor` -> `sdeditor`
+- [x] - Prejmenovat tridy a metody podle konveci `sequenceeditor` -> `sdeditor`
+- [ ] - Napsat Destruktor class->v_diagrams a smazat spravnou SDClass #HELP
