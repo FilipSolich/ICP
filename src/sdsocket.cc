@@ -7,8 +7,8 @@
  * \author Marek Sechra
  */
 
-#include "sdsocket.h"
-#include "sdclass.h"
+#include "sdsocket.hh"
+#include "sdclass.hh"
 #include "diagram.hh"
 #include "class.hh"
 SDSocket::SDSocket(int position, SDClass *parent_sequence, QGraphicsItem *parentItem)

@@ -17,7 +17,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 
-#include "sdeditorscene.h"
+#include "sdeditorscene.hh"
 #include "cdeditorscene.hh"
 #include "edgecombobox.hh"
 #include "fileprocessor.hh"

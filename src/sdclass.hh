@@ -12,9 +12,9 @@
 
 #include <QWidget>
 
-#include "sdsocket.h"
-#include "sequenceitem.h"
-#include "sequencewidget.h"
+#include "sdsocket.hh"
+#include "sequenceitem.hh"
+#include "sequencewidget.hh"
 class SequenceEditor;
 class Class;
 /**

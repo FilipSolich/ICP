@@ -10,7 +10,7 @@
 #include "class.hh"
 #include "diagram.hh"
 #include "sequenceeditor.hh"
-#include "sdclass.h"
+#include "sdclass.hh"
 
 Class::Class(Diagram *diagram, CDEditor *cdEditor, QVector<SequenceEditor *> *sqEditors, QString name, QPointF pos)
     : name{name},

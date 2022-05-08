@@ -7,9 +7,9 @@
  * \author Marek Sechra
  */
 
-#include "sequenceitem.h"
+#include "sequenceitem.hh"
 #include "sequenceeditor.hh"
-#include "sdclass.h"
+#include "sdclass.hh"
 Sequenceitem::Sequenceitem(SDClass *parent_sequence)
 {
     this->parent_sequence = parent_sequence;

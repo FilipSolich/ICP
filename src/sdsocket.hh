@@ -10,8 +10,8 @@
 #ifndef SDSOCKET_H
 #define SDSOCKET_H
 
-#include "sdsocketitem.h"
-#include "sdedge.h"
+#include "sdsocketitem.hh"
+#include "sdedge.hh"
 
 class SDClass;
 class SDEdge;

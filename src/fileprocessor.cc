@@ -21,8 +21,8 @@
 #include "cdclassproperty.hh"
 #include "cdeditor.hh"
 #include "cdedge.hh"
-#include "sdedge.h"
-#include "sdclass.h"
+#include "sdedge.hh"
+#include "sdclass.hh"
 #include "diagram.hh"
 #include "fileprocessor.hh"
 #include "mainwindow.hh"
@@ -88,7 +88,7 @@ QJsonObject FileProcessor::genSDEditor(SequenceEditor *sequence_editor)
     QSet <SDEdge *> edgesSet;
     for(SDClass *sdclass: qAsConst(sequence_editor->v_diagrams))
     {
-        sdclasses.push_back(genSDClass(sdclass));
+       // sdclasses.push_back(genSDClass(sdclass));
         for(SDSocket *socket : qAsConst(sdclass->sockets))
         {
             for (SDEdge *edge : qAsConst(socket->edges))
@@ -247,6 +247,7 @@ void FileProcessor::createSDEdge(QJsonObject data, int tab)
     SDSocket *endSocket = nullptr;
 
     for(SequenceEditor *e : diagram->sqEditors[tab]){
+
         for(SDClass *s : e->v_diagrams){
 
             if((start)< 0){

@@ -7,8 +7,8 @@
  * \author Marek Sechra
  */
 
-#include "sdedgeitem.h"
-#include "sdsocket.h"
+#include "sdedgeitem.hh"
+#include "sdsocket.hh"
 #include <math.h>
 #include <QPen>
 #include <QPainter>

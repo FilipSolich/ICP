@@ -8,10 +8,10 @@
  */
 
 #include <QGraphicsScene>
-#include "sdedge.h"
+#include "sdedge.hh"
 #include "sequenceeditor.hh"
-#include "sdeditorscene.h"
-#include "sdedgeitem.h"
+#include "sdeditorscene.hh"
+#include "sdedgeitem.hh"
 
 QMap<SDEdge::Type, QString> SDEdge::typeMap = {
     {SDEdge::Type::Async, "Async"},
