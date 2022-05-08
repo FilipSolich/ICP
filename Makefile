@@ -29,7 +29,7 @@ example: $(TARGET)
 
 clean:
 	-rm -rf $(TARGET) $(PACK) $(DOC_DIR)/html
-	-rm -f $(SRC_DIR)/.qmake.stash
+	-rm -f $(SRC_DIR)/.qmake.stash $(SRC_DIR)/icp.pro.user
 	-make clean -C $(SRC_DIR)
 	-rm -f $(SRC_DIR)/Makefile
 
