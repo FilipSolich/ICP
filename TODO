@@ -1,6 +1,0 @@
-- [x] - Dat vsude Doxygen komentare
-- [x] - Prejmenovat `.h` na `.hh`
-- [ ] - Volat metodu pro varovne okno v pripade nekonzistence
-- [x] - Prejmenovat tridy a metody podle konveci `sequenceeditor` -> `sdeditor`
-- [ ] - Napsat Destruktor class->v_diagrams a smazat spravnou SDClass #HELP
-- [ ] - Vytvorit `bad_example.json` ktery vyvola okno informujici o nekonzistenci
