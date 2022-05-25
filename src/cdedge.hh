@@ -61,7 +61,7 @@ public:
      * \param s1 Pointer to start socket.
      * \param s2 Pointer to end socket.
      */
-    CDEdge(QString type = "Association", CDSocket *s1 = nullptr, CDSocket *s2 = nullptr);
+    CDEdge(QString type = "Association", CDSocket *s1 = nullptr, CDSocket *s2 = nullptr, bool import = false);
 
     /** Destructor */
     ~CDEdge();
@@ -72,7 +72,7 @@ public:
      * \param socket Pointer to socket.
      * \param type Type of socket (Start, End).
      */
-    void setSocket(CDSocket *socket, EdgeEndType type);
+    void setSocket(CDSocket *socket, EdgeEndType type, bool import = false);
 
     /**
      * Caculate "C" point for cubic curve.

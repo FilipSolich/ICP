@@ -7,13 +7,13 @@
  * \author Filip Solich
  */
 
+#include <QDebug>
 #include <QGraphicsScene>
 #include <QMessageBox>
 
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
 #include "cdeditor.hh"
-#include <QMessageBox>
 
 QMap<CDEdge::Type, QString> CDEdge::typeMap = {
     {CDEdge::Type::Association, "Association"},
@@ -22,24 +22,29 @@ QMap<CDEdge::Type, QString> CDEdge::typeMap = {
     {CDEdge::Type::Generalization, "Generalization"},
 };
 
-CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
+CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2, bool import)
 {
     this->type = CDEdge::typeMap.key(type);
 
     item = new CDEdgeItem(this);
     s1->item->scene()->addItem(item);
 
-    setSocket(s1, EdgeEndType::Start);
-    setSocket(s2, EdgeEndType::End);
+    setSocket(s1, EdgeEndType::Start, import);
+    setSocket(s2, EdgeEndType::End, import);
 
     if (!s2) {
         this->startSocket->cdClass->editor->currentEdge = this;
     }
 
     if (this->type == Type::Aggregation || this->type == Type::Generalization) {
-        QPointF socketCenter = s1->getSocketCenter();
-        arrow1 = new QGraphicsLineItem(socketCenter.x(), socketCenter.y(), socketCenter.x(), socketCenter.y(), item);
-        arrow2 = new QGraphicsLineItem(socketCenter.x(), socketCenter.y(), socketCenter.x(), socketCenter.y(), item);
+        QPointF socketCenter;
+        if (s2) {
+             socketCenter = s2->getSocketCenter();
+        } else {
+            socketCenter = s1->getSocketCenter();
+        }
+        arrow1 = new QGraphicsLineItem(socketCenter.x(), socketCenter.y(), arrowPoint1.x(), arrowPoint1.y(), item);
+        arrow2 = new QGraphicsLineItem(socketCenter.x(), socketCenter.y(), arrowPoint2.x(), arrowPoint2.y(), item);
         QPen pen = item->pen();
         arrow1->setPen(pen);
         arrow2->setPen(pen);
@@ -63,13 +68,9 @@ CDEdge::~CDEdge()
         }
         endSocket->removeEdge(this);
     }
-
-    //delete edgeText;
-    //delete kard_start;
-    //delete kard_end;
 }
 
-void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
+void CDEdge::setSocket(CDSocket *socket, EdgeEndType type, bool import)
 {
     if (type == EdgeEndType::Start) {
         startSocket = socket;
@@ -86,7 +87,9 @@ void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
     if (type == EdgeEndType::End && socket != nullptr) {
         startSocket->cdClass->editor->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
-        CreateTaskWindow();
+        if (!import) {
+            CreateTaskWindow();
+        }
         createLabels();
     }
 }
@@ -98,7 +101,7 @@ void CDEdge::createLabels()
     QPointF p2 = this->endSocket->getSocketCenter();
 
     if(this->startSocket->position == CDSocket::Position::Top)
-       p.ry()+=20;
+        p.ry()+=20;
     else if(this->startSocket->position == CDSocket::Position::Bottom)
         p.ry()-=20;
 

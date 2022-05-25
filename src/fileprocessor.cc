@@ -331,12 +331,12 @@ void FileProcessor::createCDEdge(QJsonObject data)
         return;
     }
 
-    CDEdge *edge = new CDEdge(data["type"].toString(), startSocket, endSocket);
-    startSocket->edges.push_back(edge);
-    endSocket->edges.push_back(edge);
+    CDEdge *edge = new CDEdge(data["type"].toString(), startSocket, endSocket, true);
     edge->name.setText(data["name"].toString());
     edge->kardinalita_from.setText(data["startCardinality"].toString());
     edge->kardinalita_to.setText(data["endCardinality"].toString());
+    startSocket->edges.push_back(edge);
+    endSocket->edges.push_back(edge);
     if (edge->type == CDEdge::Type::Association || edge->type == CDEdge::Type::Composition) {
         edge->createLabels();
     }
