@@ -118,7 +118,10 @@ void CDEdge::createLabels()
 
 
     edgeText = new QGraphicsTextItem(name.text(), item);
-    edgeText->setPos(p-p2);
+    float px = this->item->boundingRect().width()/ 2.00;
+    float py = this->item->boundingRect().height()/2.00;
+    edgeText->setPos(px,py);
+
 
     kard_start->setFlag(QGraphicsItem::ItemIsMovable);
     kard_start->setFlag(QGraphicsItem::ItemIsSelectable);
