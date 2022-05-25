@@ -89,9 +89,37 @@ void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
 
 void CDEdge::createLabels()
 {
+
+    QPointF p = this->startSocket->getSocketCenter();
+    QPointF p2 = this->endSocket->getSocketCenter();
+    if(this->startSocket->position == CDSocket::Position::Top){
+       p.ry()+=20;
+       p2.ry()+=20;
+    }
+    else if(this->startSocket->position == CDSocket::Position::Bottom)
+    {
+        p.ry()-=20;
+        p2.ry()-=20;
+    }
+    else if(this->startSocket->position == CDSocket::Position::Left){
+        p.rx() -= 20;
+        p2.rx() -= 20;
+    }
+    else if(this->startSocket->position == CDSocket::Position::Right)
+    {
+        p.rx() += 20;
+        p2.rx() += 20;
+    }
     kard_start = new QGraphicsTextItem(kardinalita_from.text(), item);
+    kard_start->setPos(p);
+
     kard_end = new QGraphicsTextItem(kardinalita_to.text(), item);
+    kard_end->setPos(p2);
+
+
     edgeText = new QGraphicsTextItem(name.text(), item);
+    edgeText->setPos(p-p2);
+
     kard_start->setFlag(QGraphicsItem::ItemIsMovable);
     kard_start->setFlag(QGraphicsItem::ItemIsSelectable);
     kard_start->setTextInteractionFlags(Qt::TextEditorInteraction);
