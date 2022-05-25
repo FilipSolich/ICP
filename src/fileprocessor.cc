@@ -249,7 +249,14 @@ void FileProcessor::createSDEdge(QJsonObject data, int tab)
     SDSocket *startSocket = nullptr;
     SDSocket *endSocket = nullptr;
 
+    for(Class *cls : diagram->classes){
+       if(cls->getName() != "" and StartSequence != "" and endSequence != ""){
+           if(cls->getName() != StartSequence or cls->getName() != endSequence){
+              inputFileInconsistency();
+           }
 
+       }
+    }
      for(SDClass *s : (*diagram->sqEditors)[tab]->v_diagrams){
 
 
@@ -270,12 +277,7 @@ void FileProcessor::createSDEdge(QJsonObject data, int tab)
                     {
                         endSocket = s->sockets[abs(end)];
                     }
-                    for(Class *cls : diagram->classes){
-                       if(cls->getName() != StartSequence and cls->getName() != endSequence){
-                           inputFileInconsistency();
-                       }
 
-                    }
                 }
 
     }
