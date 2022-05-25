@@ -102,6 +102,8 @@ public:
      * \param s Pointer to socket.
      */
     void socketMoved(CDSocket *s);
+
+    void CreateTaskWindow();
 };
 
 #endif // CDEDGE_H
