@@ -92,24 +92,29 @@ void CDEdge::createLabels()
 
     QPointF p = this->startSocket->getSocketCenter();
     QPointF p2 = this->endSocket->getSocketCenter();
-    if(this->startSocket->position == CDSocket::Position::Top){
+
+    if(this->startSocket->position == CDSocket::Position::Top)
        p.ry()+=20;
-       p2.ry()+=20;
-    }
     else if(this->startSocket->position == CDSocket::Position::Bottom)
-    {
         p.ry()-=20;
-        p2.ry()-=20;
-    }
-    else if(this->startSocket->position == CDSocket::Position::Left){
+
+    else if(this->startSocket->position == CDSocket::Position::Left)
         p.rx() -= 20;
-        p2.rx() -= 20;
-    }
+
     else if(this->startSocket->position == CDSocket::Position::Right)
-    {
         p.rx() += 20;
+
+    if(this->endSocket->position == CDSocket::Position::Top)
+       p2.ry()+=20;
+    else if(this->endSocket->position == CDSocket::Position::Bottom)
+        p2.ry()-=20;
+
+    else if(this->endSocket->position == CDSocket::Position::Left)
+        p2.rx() -= 20;
+
+    else if(this->endSocket->position == CDSocket::Position::Right)
         p2.rx() += 20;
-    }
+
     kard_start = new QGraphicsTextItem(kardinalita_from.text(), item);
     kard_start->setPos(p);
 
@@ -118,9 +123,9 @@ void CDEdge::createLabels()
 
 
     edgeText = new QGraphicsTextItem(name.text(), item);
-    float px = this->item->boundingRect().width()/ 2.00;
-    float py = this->item->boundingRect().height()/2.00;
-    edgeText->setPos(px,py);
+    float px = p.x() + p2.x() ;
+    float py = p.y() + p2.y() ;
+    edgeText->setPos(px/2.0,py/2.0);
 
 
     kard_start->setFlag(QGraphicsItem::ItemIsMovable);
