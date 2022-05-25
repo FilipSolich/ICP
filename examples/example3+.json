@@ -1,0 +1,111 @@
+{
+    "classDiagram": {
+        "classes": [
+            {
+                "name": "B",
+                "property": [
+                ],
+                "x": 9,
+                "y": -5
+            },
+            {
+                "name": "A",
+                "property": [
+                    {
+                        "attribute": true,
+                        "dt": "",
+                        "name": "",
+                        "visibility": "+"
+                    }
+                ],
+                "x": -661,
+                "y": -32
+            },
+            {
+                "name": "C",
+                "property": [
+                ],
+                "x": -661,
+                "y": 350
+            }
+        ],
+        "edges": [
+            {
+                "endCardinality": "8",
+                "endClass": "B",
+                "endSocket": "Left",
+                "name": "AB",
+                "startCardinality": "1",
+                "startClass": "A",
+                "startSocket": "Right",
+                "type": "Association"
+            },
+            {
+                "endCardinality": "",
+                "endClass": "C",
+                "endSocket": "Top",
+                "name": "",
+                "startCardinality": "",
+                "startClass": "A",
+                "startSocket": "Bottom",
+                "type": "Aggregation"
+            },
+            {
+                "endCardinality": "",
+                "endClass": "C",
+                "endSocket": "Right",
+                "name": "",
+                "startCardinality": "",
+                "startClass": "B",
+                "startSocket": "Bottom",
+                "type": "Generalization"
+            }
+        ]
+    },
+    "sequenceDiagram": {
+        "SequenceEditors": [
+            {
+                "edges": [
+                    {
+                        "StartSequence": "C",
+                        "endSequence": "A",
+                        "endSocket": -17,
+                        "startSocket": 1,
+                        "type": "Destroy"
+                    },
+                    {
+                        "StartSequence": "C",
+                        "endSequence": "C",
+                        "endSocket": 2,
+                        "startSocket": 6,
+                        "type": "Activate"
+                    },
+                    {
+                        "StartSequence": "C",
+                        "endSequence": "A",
+                        "endSocket": -11,
+                        "startSocket": 7,
+                        "type": "Create"
+                    }
+                ],
+                "sequences": [
+                    {
+                        "name": "B",
+                        "x": 78,
+                        "y": 78
+                    },
+                    {
+                        "name": "A",
+                        "x": -262,
+                        "y": -262
+                    },
+                    {
+                        "name": "C",
+                        "x": -706,
+                        "y": -706
+                    }
+                ]
+            }
+        ]
+    }
+}
