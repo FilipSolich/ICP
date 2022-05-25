@@ -41,6 +41,11 @@ public:
     QPointF c1;
     QPointF c2;
 
+    QGraphicsLineItem *arrow1 = nullptr;
+    QGraphicsLineItem *arrow2 = nullptr;
+    QPointF arrowPoint1;
+    QPointF arrowPoint2;
+
     /**
      * Constructor create new edge in `CDEditor`.
      *

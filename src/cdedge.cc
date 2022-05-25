@@ -1,4 +1,4 @@
-/**
+z/**
  * \file cdedge.cc
  *
  * \brief Source code file for `CDEdge` class.
@@ -33,6 +33,15 @@ CDEdge::CDEdge(QString type, CDSocket *s1, CDSocket *s2)
 
     if (!s2) {
         this->startSocket->cdClass->editor->currentEdge = this;
+    }
+
+    if (this->type == Type::Aggregation || this->type == Type::Generalization) {
+        QPointF socketCenter = s1->getSocketCenter();
+        arrow1 = new QGraphicsLineItem(socketCenter.x(), socketCenter.y(), socketCenter.x(), socketCenter.y(), item);
+        arrow2 = new QGraphicsLineItem(socketCenter.x(), socketCenter.y(), socketCenter.x(), socketCenter.y(), item);
+        QPen pen = item->pen();
+        arrow1->setPen(pen);
+        arrow2->setPen(pen);
     }
 }
 
@@ -105,6 +114,27 @@ void CDEdge::setPoints(EdgeEndType type, QPointF point, CDSocket::Position socPo
     } else {
         endPoint = point;
         c2 = calculateC(point, socPos);
+        if (socPos == CDSocket::Position::Top) {
+            arrowPoint1.setX(endPoint.x() - 10);
+            arrowPoint1.setY(endPoint.y() - 10);
+            arrowPoint2.setX(endPoint.x() + 10);
+            arrowPoint2.setY(endPoint.y() - 10);
+        } else if (socPos == CDSocket::Position::Right) {
+            arrowPoint1.setX(endPoint.x() + 10);
+            arrowPoint1.setY(endPoint.y() - 10);
+            arrowPoint2.setX(endPoint.x() + 10);
+            arrowPoint2.setY(endPoint.y() + 10);
+        } else if (socPos == CDSocket::Position::Bottom) {
+            arrowPoint1.setX(endPoint.x() - 10);
+            arrowPoint1.setY(endPoint.y() + 10);
+            arrowPoint2.setX(endPoint.x() + 10);
+            arrowPoint2.setY(endPoint.y() + 10);
+        } else if (socPos == CDSocket::Position::Left) {
+            arrowPoint1.setX(endPoint.x() - 10);
+            arrowPoint1.setY(endPoint.y() - 10);
+            arrowPoint2.setX(endPoint.x() - 10);
+            arrowPoint2.setY(endPoint.y() + 10);
+        }
     }
 
     setPath();
@@ -117,6 +147,12 @@ void CDEdge::setPath()
     path.cubicTo(c1, c2, endPoint);
     item->setPath(path);
 
+    if (arrow1) {
+        arrow1->setLine(endPoint.x(), endPoint.y(), arrowPoint1.x(), arrowPoint1.y());
+    }
+    if (arrow2) {
+        arrow2->setLine(endPoint.x(), endPoint.y(), arrowPoint2.x(), arrowPoint2.y());
+    }
 }
 
 void CDEdge::setMousePos(QPointF pos)
