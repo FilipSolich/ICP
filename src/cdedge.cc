@@ -101,9 +101,9 @@ void CDEdge::createLabels()
     QPointF p2 = this->endSocket->getSocketCenter();
 
     if(this->startSocket->position == CDSocket::Position::Top)
-        p.ry()+=20;
+        p.ry()-= 40;
     else if(this->startSocket->position == CDSocket::Position::Bottom)
-        p.ry()-=20;
+        p.ry()+= 40;
 
     else if(this->startSocket->position == CDSocket::Position::Left)
         p.rx() -= 20;
@@ -112,9 +112,9 @@ void CDEdge::createLabels()
         p.rx() += 20;
 
     if(this->endSocket->position == CDSocket::Position::Top)
-       p2.ry()+=20;
+       p2.ry()-=40;
     else if(this->endSocket->position == CDSocket::Position::Bottom)
-        p2.ry()-=20;
+        p2.ry()+=40;
 
     else if(this->endSocket->position == CDSocket::Position::Left)
         p2.rx() -= 20;
