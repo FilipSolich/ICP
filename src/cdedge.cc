@@ -175,16 +175,12 @@ void CDEdge::CreateTaskWindow(){
     QMessageBox *mg = new QMessageBox;
     QLabel namelabel;
     namelabel.setText("Name of relation: ");
-    QLineEdit le;
 
-    QLabel kard_label;
-    kard_label.setText("Cardinality(from):");
+    QLabel kard_from_label;
+    kard_from_label.setText("Cardinality(from):");
 
-    QLabel kard_label2;
-    kard_label2.setText("Cardinality(to):");
-
-    QLineEdit kardinalita_in;
-    QLineEdit kardinalita_out;
+    QLabel kard_to_label;
+    kard_to_label.setText("Cardinality(to):");
 
     mg->setWindowTitle("SET PATH");
     if(this->type == Type::Association){
@@ -198,13 +194,13 @@ void CDEdge::CreateTaskWindow(){
     if( this->type == Type::Composition or this->type == Type::Association)
     {
         mg->layout()->addWidget(&namelabel);
-        mg->layout()->addWidget(&le);
+        mg->layout()->addWidget(&name);
 
-        mg->layout()->addWidget(&kard_label);
-        mg->layout()->addWidget(&kardinalita_in);
+        mg->layout()->addWidget(&kard_from_label);
+        mg->layout()->addWidget(&kardinalita_from);
 
-        mg->layout()->addWidget(&kard_label2);
-        mg->layout()->addWidget(&kardinalita_out);
+        mg->layout()->addWidget(&kard_to_label);
+        mg->layout()->addWidget(&kardinalita_to);
 
         mg->addButton(QMessageBox::Ok);
         mg->exec();

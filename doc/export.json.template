@@ -22,6 +22,9 @@
         "startSocket": "top",
         "endClass": "name2",
         "endSocket": "bottom"
+        "name": "name",
+        "startCardinality": "1",
+        "endCardinality": "1..*",
       }
     ]
   },

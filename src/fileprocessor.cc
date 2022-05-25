@@ -172,10 +172,13 @@ QJsonObject FileProcessor::genCDEdge(CDEdge *edge)
     QJsonObject data;
 
     data["type"] = CDEdge::typeMap[edge->type];
+    data["name"] = edge->name.text();
     data["startClass"] = edge->startSocket->cdClass->cls->getName();
     data["endClass"] = edge->endSocket->cdClass->cls->getName();
     data["startSocket"] = CDSocket::positionMap[edge->startSocket->position];
     data["endSocket"] = CDSocket::positionMap[edge->endSocket->position];
+    data["startCardinality"] = edge->kardinalita_from.text();
+    data["endCardinality"] = edge->kardinalita_to.text();
 
     return data;
 }

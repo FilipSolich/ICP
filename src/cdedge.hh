@@ -46,6 +46,10 @@ public:
     QPointF arrowPoint1;
     QPointF arrowPoint2;
 
+    QLineEdit name;
+    QLineEdit kardinalita_from;
+    QLineEdit kardinalita_to;
+
     /**
      * Constructor create new edge in `CDEditor`.
      *
