@@ -50,6 +50,10 @@ public:
     QLineEdit kardinalita_from;
     QLineEdit kardinalita_to;
 
+    QGraphicsTextItem *kard_start = nullptr;
+    QGraphicsTextItem *kard_end = nullptr;
+    QGraphicsTextItem *edgeText = nullptr;
+
     /**
      * Constructor create new edge in `CDEditor`.
      *
@@ -107,6 +111,7 @@ public:
      */
     void socketMoved(CDSocket *s);
     void CreateTaskWindow();
+    void createLabels();
 };
 
 #endif // CDEDGE_H
