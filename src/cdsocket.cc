@@ -13,6 +13,7 @@
 #include "cdsocketitem.hh"
 #include "diagram.hh"
 
+
 QMap<CDSocket::Position, QString> CDSocket::positionMap = {
     {CDSocket::Position::Top, "Top"},
     {CDSocket::Position::Right, "Right"},
@@ -78,6 +79,8 @@ QPointF CDSocket::getSocketCenter()
 void CDSocket::createEdge()
 {
     edges.push_back(new CDEdge(cdClass->cls->diagram->mainWindow->edgeComboBox->currentText(), this));
+
+
 }
 
 void CDSocket::redraw()

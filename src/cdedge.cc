@@ -1,4 +1,4 @@
-/**
+z/**
  * \file cdedge.cc
  *
  * \brief Source code file for `CDEdge` class.
@@ -13,6 +13,7 @@
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
 #include "cdeditor.hh"
+#include <QMessageBox>
 
 QMap<CDEdge::Type, QString> CDEdge::typeMap = {
     {CDEdge::Type::Association, "Association"},
@@ -138,6 +139,7 @@ void CDEdge::setPoints(EdgeEndType type, QPointF point, CDSocket::Position socPo
     }
 
     setPath();
+
 }
 
 void CDEdge::setPath()
