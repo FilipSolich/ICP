@@ -196,6 +196,7 @@ Diagram *FileProcessor::parseFile(DiagramTabWidget *tabs, QString *text)
 
     return diagram;
 }
+
 void FileProcessor::createTabs(QJsonObject data)
 {
     bool first_skip = true;
@@ -209,6 +210,7 @@ void FileProcessor::createTabs(QJsonObject data)
         first_skip = false;
     }
 }
+
 void FileProcessor::parseCD(QJsonObject data)
 {
     QJsonArray classes = data["classes"].toArray();
@@ -237,8 +239,6 @@ void FileProcessor::parseSD(QJsonObject data)
         counter_tabs++;
     }
 }
-
-
 
 void FileProcessor::createSDEdge(QJsonObject data, int tab)
 {
@@ -334,6 +334,12 @@ void FileProcessor::createCDEdge(QJsonObject data)
     CDEdge *edge = new CDEdge(data["type"].toString(), startSocket, endSocket);
     startSocket->edges.push_back(edge);
     endSocket->edges.push_back(edge);
+    edge->name.setText(data["name"].toString());
+    edge->kardinalita_from.setText(data["startCardinality"].toString());
+    edge->kardinalita_to.setText(data["endCardinality"].toString());
+    if (edge->type == CDEdge::Type::Association || edge->type == CDEdge::Type::Composition) {
+        edge->createLabels();
+    }
 }
 
 void FileProcessor::inputFileInconsistency(void)

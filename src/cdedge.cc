@@ -83,7 +83,27 @@ void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
         startSocket->cdClass->editor->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
         CreateTaskWindow();
+        createLabels();
     }
+}
+
+void CDEdge::createLabels()
+{
+    kard_start = new QGraphicsTextItem(kardinalita_from.text(), item);
+    kard_end = new QGraphicsTextItem(kardinalita_to.text(), item);
+    edgeText = new QGraphicsTextItem(name.text(), item);
+    kard_start->setFlag(QGraphicsItem::ItemIsMovable);
+    kard_start->setFlag(QGraphicsItem::ItemIsSelectable);
+    kard_start->setTextInteractionFlags(Qt::TextEditorInteraction);
+    kard_end->setFlag(QGraphicsItem::ItemIsMovable);
+    kard_end->setFlag(QGraphicsItem::ItemIsSelectable);
+    kard_end->setTextInteractionFlags(Qt::TextEditorInteraction);
+    edgeText->setFlag(QGraphicsItem::ItemIsMovable);
+    edgeText->setFlag(QGraphicsItem::ItemIsSelectable);
+    edgeText->setTextInteractionFlags(Qt::TextEditorInteraction);
+    this->item->scene()->addItem(kard_start);
+    this->item->scene()->addItem(kard_end);
+    this->item->scene()->addItem(edgeText);
 }
 
 QPointF CDEdge::calculateC(QPointF point, CDSocket::Position socPos)
