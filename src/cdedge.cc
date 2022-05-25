@@ -1,4 +1,3 @@
-
 /**
  * \file cdedge.cc
  *
@@ -9,6 +8,7 @@
  */
 
 #include <QGraphicsScene>
+#include <QMessageBox>
 
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
@@ -169,7 +169,6 @@ void CDEdge::socketMoved(CDSocket *s)
         setPoints(EdgeEndType::End, s->getSocketCenter(), s->position);
     }
 }
-
 
 void CDEdge::CreateTaskWindow(){
 
