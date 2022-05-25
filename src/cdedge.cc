@@ -63,6 +63,10 @@ CDEdge::~CDEdge()
         }
         endSocket->removeEdge(this);
     }
+
+    //delete edgeText;
+    //delete kard_start;
+    //delete kard_end;
 }
 
 void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
@@ -94,16 +98,10 @@ void CDEdge::createLabels()
     edgeText = new QGraphicsTextItem(name.text(), item);
     kard_start->setFlag(QGraphicsItem::ItemIsMovable);
     kard_start->setFlag(QGraphicsItem::ItemIsSelectable);
-    kard_start->setTextInteractionFlags(Qt::TextEditorInteraction);
     kard_end->setFlag(QGraphicsItem::ItemIsMovable);
     kard_end->setFlag(QGraphicsItem::ItemIsSelectable);
-    kard_end->setTextInteractionFlags(Qt::TextEditorInteraction);
     edgeText->setFlag(QGraphicsItem::ItemIsMovable);
     edgeText->setFlag(QGraphicsItem::ItemIsSelectable);
-    edgeText->setTextInteractionFlags(Qt::TextEditorInteraction);
-    this->item->scene()->addItem(kard_start);
-    this->item->scene()->addItem(kard_end);
-    this->item->scene()->addItem(edgeText);
 }
 
 QPointF CDEdge::calculateC(QPointF point, CDSocket::Position socPos)
