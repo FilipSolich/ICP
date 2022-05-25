@@ -17,7 +17,6 @@
 SDEdgeItem::SDEdgeItem(SDEdge *sdEdge)
     :sdEdge(sdEdge)
 {
-
     QPen pen;
     pen.setWidth(4);
 
@@ -52,5 +51,4 @@ SDEdgeItem::SDEdgeItem(SDEdge *sdEdge)
     }
 
     setPen(pen);
-
 }

@@ -12,6 +12,7 @@
 #include "cdedge.hh"
 #include "cdedgeitem.hh"
 #include "cdeditor.hh"
+#include <QMessageBox>
 
 QMap<CDEdge::Type, QString> CDEdge::typeMap = {
     {CDEdge::Type::Association, "Association"},
@@ -71,6 +72,7 @@ void CDEdge::setSocket(CDSocket *socket, EdgeEndType type)
     if (type == EdgeEndType::End && socket != nullptr) {
         startSocket->cdClass->editor->currentEdge = nullptr;
         this->item->setFlag(QGraphicsItem::ItemIsSelectable);
+        CreateTaskWindow();
     }
 }
 
@@ -106,6 +108,7 @@ void CDEdge::setPoints(EdgeEndType type, QPointF point, CDSocket::Position socPo
     }
 
     setPath();
+
 }
 
 void CDEdge::setPath()
@@ -113,6 +116,7 @@ void CDEdge::setPath()
     QPainterPath path{startPoint};
     path.cubicTo(c1, c2, endPoint);
     item->setPath(path);
+
 }
 
 void CDEdge::setMousePos(QPointF pos)
@@ -126,5 +130,47 @@ void CDEdge::socketMoved(CDSocket *s)
         setPoints(EdgeEndType::Start, s->getSocketCenter(), s->position);
     } else {
         setPoints(EdgeEndType::End, s->getSocketCenter(), s->position);
+    }
+}
+
+
+void CDEdge::CreateTaskWindow(){
+
+    QMessageBox *mg = new QMessageBox;
+    QLabel namelabel;
+    namelabel.setText("Name of relation: ");
+    QLineEdit le;
+
+    QLabel kard_label;
+    kard_label.setText("Cardinality(from):");
+
+    QLabel kard_label2;
+    kard_label2.setText("Cardinality(to):");
+
+    QLineEdit kardinalita_in;
+    QLineEdit kardinalita_out;
+
+    mg->setWindowTitle("SET PATH");
+    if(this->type == Type::Association){
+         mg->setText("Association");
+
+    }
+    else if(this->type == Type::Composition){
+          mg->setText("Composition");
+    }
+
+    if( this->type == Type::Composition or this->type == Type::Association)
+    {
+        mg->layout()->addWidget(&namelabel);
+        mg->layout()->addWidget(&le);
+
+        mg->layout()->addWidget(&kard_label);
+        mg->layout()->addWidget(&kardinalita_in);
+
+        mg->layout()->addWidget(&kard_label2);
+        mg->layout()->addWidget(&kardinalita_out);
+
+        mg->addButton(QMessageBox::Ok);
+        mg->exec();
     }
 }

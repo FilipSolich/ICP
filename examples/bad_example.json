@@ -49,7 +49,7 @@
             {
                 "edges": [
                     {
-                        "StartSequence": "Auto",
+                        "StartSequence": "Autoaa",
                         "endSequence": "Motorka",
                         "endSocket": -11,
                         "startSocket": 7,

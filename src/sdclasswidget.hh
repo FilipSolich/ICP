@@ -42,7 +42,4 @@ public slots:
 
 };
 
-
-
-
 #endif // SDCLASSWIDGET_H

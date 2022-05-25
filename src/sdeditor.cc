@@ -17,7 +17,6 @@
 #include "diagram.hh"
 #include "cdclass.hh"
 #include "sdclass.hh"
-#include "sequencemsg.h"
 #include "sdeditorscene.hh"
 
 #include <QLabel>
@@ -45,9 +44,7 @@ SDEditor::SDEditor(QWidget *parent, Diagram *diagram)
 
     seq_layout->addWidget(seqBtns);
     seq_layout->addWidget(sequence_view);
-
 }
-
 
 void SDEditor::remove()
 {
@@ -65,8 +62,4 @@ void SDEditor::remove()
     }
     v_diagrams.erase(std::remove(v_diagrams.begin(), v_diagrams.end(), nullptr), v_diagrams.end());
     v_rect_diagrams.erase(std::remove(v_rect_diagrams.begin(), v_rect_diagrams.end(), nullptr), v_rect_diagrams.end());
-
 }
-
-
-
