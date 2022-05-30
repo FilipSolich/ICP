@@ -39,5 +39,4 @@ CDEdgeItem::CDEdgeItem(CDEdge *cdEdge)
     }
 
     setPen(pen);
-
 }

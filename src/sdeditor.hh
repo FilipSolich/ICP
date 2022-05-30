@@ -32,6 +32,7 @@ public:
     SDEdge *currentEdge = nullptr;
 
     QGraphicsScene *sequence_scene = nullptr;
+
     /**
      * \brief SequenceEditor Constructor
      * \param parent pointer on parent qwidget

@@ -22,7 +22,7 @@ class CDSocket
 {
 public:
     static const int _width = 10;
-    static const int _heigth = 10;
+    static const int _height = 10;
 
     enum class Position {Top, Right, Bottom, Left };
 
@@ -64,7 +64,7 @@ public:
      * Add edge to `CDSocket`.
      */
     void createEdge();
-    
+
     /**
      * Redraw socket and all his edges.
      */

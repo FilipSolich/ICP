@@ -58,7 +58,6 @@ public:
 
     /** Destructor */
     ~SDSocket();
-
 };
 
 #endif // SDSOCKET_H

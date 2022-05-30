@@ -44,31 +44,36 @@ public:
      * \param s2 pointer to end socket.
      */
     SDEdge(QString type="Async", SDSocket *s1 = nullptr, SDSocket *s2 = nullptr );
+
     /**
      * Desturcor of object,
     */
     ~SDEdge();
+
     /**
      * \brief setSocket setting of type socket.
      * \param socket pointer on socket.
      * \param type future type of socket.
      */
-
     void setSocket(SDSocket *socket, EdgeEndType type);
+
     /**
      * \brief setPath draw line between set sockets,
      */
     void setPath();
+
     /**
      * \brief setMousePos current mouse position.
      * \param pos mouse position.
      */
     void setMousePos(QPointF pos);
+
     /**
      * \brief socketMoved recalculate new positions of sockets between edge,
      * \param s socket pointer.
      */
     void socketMoved(SDSocket *s);
+
     /**
      * \brief setPoints set of points.
      * \param type type of socket (start, end).

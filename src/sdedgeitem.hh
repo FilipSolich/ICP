@@ -20,11 +20,13 @@ class SDEdgeItem : public QGraphicsPathItem
 {
 public:
     SDEdge *sdEdge;
+
     /**
      * \brief SDEdgeItem Construcotr.
      * \param sdEdge pointer on the edge.
      */
     SDEdgeItem(SDEdge *sdEdge);
+
     /**
      * \brief type
      * \return ItemTypeSDEdge

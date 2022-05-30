@@ -16,7 +16,7 @@ CDSocketItem::CDSocketItem(CDSocket *cdSocket, QGraphicsItem *parentItem)
     : QGraphicsEllipseItem(parentItem),
       cdSocket{cdSocket}
 {
-    setRect(0, 0, cdSocket->_width, cdSocket->_heigth);
+    setRect(0, 0, cdSocket->_width, cdSocket->_height);
     setPos(cdSocket->calculateNewPos());
     setBrush(QBrush(Qt::white));
 }
